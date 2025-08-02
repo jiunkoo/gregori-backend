@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gregori.product.mapper.ProductMapper">
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.gregori.product.domain.Product">
+        INSERT INTO products (seller_id, category_id, name, price, inventory, status, is_deleted)
+        VALUES (#{sellerId}, #{categoryId}, #{name}, #{price}, #{inventory}, #{status}, #{isDeleted})
+    </insert>
+
+    <update id="update">
+        UPDATE products
+        SET category_id = #{categoryId}, name = #{name}, price = #{price}, inventory = #{inventory}, status = #{status}
+        WHERE id = #{id}
+    </update>
+
+    <update id="updateInventory">
+        UPDATE products
+        SET inventory = #{inventory}
+        WHERE id = #{id}
+    </update>
+
+    <update id="updateIsDeleted">
+        UPDATE products
+        SET is_deleted = #{isDeleted}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM products
+        WHERE id = #{id}
+    </delete>
+
+    <select id="findById" resultType="com.gregori.product.domain.Product" parameterType="Long">
+        SELECT id, seller_id, category_id, name, price, inventory, status, created_at, updated_at
+        FROM products
+        WHERE id = #{id} AND is_deleted = 'FALSE'
+    </select>
+
+    <select id="find" resultType="com.gregori.product.domain.Product" parameterType="Long">
+        SELECT id, seller_id, category_id, name, price, inventory, status, created_at, updated_at
+        FROM products
+        <include refid="where"/>
+        <include refid="orderBy"/>
+        <include refid="limitAndOffset"/>
+    </select>
+
+    <sql id="where">
+        <choose>
+            <when test="keyword != null">
+                WHERE name LIKE CONCAT('%', #{keyword}, '%') AND is_deleted = 'FALSE'
+            </when>
+            <when test="categoryId != null">
+                WHERE category_id = #{categoryId} AND is_deleted = 'FALSE'
+            </when>
+            <when test="sellerId != null">
+                WHERE seller_id = #{sellerId} AND is_deleted = 'FALSE'
+            </when>
+        </choose>
+    </sql>
+
+    <sql id="orderBy">
+        <choose>
+            <when test="sorter == 'CREATED_AT_DESC'">
+                ORDER BY created_at DESC
+            </when>
+            <when test="sorter == 'PRICE_DESC'">
+                ORDER BY price DESC
+            </when>
+            <when test="sorter == 'PRICE_ASC'">
+                ORDER BY price ASC
+            </when>
+        </choose>
+    </sql>
+
+    <sql id="limitAndOffset">
+        <if test="limit != null">
+            LIMIT #{limit}
+        </if>
+        <if test="offset != null">
+            OFFSET #{offset}
+        </if>
+    </sql>
+</mapper>
