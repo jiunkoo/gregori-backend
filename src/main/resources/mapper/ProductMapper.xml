@@ -40,8 +40,8 @@
     </select>
 
     <select id="find" resultType="com.gregori.product.domain.Product" parameterType="Long">
-        SELECT id, seller_id, category_id, name, price, inventory, status, created_at, updated_at
-        FROM products
+        SELECT p.id, p.seller_id, p.category_id, p.name, p.price, p.inventory, p.status, p.created_at, p.updated_at
+        FROM products p
         <include refid="where"/>
         <include refid="orderBy"/>
         <include refid="limitAndOffset"/>
@@ -58,6 +58,9 @@
             <when test="sellerId != null">
                 WHERE seller_id = #{sellerId} AND is_deleted = 'FALSE'
             </when>
+            <otherwise>
+                WHERE is_deleted = 'FALSE'
+            </otherwise>
         </choose>
     </sql>
 

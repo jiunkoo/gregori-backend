@@ -27,7 +27,6 @@ public class AuthIntercepter implements HandlerInterceptor {
 	public boolean preHandle(@NonNull HttpServletRequest request,
 		@NonNull HttpServletResponse response, @NonNull Object handler) throws Exception {
 
-		// CORS PreFlight 요청이나 HandlerMethod가 아닌 경우 처리하지 않음
 		if (!(handler instanceof HandlerMethod)) {
 			return true;
 		}

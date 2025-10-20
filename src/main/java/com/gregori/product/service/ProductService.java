@@ -87,7 +87,19 @@ public class ProductService {
 
 		return productMapper.find(keyword, categoryId, sellerId, limit, offset, sorter.toString())
 			.stream()
-			.map(product -> new ProductResponseDto().toEntity(product))
+			.map(product -> {
+				ProductResponseDto dto = new ProductResponseDto().toEntity(product);
+				// 실제 판매자 이름 설정
+				try {
+					Seller seller = sellerMapper.findById(product.getSellerId()).orElse(null);
+					if (seller != null) {
+						dto.setSellerName(seller.getBusinessName());
+					}
+				} catch (Exception e) {
+					dto.setSellerName("판매자");
+				}
+				return dto;
+			})
 			.toList();
 	}
 

@@ -28,6 +28,9 @@ dependencies {
     implementation 'com.h2database:h2'
     runtimeOnly 'com.mysql:mysql-connector-j'
 
+    // Spring Boot DevTools for auto-restart
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
     compileOnly 'org.projectlombok:lombok:1.18.30'
     testCompileOnly 'org.projectlombok:lombok:1.18.30'
     annotationProcessor 'org.projectlombok:lombok:1.18.30'
