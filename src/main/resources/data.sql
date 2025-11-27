@@ -11,11 +11,11 @@ INSERT INTO categories (name) VALUES
 
 -- 더미 회원 데이터 (비밀번호: aa11111!)
 INSERT INTO members (name, email, password, authority, is_deleted) VALUES 
-('관리자', 'admin@gregori.com', '$2a$10$N.zmdr9k7uOCQb376NoUnuTJ8iAt6Z5EHsM8lE9lBOsl7iKTVEFDa', 'ADMIN_MEMBER', 'FALSE'),
-('판매자1', 'seller1@gregori.com', '$2a$10$N.zmdr9k7uOCQb376NoUnuTJ8iAt6Z5EHsM8lE9lBOsl7iKTVEFDa', 'SELLING_MEMBER', 'FALSE'),
-('판매자2', 'seller2@gregori.com', '$2a$10$N.zmdr9k7uOCQb376NoUnuTJ8iAt6Z5EHsM8lE9lBOsl7iKTVEFDa', 'SELLING_MEMBER', 'FALSE'),
-('일반회원1', 'user1@gregori.com', '$2a$10$N.zmdr9k7uOCQb376NoUnuTJ8iAt6Z5EHsM8lE9lBOsl7iKTVEFDa', 'GENERAL_MEMBER', 'FALSE'),
-('일반회원2', 'user2@gregori.com', '$2a$10$N.zmdr9k7uOCQb376NoUnuTJ8iAt6Z5EHsM8lE9lBOsl7iKTVEFDa', 'GENERAL_MEMBER', 'FALSE');
+('관리자', 'admin@gregori.com', '$2a$10$tCO5vniqaJSDesds5eUtWOIBmgXPSxi6jvqm1QnAK80uJ9G5Rq1Fu', 'ADMIN_MEMBER', 'FALSE'),
+('판매자1', 'seller1@gregori.com', '$2a$10$tCO5vniqaJSDesds5eUtWOIBmgXPSxi6jvqm1QnAK80uJ9G5Rq1Fu', 'SELLING_MEMBER', 'FALSE'),
+('판매자2', 'seller2@gregori.com', '$2a$10$tCO5vniqaJSDesds5eUtWOIBmgXPSxi6jvqm1QnAK80uJ9G5Rq1Fu', 'SELLING_MEMBER', 'FALSE'),
+('일반회원1', 'user1@gregori.com', '$2a$10$tCO5vniqaJSDesds5eUtWOIBmgXPSxi6jvqm1QnAK80uJ9G5Rq1Fu', 'GENERAL_MEMBER', 'FALSE'),
+('일반회원2', 'user2@gregori.com', '$2a$10$tCO5vniqaJSDesds5eUtWOIBmgXPSxi6jvqm1QnAK80uJ9G5Rq1Fu', 'GENERAL_MEMBER', 'FALSE');
 
 -- 더미 판매자 데이터
 INSERT INTO sellers (member_id, business_number, business_name, is_deleted) VALUES 
