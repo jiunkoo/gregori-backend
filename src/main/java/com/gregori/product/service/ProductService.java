@@ -3,7 +3,6 @@ package com.gregori.product.service;
 import java.util.List;
 import java.util.Objects;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,9 +36,6 @@ public class ProductService {
 	private final ProductMapper productMapper;
 	private final OrderDetailMapper orderDetailMapper;
 	private final CategoryMapper categoryMapper;
-
-	@Value("${server.base-url}")
-	private String baseUrl;
 
 	public Long saveProduct(ProductCreateDto dto) {
 
@@ -86,10 +82,7 @@ public class ProductService {
 		Category category = categoryMapper.findById(product.getCategoryId()).orElse(null);
 		Seller seller = sellerMapper.findById(product.getSellerId()).orElse(null);
 		
-		ProductResponseDto dto = new ProductResponseDto().toEntity(product, category, seller);
-		convertImageUrl(dto);
-		
-		return dto;
+		return new ProductResponseDto().toEntity(product, category, seller);
 	}
 
 	public List<ProductResponseDto> getProducts(String keyword, Long categoryId, Long sellerId, int page, Sorter sorter) {
@@ -102,9 +95,7 @@ public class ProductService {
 			.map(product -> {
 				Category category = categoryMapper.findById(product.getCategoryId()).orElse(null);
 				Seller seller = sellerMapper.findById(product.getSellerId()).orElse(null);
-				ProductResponseDto dto = new ProductResponseDto().toEntity(product, category, seller);
-				convertImageUrl(dto);
-				return dto;
+				return new ProductResponseDto().toEntity(product, category, seller);
 			})
 			.toList();
 	}
@@ -121,14 +112,6 @@ public class ProductService {
 		Seller seller = sellerMapper.findById(sellerId).orElseThrow(NotFoundException::new);
 		if (!Objects.equals(memberId, seller.getMemberId())) {
 			throw new UnauthorizedException("요청한 회원과 판매자가 일치하지 않습니다.");
-		}
-	}
-
-	private void convertImageUrl(ProductResponseDto dto) {
-
-		String imageUrl = dto.getImageUrl();
-		if (imageUrl != null && !imageUrl.startsWith("http")) {
-			dto.setImageUrl(baseUrl + imageUrl);
 		}
 	}
 }
