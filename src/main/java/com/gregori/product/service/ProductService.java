@@ -10,6 +10,8 @@ import com.gregori.common.exception.BusinessRuleViolationException;
 import com.gregori.common.exception.NotFoundException;
 import com.gregori.common.exception.UnauthorizedException;
 import com.gregori.common.exception.ValidationException;
+import com.gregori.category.domain.Category;
+import com.gregori.category.mapper.CategoryMapper;
 import com.gregori.order.domain.OrderDetail;
 import com.gregori.order.mapper.OrderDetailMapper;
 import com.gregori.product.domain.Product;
@@ -33,6 +35,7 @@ public class ProductService {
 	private final SellerMapper sellerMapper;
 	private final ProductMapper productMapper;
 	private final OrderDetailMapper orderDetailMapper;
+	private final CategoryMapper categoryMapper;
 
 	public Long saveProduct(ProductCreateDto dto) {
 
@@ -76,8 +79,10 @@ public class ProductService {
 	public ProductResponseDto getProduct(Long productId) {
 
 		Product product = productMapper.findById(productId).orElseThrow(NotFoundException::new);
-
-		return new ProductResponseDto().toEntity(product);
+		Category category = categoryMapper.findById(product.getCategoryId()).orElse(null);
+		Seller seller = sellerMapper.findById(product.getSellerId()).orElse(null);
+		
+		return new ProductResponseDto().toEntity(product, category, seller);
 	}
 
 	public List<ProductResponseDto> getProducts(String keyword, Long categoryId, Long sellerId, int page, Sorter sorter) {
@@ -88,17 +93,9 @@ public class ProductService {
 		return productMapper.find(keyword, categoryId, sellerId, limit, offset, sorter.toString())
 			.stream()
 			.map(product -> {
-				ProductResponseDto dto = new ProductResponseDto().toEntity(product);
-				// 실제 판매자 이름 설정
-				try {
-					Seller seller = sellerMapper.findById(product.getSellerId()).orElse(null);
-					if (seller != null) {
-						dto.setSellerName(seller.getBusinessName());
-					}
-				} catch (Exception e) {
-					dto.setSellerName("판매자");
-				}
-				return dto;
+				Category category = categoryMapper.findById(product.getCategoryId()).orElse(null);
+				Seller seller = sellerMapper.findById(product.getSellerId()).orElse(null);
+				return new ProductResponseDto().toEntity(product, category, seller);
 			})
 			.toList();
 	}
