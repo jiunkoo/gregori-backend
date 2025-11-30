@@ -24,6 +24,7 @@ public class ProductResponseDto {
 	private String description;
 	private Long price;
 	private Long stock;
+	private String imageUrl;
 	private Product.Status status;
 	private String createdAt;
 	private String updatedAt;
@@ -40,6 +41,7 @@ public class ProductResponseDto {
 			.description("상품 설명") // 임시 값
 			.price(product.getPrice())
 			.stock(product.getInventory())
+			.imageUrl(product.getImageUrl())
 			.status(product.getStatus())
 			.createdAt(product.getCreatedAt().toString())
 			.updatedAt(product.getUpdatedAt().toString())

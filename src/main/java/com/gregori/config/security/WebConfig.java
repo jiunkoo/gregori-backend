@@ -9,6 +9,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import lombok.RequiredArgsConstructor;
@@ -60,5 +61,11 @@ public class WebConfig implements WebMvcConfigurer {
 			.allowCredentials(true)
 			.exposedHeaders(LOCATION, AUTHORIZATION, SET_COOKIE)
 			.allowedOrigins(allowedOrigins);
+	}
+
+	@Override
+	public void addResourceHandlers(@NonNull ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("/images/**")
+			.addResourceLocations("classpath:/images/");
 	}
 }

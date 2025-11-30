@@ -20,6 +20,7 @@ public class Product extends AbstractEntity {
 	private String name;
 	private Long price;
 	private Long inventory;
+	private String imageUrl;
 	private Status status;
 	private IsDeleted isDeleted;
 
@@ -35,13 +36,14 @@ public class Product extends AbstractEntity {
 	}
 
 	@Builder
-	public Product(Long sellerId, Long categoryId, String name, Long price, Long inventory) {
+	public Product(Long sellerId, Long categoryId, String name, Long price, Long inventory, String imageUrl) {
 
 		this.sellerId = sellerId;
 		this.categoryId = categoryId;
 		this.name = name;
 		this.price = price;
 		this.inventory = inventory;
+		this.imageUrl = imageUrl;
 		this.status = Status.PRE_SALE;
 		this.isDeleted = FALSE;
 	}

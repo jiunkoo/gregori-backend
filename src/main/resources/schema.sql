@@ -41,6 +41,7 @@ CREATE TABLE products (
     name        VARCHAR(255) NOT NULL                                                       COMMENT '상품 이름',
     price       BIGINT       NOT NULL                                                       COMMENT '상품 가격',
     inventory   BIGINT       NOT NULL                                                       COMMENT '상품 재고',
+    image_url   VARCHAR(500)                                                               COMMENT '상품 이미지 URL',
     status      VARCHAR(255) NOT NULL                                                       COMMENT '상품 상태',
     is_deleted  VARCHAR(255) NOT NULL                                                       COMMENT '상품 삭제 여부',
     created_at  TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP                             COMMENT '상품 생성 날짜',

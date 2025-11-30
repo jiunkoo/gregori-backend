@@ -5,9 +5,22 @@
 
 <mapper namespace="com.gregori.product.mapper.ProductMapper">
 
+    <resultMap id="productResultMap" type="com.gregori.product.domain.Product">
+        <id property="id" column="id"/>
+        <result property="sellerId" column="seller_id"/>
+        <result property="categoryId" column="category_id"/>
+        <result property="name" column="name"/>
+        <result property="price" column="price"/>
+        <result property="inventory" column="inventory"/>
+        <result property="imageUrl" column="image_url"/>
+        <result property="status" column="status"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="updatedAt" column="updated_at"/>
+    </resultMap>
+
     <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.gregori.product.domain.Product">
-        INSERT INTO products (seller_id, category_id, name, price, inventory, status, is_deleted)
-        VALUES (#{sellerId}, #{categoryId}, #{name}, #{price}, #{inventory}, #{status}, #{isDeleted})
+        INSERT INTO products (seller_id, category_id, name, price, inventory, image_url, status, is_deleted)
+        VALUES (#{sellerId}, #{categoryId}, #{name}, #{price}, #{inventory}, #{imageUrl}, #{status}, #{isDeleted})
     </insert>
 
     <update id="update">
@@ -33,14 +46,14 @@
         WHERE id = #{id}
     </delete>
 
-    <select id="findById" resultType="com.gregori.product.domain.Product" parameterType="Long">
-        SELECT id, seller_id, category_id, name, price, inventory, status, created_at, updated_at
+    <select id="findById" resultMap="productResultMap" parameterType="Long">
+        SELECT id, seller_id, category_id, name, price, inventory, image_url, status, created_at, updated_at
         FROM products
         WHERE id = #{id} AND is_deleted = 'FALSE'
     </select>
 
-    <select id="find" resultType="com.gregori.product.domain.Product" parameterType="Long">
-        SELECT p.id, p.seller_id, p.category_id, p.name, p.price, p.inventory, p.status, p.created_at, p.updated_at
+    <select id="find" resultMap="productResultMap" parameterType="Long">
+        SELECT p.id, p.seller_id, p.category_id, p.name, p.price, p.inventory, p.image_url, p.status, p.created_at, p.updated_at
         FROM products p
         <include refid="where"/>
         <include refid="orderBy"/>
