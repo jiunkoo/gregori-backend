@@ -1,5 +1,6 @@
 package com.gregori.order.dto;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 
 import com.gregori.order.domain.Order;
@@ -22,6 +23,8 @@ public class OrderResponseDto {
 	private Long paymentAmount;
 	private Long deliveryCost;
 	private Order.Status status;
+	private ZonedDateTime createdAt;
+	private ZonedDateTime updatedAt;
 	private List<OrderDetailResponseDto> orderDetails;
 
 	public OrderResponseDto toEntity(Order order, List<OrderDetailResponseDto> orderDetails) {
@@ -34,6 +37,8 @@ public class OrderResponseDto {
 			.paymentAmount(order.getPaymentAmount())
 			.deliveryCost(order.getDeliveryCost())
 			.status(order.getStatus())
+			.createdAt(order.getCreatedAt())
+			.updatedAt(order.getUpdatedAt())
 			.orderDetails(orderDetails)
 			.build();
 	}

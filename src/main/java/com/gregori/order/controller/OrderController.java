@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gregori.auth.domain.CurrentMember;
 import com.gregori.auth.domain.LoginCheck;
-import com.gregori.common.exception.UnauthorizedException;
 import com.gregori.member.domain.SessionMember;
 import com.gregori.order.dto.OrderDetailStatusUpdateDto;
 import com.gregori.order.dto.OrderRequestDto;

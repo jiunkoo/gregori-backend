@@ -26,13 +26,29 @@
     </delete>
 
     <select id="findById" resultType="com.gregori.order.domain.Order" parameterType="Long">
-        SELECT id, member_id, order_number, payment_method, payment_amount, delivery_cost, status
+        SELECT id,
+               member_id,
+               order_number,
+               payment_method,
+               payment_amount,
+               delivery_cost,
+               status,
+               created_at,
+               updated_at
         FROM orders
         WHERE id = #{id}
     </select>
 
     <select id="findByMemberId" resultType="com.gregori.order.domain.Order" parameterType="Long">
-        SELECT id, member_id, order_number, payment_method, payment_amount, delivery_cost, status
+        SELECT id,
+               member_id,
+               order_number,
+               payment_method,
+               payment_amount,
+               delivery_cost,
+               status,
+               created_at,
+               updated_at
         FROM orders
         WHERE member_id = #{memberId}
         ORDER BY created_at DESC
