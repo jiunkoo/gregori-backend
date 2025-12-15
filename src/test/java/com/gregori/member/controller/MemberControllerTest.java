@@ -22,27 +22,26 @@ import jakarta.servlet.http.Cookie;
 import static com.gregori.auth.domain.Authority.GENERAL_MEMBER;
 import static com.gregori.common.CookieGenerator.COOKIE_NAME;
 import static com.gregori.common.DeepReflectionEqMatcher.deepRefEq;
+import static java.util.Objects.requireNonNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 class MemberControllerTest extends CustomWebMvcTest {
-
 	private final ObjectMapper objectMapper = new ObjectMapper();
 
 	@Test
 	@DisplayName("회원가입을 요청하면 Created 응답을 반환한다.")
 	void should_responseCreated_when_requestRegister() throws Exception {
-
 		// given
 		MemberRegisterDto dto = new MemberRegisterDto("일호", "a@a.a", "aa11111!");
 
 		// when
 		ResultActions actions = mockMvc.perform(
 			MockMvcRequestBuilders.post("/member/register")
-				.contentType(MediaType.APPLICATION_JSON)
-				.content(objectMapper.writeValueAsString(dto)));
+				.contentType(requireNonNull(MediaType.APPLICATION_JSON))
+				.content(requireNonNull(objectMapper.writeValueAsString(dto))));
 
 		// then
 		actions.andExpect(status().isCreated());
@@ -53,7 +52,6 @@ class MemberControllerTest extends CustomWebMvcTest {
 	@Test
 	@DisplayName("회원 이름 수정을 요청하면 NoContent 응답을 반환한다.")
 	void should_responseNoContent_when_requestUpdateMemberName() throws Exception {
-
 		// given
 		MemberNameUpdateDto dto = new MemberNameUpdateDto("이름");
 
@@ -67,8 +65,8 @@ class MemberControllerTest extends CustomWebMvcTest {
 		ResultActions actions = mockMvc.perform(
 			MockMvcRequestBuilders.post("/member/name")
 				.session(session)
-				.contentType(MediaType.APPLICATION_JSON)
-				.content(objectMapper.writeValueAsString(dto)));
+				.contentType(requireNonNull(MediaType.APPLICATION_JSON))
+				.content(requireNonNull(objectMapper.writeValueAsString(dto))));
 
 		// then
 		actions.andExpect(status().isNoContent());
@@ -79,7 +77,6 @@ class MemberControllerTest extends CustomWebMvcTest {
 	@Test
 	@DisplayName("회원 비밀번호 수정을 요청하면 NoContent 응답을 반환한다.")
 	void should_responseNoContent_when_requestUpdateMemberPassword() throws Exception {
-
 		// given
 		MemberPasswordUpdateDto dto = new MemberPasswordUpdateDto("aa11111!", "aa11111!");
 
@@ -93,8 +90,8 @@ class MemberControllerTest extends CustomWebMvcTest {
 		ResultActions actions = mockMvc.perform(
 			MockMvcRequestBuilders.post("/member/password")
 				.session(session)
-				.contentType(MediaType.APPLICATION_JSON)
-				.content(objectMapper.writeValueAsString(dto)));
+				.contentType(requireNonNull(MediaType.APPLICATION_JSON))
+				.content(requireNonNull(objectMapper.writeValueAsString(dto))));
 
 		// then
 		actions.andExpect(status().isNoContent());
@@ -105,7 +102,6 @@ class MemberControllerTest extends CustomWebMvcTest {
 	@Test
 	@DisplayName("회원 탈퇴를 요청하면 NoContent 응답을 반환한다.")
 	void should_responseNoContent_when_requestDeleteMember() throws Exception {
-
 		// given
 		MockHttpSession session = new MockHttpSession();
 		session.setAttribute("member", new SessionMember(null, "a@a.a", GENERAL_MEMBER));
@@ -119,7 +115,7 @@ class MemberControllerTest extends CustomWebMvcTest {
 			MockMvcRequestBuilders.delete("/member")
 				.session(session)
 				.cookie(cookie)
-				.contentType(MediaType.APPLICATION_JSON));
+				.contentType(requireNonNull(MediaType.APPLICATION_JSON)));
 
 		// then
 		actions.andExpect(status().isNoContent());
@@ -130,7 +126,6 @@ class MemberControllerTest extends CustomWebMvcTest {
 	@Test
 	@DisplayName("회원 조회를 요청하면 Ok 응답을 반환한다.")
 	void should_responseOk_when_requestGetMember() throws Exception {
-
 		// given
 		MockHttpSession session = new MockHttpSession();
 		session.setAttribute("member", new SessionMember(null, "a@a.a", GENERAL_MEMBER));
@@ -142,7 +137,7 @@ class MemberControllerTest extends CustomWebMvcTest {
 		ResultActions actions = mockMvc.perform(
 			MockMvcRequestBuilders.get("/member")
 				.session(session)
-				.contentType(MediaType.APPLICATION_JSON));
+				.contentType(requireNonNull(MediaType.APPLICATION_JSON)));
 
 		// then
 		actions.andExpect(status().isOk());

@@ -20,7 +20,6 @@ import com.gregori.seller.service.SellerService;
 @WebMvcTest
 @Import({ AuthArgumentResolver.class, AuthIntercepter.class, SessionMemberManager.class })
 public abstract class CustomWebMvcTest {
-
 	@Autowired
 	protected MockMvc mockMvc;
 

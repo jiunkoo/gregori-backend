@@ -13,11 +13,9 @@ import static com.gregori.common.domain.IsDeleted.TRUE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class MemberTest {
-
 	@Test
 	@DisplayName("Member 객체의 권한을 'SELLING_MEMBER'로 변경한다.")
 	void should_deactivate() {
-
 		// given
 		Member member = new Member("name", "email", "password");
 		Authority authority = member.getAuthority();
@@ -34,7 +32,6 @@ class MemberTest {
 	@Test
 	@DisplayName("Member 객체의 삭제 여부를 'TRUE'로 변경한다.")
 	void should_isDeletedTrue() {
-
 		// given
 		Member member = new Member("name", "email", "password");
 		IsDeleted isDeleted = member.getIsDeleted();

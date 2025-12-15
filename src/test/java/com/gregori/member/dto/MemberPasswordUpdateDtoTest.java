@@ -10,14 +10,12 @@ import jakarta.validation.ValidatorFactory;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class MemberPasswordUpdateDtoTest {
-
 	private final ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
 	private final Validator validator = factory.getValidator();
 
 	@Test
 	@DisplayName("올바른 입력값이면 MemberPasswordUpdateDto 객체 생성에 성공한다.")
 	void should_createMemberPasswordUpdateDto_when_validInput() {
-
 		// given
 		MemberPasswordUpdateDto dto = new MemberPasswordUpdateDto("aa11111!", "aa11111!");
 
@@ -31,7 +29,6 @@ class MemberPasswordUpdateDtoTest {
 	@Test
 	@DisplayName("oldPassword 필드가 비어 있거나 빈 문자열이면 에러가 발생한다.")
 	void should_ValidException_when_blankOldPassword() {
-
 		// given
 		MemberPasswordUpdateDto dto1 = new MemberPasswordUpdateDto(null, "aa11111!");
 		MemberPasswordUpdateDto dto2 = new MemberPasswordUpdateDto("", "aa11111!");
@@ -51,7 +48,6 @@ class MemberPasswordUpdateDtoTest {
 	@Test
 	@DisplayName("oldPassword 필드의 패턴이 불일치하면 에러가 발생한다.")
 	void should_ValidException_when_mismatchedOldPassword() {
-
 		// given
 		MemberPasswordUpdateDto dto1 = new MemberPasswordUpdateDto("pass%5", "aa11111!");
 		MemberPasswordUpdateDto dto2 = new MemberPasswordUpdateDto("passwordpassword%5", "aa11111!");
@@ -80,7 +76,6 @@ class MemberPasswordUpdateDtoTest {
 	@Test
 	@DisplayName("newPassword 필드가 비어 있거나 빈 문자열이면 에러가 발생한다.")
 	void should_ValidException_when_blankNewPassword() {
-
 		// given
 		MemberPasswordUpdateDto dto1 = new MemberPasswordUpdateDto("aa11111!", null);
 		MemberPasswordUpdateDto dto2 = new MemberPasswordUpdateDto("aa11111!", "");
@@ -100,7 +95,6 @@ class MemberPasswordUpdateDtoTest {
 	@Test
 	@DisplayName("newPassword 필드의 패턴이 불일치하면 에러가 발생한다.")
 	void should_ValidException_when_mismatchedNewPassword() {
-
 		// given
 		MemberPasswordUpdateDto dto1 = new MemberPasswordUpdateDto("aa11111!", "pass%5");
 		MemberPasswordUpdateDto dto2 = new MemberPasswordUpdateDto("aa11111!", "passwordpassword%5");

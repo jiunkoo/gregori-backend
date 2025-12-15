@@ -19,7 +19,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @CustomMybatisTest
 class MemberMapperTest {
-
 	@Autowired
 	private MemberMapper memberMapper;
 
@@ -36,7 +35,6 @@ class MemberMapperTest {
 	@Test
 	@DisplayName("새로운 회원을 추가한다.")
 	void should_insert() {
-
 		// given
 		Member member = new Member("name", "new email", "password");
 
@@ -53,7 +51,6 @@ class MemberMapperTest {
 	@Test
 	@DisplayName("회원 이름을 갱신한다.")
 	void should_updateName() {
-
 		// given
 		Member member = new Member("name", "email", "password");
 		memberMapper.insert(member);
@@ -72,7 +69,6 @@ class MemberMapperTest {
 	@Test
 	@DisplayName("회원 비밀번호를 갱신한다.")
 	void should_updatePassword() {
-
 		// given
 		Member member = new Member("name", "email", "password");
 		memberMapper.insert(member);
@@ -91,7 +87,6 @@ class MemberMapperTest {
 	@Test
 	@DisplayName("회원 권한을 갱신한다.")
 	void should_updateAuthority() {
-
 		// given
 		Member member = new Member("name", "email", "password");
 		memberMapper.insert(member);
@@ -110,7 +105,6 @@ class MemberMapperTest {
 	@Test
 	@DisplayName("id로 상품을 논리적으로 삭제한다")
 	void should_updateIsDeleted() {
-
 		// given
 		Member member = new Member("name", "email", "password");
 		memberMapper.insert(member);
@@ -127,7 +121,6 @@ class MemberMapperTest {
 	@Test
 	@DisplayName("id로 회원을 삭제한다.")
 	void should_deleteById() {
-
 		// given
 		Member member = new Member("name", "email", "password");
 		memberMapper.insert(member);
@@ -144,7 +137,6 @@ class MemberMapperTest {
 	@Test
 	@DisplayName("id 목록으로 회원을 삭제한다.")
 	void should_deleteByIds() {
-
 		// given
 		Member member1 = new Member("name", "email1", "password");
 		Member member2 = new Member("name", "email2", "password");
@@ -166,7 +158,6 @@ class MemberMapperTest {
 	@Test
 	@DisplayName("id로 회원을 조회한다.")
 	void should_findById() {
-
 		// given
 		Member member = new Member("name", "email", "password");
 		memberMapper.insert(member);
@@ -183,7 +174,6 @@ class MemberMapperTest {
 	@Test
 	@DisplayName("email로 회원을 조회한다.")
 	void should_findByEmail() {
-
 		// given
 		Member member = new Member("name", "email", "password");
 		memberMapper.insert(member);

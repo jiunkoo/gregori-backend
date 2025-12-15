@@ -10,14 +10,12 @@ import jakarta.validation.ValidatorFactory;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class MemberNameUpdateDtoTest {
-
 	private final ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
 	private final Validator validator = factory.getValidator();
 
 	@Test
 	@DisplayName("올바른 입력값이면 MemberNameUpdateDto 객체 생성에 성공한다.")
 	void should_createMemberNameUpdateDto_when_validInput() {
-
 		// given
 		MemberNameUpdateDto dto = new MemberNameUpdateDto("일호");
 
@@ -31,7 +29,6 @@ class MemberNameUpdateDtoTest {
 	@Test
 	@DisplayName("name 필드가 비어 있거나 빈 문자열이면 에러가 발생한다.")
 	void should_ValidException_when_blankName() {
-
 		// given
 		MemberNameUpdateDto dto1 = new MemberNameUpdateDto(null);
 		MemberNameUpdateDto dto2 = new MemberNameUpdateDto("");
@@ -51,7 +48,6 @@ class MemberNameUpdateDtoTest {
 	@Test
 	@DisplayName("name 필드의 패턴이 불일치하면 에러가 발생한다.")
 	void should_ValidException_when_mismatchedName() {
-
 		// given
 		MemberNameUpdateDto dto1 = new MemberNameUpdateDto("김");
 		MemberNameUpdateDto dto2 = new MemberNameUpdateDto("kimchulsu");
