@@ -10,11 +10,9 @@ import static com.gregori.order.domain.OrderDetail.Status.SHIPPED;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class OrderDetailTest {
-
 	@Test
 	@DisplayName("OrderDetail 객체의 상태를 'PAYMENT_COMPLETED'로 변경한다.")
 	void should_paymentCompleted() {
-
 		// given
 		OrderDetail orderDetail = new OrderDetail(1L, 1L, 1L, "name", 1L, 1L);
 		orderDetail.shipmentPreparation();
@@ -31,7 +29,6 @@ class OrderDetailTest {
 	@Test
 	@DisplayName("OrderDetail 객체의 상태를 'SHIPMENT_PREPARATION'로 변경한다.")
 	void should_shipmentPreparation() {
-
 		// given
 		OrderDetail orderDetail = new OrderDetail(1L, 1L, 1L, "name", 1L, 1L);
 		OrderDetail.Status status = orderDetail.getStatus();
@@ -47,7 +44,6 @@ class OrderDetailTest {
 	@Test
 	@DisplayName("OrderDetail 객체의 상태를 'SHIPPED'로 변경한다.")
 	void should_shipped() {
-
 		// given
 		OrderDetail orderDetail = new OrderDetail(1L, 1L, 1L, "name", 1L, 1L);
 		OrderDetail.Status status = orderDetail.getStatus();
@@ -63,7 +59,6 @@ class OrderDetailTest {
 	@Test
 	@DisplayName("OrderDetail 객체의 상태를 'DELIVERED'로 변경한다.")
 	void should_deliveryCost() {
-
 		// given
 		OrderDetail orderDetail = new OrderDetail(1L, 1L, 1L, "name", 1L, 1L);
 		OrderDetail.Status status = orderDetail.getStatus();

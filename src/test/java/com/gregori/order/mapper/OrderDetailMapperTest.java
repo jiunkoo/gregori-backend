@@ -171,7 +171,7 @@ class OrderDetailMapperTest {
 
 		// when
 		orderDetail.paymentCanceled();
-		orderDetailMapper.updateStatus(order.getId(), orderDetail.getStatus());
+		orderDetailMapper.updateStatus(orderDetail.getId(), orderDetail.getStatus());
 		Optional<OrderDetail> result = orderDetailMapper.findById(orderDetail.getId());
 
 		// then

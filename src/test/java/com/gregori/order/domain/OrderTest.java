@@ -9,11 +9,9 @@ import static com.gregori.order.domain.Order.Status.ORDER_PROCESSING;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class OrderTest {
-
 	@Test
 	@DisplayName("15자리 이상의 주문 번호를 생성한다.")
 	void should_generateOrderNumber() {
-
 		// given
 		Order order = Order.builder()
 			.memberId(1L)
@@ -31,7 +29,6 @@ class OrderTest {
 	@Test
 	@DisplayName("Order 객체의 상태를 'ORDER_CANCELLED'로 변경한다.")
 	void should_orderCancelled() {
-
 		// given
 		Order order = new Order(1L, "method", 1L, 1L);
 		Order.Status status = order.getStatus();
@@ -49,7 +46,6 @@ class OrderTest {
 	@Test
 	@DisplayName("Order 객체의 상태를 'ORDER_PROCESSING'로 변경한다.")
 	void should_orderProcessing() {
-
 		// given
 		Order order = new Order(1L, "method", 1L, 1L);
 		order.orderCompleted();
@@ -67,7 +63,6 @@ class OrderTest {
 	@Test
 	@DisplayName("Order 객체의 상태를 'ORDER_CANCELLED'로 변경한다.")
 	void should_orderCompleted() {
-
 		// given
 		Order order = new Order(1L, "method", 1L, 1L);
 		Order.Status status = order.getStatus();

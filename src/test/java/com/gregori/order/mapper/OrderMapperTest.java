@@ -20,7 +20,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @CustomMybatisTest
 class OrderMapperTest {
-
 	@Autowired
 	private MemberMapper memberMapper;
 
@@ -55,7 +54,6 @@ class OrderMapperTest {
 	@Test
 	@DisplayName("새로운 주문을 추가한다.")
 	void should_insert() {
-
 		// given
 		Order order = Order.builder()
 			.memberId(member.getId())
@@ -76,7 +74,6 @@ class OrderMapperTest {
 	@Test
 	@DisplayName("주문의 상태를 수정한다.")
 	void should_updateStatus() {
-
 		// given
 		Order order = Order.builder()
 			.memberId(member.getId())
@@ -101,7 +98,6 @@ class OrderMapperTest {
 	@Test
 	@DisplayName("id 목록으로 주문을 삭제한다.")
 	void should_deleteByIds() {
-
 		// given
 		Order order = Order.builder()
 			.memberId(member.getId())
@@ -124,7 +120,6 @@ class OrderMapperTest {
 	@Test
 	@DisplayName("id로 주문을 조회한다.")
 	void should_findById() {
-
 		// given
 		Order order = Order.builder()
 			.memberId(member.getId())
@@ -153,7 +148,6 @@ class OrderMapperTest {
 	@Test
 	@DisplayName("memberId로 주문을 조회한다.")
 	void should_findByMemberId() {
-
 		// given
 		Order order1 = Order.builder()
 			.memberId(member.getId())
