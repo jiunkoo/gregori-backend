@@ -10,7 +10,6 @@ class CategoryTest {
 	@Test
 	@DisplayName("Category 객체의 이름을 수정한다.")
 	void should_updateCategoryName() {
-
 		// given
 		Category category = new Category("name");
 

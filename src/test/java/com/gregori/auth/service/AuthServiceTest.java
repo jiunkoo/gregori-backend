@@ -20,7 +20,6 @@ import static org.mockito.BDDMockito.given;
 
 @ExtendWith(MockitoExtension.class)
 class AuthServiceTest {
-
 	@Mock
 	private PasswordEncoder passwordEncoder;
 
@@ -33,7 +32,6 @@ class AuthServiceTest {
 	@Test
 	@DisplayName("로그인을 성공하면 세션 회원을 반환한다.")
 	void should_returnSessionMember_when_signInSuccess() {
-
 		// given
 		AuthSignInDto dto = new AuthSignInDto("email", "password");
 		Member member = new Member("email", "name", "password");

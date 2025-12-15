@@ -16,18 +16,17 @@ import com.gregori.member.domain.Member;
 import com.gregori.member.domain.SessionMember;
 
 import static com.gregori.auth.domain.Authority.ADMIN_MEMBER;
+import static java.util.Objects.requireNonNull;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 class CategoryControllerTest extends CustomWebMvcTest {
-
 	private final ObjectMapper objectMapper = new ObjectMapper();
 
 	@Test
 	@DisplayName("카테고리 생성을 요청하면 Created 응답을 반환한다.")
 	void should_responseCreated_when_requestSaveCategory() throws Exception {
-
 		// given
 		CategoryRequestDto dto = new CategoryRequestDto("name");
 
@@ -42,8 +41,8 @@ class CategoryControllerTest extends CustomWebMvcTest {
 		ResultActions actions = mockMvc.perform(
 			MockMvcRequestBuilders.post("/category")
 				.session(session)
-				.contentType(MediaType.APPLICATION_JSON)
-				.content(objectMapper.writeValueAsString(dto)));
+				.contentType(requireNonNull(MediaType.APPLICATION_JSON))
+				.content(requireNonNull(objectMapper.writeValueAsString(dto))));
 
 		// then
 		actions.andExpect(status().isCreated());
@@ -54,7 +53,6 @@ class CategoryControllerTest extends CustomWebMvcTest {
 	@Test
 	@DisplayName("카테고리 이름 수정을 요청하면 NoContent 응답을 반환한다.")
 	void should_responseNoContent_when_requestUpdateCategoryName() throws Exception {
-
 		// given
 		Long categoryId = 1L;
 		CategoryRequestDto dto = new CategoryRequestDto("name");
@@ -70,8 +68,8 @@ class CategoryControllerTest extends CustomWebMvcTest {
 		ResultActions actions = mockMvc.perform(
 			MockMvcRequestBuilders.post("/category/" + categoryId)
 				.session(session)
-				.contentType(MediaType.APPLICATION_JSON)
-				.content(objectMapper.writeValueAsString(dto)));
+				.contentType(requireNonNull(MediaType.APPLICATION_JSON))
+				.content(requireNonNull(objectMapper.writeValueAsString(dto))));
 
 		// then
 		actions.andExpect(status().isNoContent());
@@ -82,7 +80,6 @@ class CategoryControllerTest extends CustomWebMvcTest {
 	@Test
 	@DisplayName("카테고리 삭제를 요청하면 NoContent 응답을 반환한다.")
 	void should_responseNoContent_when_requestDeleteCategory() throws Exception {
-
 		// given
 		Long categoryId = 1L;
 
@@ -97,7 +94,7 @@ class CategoryControllerTest extends CustomWebMvcTest {
 		ResultActions actions = mockMvc.perform(
 			MockMvcRequestBuilders.delete("/category/" + categoryId)
 				.session(session)
-				.contentType(MediaType.APPLICATION_JSON));
+				.contentType(requireNonNull(MediaType.APPLICATION_JSON)));
 
 		// then
 		actions.andExpect(status().isNoContent());
@@ -108,14 +105,13 @@ class CategoryControllerTest extends CustomWebMvcTest {
 	@Test
 	@DisplayName("카테고리 조회를 요청하면 Ok 응답을 반환한다.")
 	void should_responseOk_when_requestGetCategory() throws Exception {
-
 		// given
 		Long categoryId = 1L;
 
 		// when
 		ResultActions actions = mockMvc.perform(
 			MockMvcRequestBuilders.get("/category/" + categoryId)
-				.contentType(MediaType.APPLICATION_JSON));
+				.contentType(requireNonNull(MediaType.APPLICATION_JSON)));
 
 		// then
 		actions.andExpect(status().isOk());
@@ -126,11 +122,10 @@ class CategoryControllerTest extends CustomWebMvcTest {
 	@Test
 	@DisplayName("카테고리 전체 조회를 요청하면 카테고리 정보를 전부 조회하고 Ok 응답을 반환한다.")
 	void should_responseOk_when_requestGetCategories() throws Exception {
-
 		// given, when
 		ResultActions actions = mockMvc.perform(
 			MockMvcRequestBuilders.get("/category?page=1")
-				.contentType(MediaType.APPLICATION_JSON));
+				.contentType(requireNonNull(MediaType.APPLICATION_JSON)));
 
 		// then
 		actions.andExpect(status().isOk());

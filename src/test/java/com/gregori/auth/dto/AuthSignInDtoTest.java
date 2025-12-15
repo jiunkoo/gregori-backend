@@ -2,7 +2,6 @@ package com.gregori.auth.dto;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
@@ -11,14 +10,12 @@ import jakarta.validation.ValidatorFactory;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class AuthSignInDtoTest {
-
 	private final ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
 	private final Validator validator = factory.getValidator();
 
 	@Test
 	@DisplayName("올바른 입력값이면 AuthSignInDto 객체 생성에 성공한다.")
 	void should_createAuthSignInDto_when_validInput() {
-
 		// given
 		AuthSignInDto dto = new AuthSignInDto("a@a.a", "aa11111!");
 
@@ -32,7 +29,6 @@ class AuthSignInDtoTest {
 	@Test
 	@DisplayName("email 필드가 비어 있거나 빈 문자열이면 에러가 발생한다.")
 	void should_ValidException_when_blankEmail() {
-
 		// given
 		AuthSignInDto dto1 = new AuthSignInDto(null, "aa11111!");
 		AuthSignInDto dto2 = new AuthSignInDto("", "aa11111!");
@@ -52,7 +48,6 @@ class AuthSignInDtoTest {
 	@Test
 	@DisplayName("email 필드의 패턴이 불일치하면 에러가 발생한다.")
 	void should_ValidException_when_mismatchedEmail() {
-
 		// given
 		AuthSignInDto dto1 = new AuthSignInDto("a", "aa11111!");
 		AuthSignInDto dto2 = new AuthSignInDto("a@a.", "aa11111!");
@@ -70,7 +65,6 @@ class AuthSignInDtoTest {
 	@Test
 	@DisplayName("password 필드가 비어 있거나 빈 문자열이면 에러가 발생한다.")
 	void should_ValidException_when_blankPassword() {
-
 		// given
 		AuthSignInDto dto1 = new AuthSignInDto("a@a.a", null);
 		AuthSignInDto dto2 = new AuthSignInDto("a@a.a",  "");
@@ -90,7 +84,6 @@ class AuthSignInDtoTest {
 	@Test
 	@DisplayName("password 필드의 패턴이 불일치하면 에러가 발생한다.")
 	void should_ValidException_when_mismatchedPassword() {
-
 		// given
 		AuthSignInDto dto1 = new AuthSignInDto("email", "pass%5");
 		AuthSignInDto dto2 = new AuthSignInDto("email", "passwordpassword%5");

@@ -20,7 +20,6 @@ import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 class CategoryServiceTest {
-
 	@Mock
 	private CategoryMapper categoryMapper;
 
@@ -30,7 +29,6 @@ class CategoryServiceTest {
 	@Test
 	@DisplayName("카테고리 생성을 성공하면 id를 반환한다.")
 	void should_returnId_when_saveCategorySuccess() {
-
 		// given, when
 		categoryService.saveCategory("name");
 
@@ -41,7 +39,6 @@ class CategoryServiceTest {
 	@Test
 	@DisplayName("카테고리 갱신을 성공한다.")
 	void should_updateCategorySuccess() {
-
 		// given
 		Long categoryId = 1L;
 		String categoryName = "name";
@@ -59,7 +56,6 @@ class CategoryServiceTest {
 	@Test
 	@DisplayName("카테고리 삭제를 성공하면 id를 반환한다.")
 	void should_deleteCategorySuccess() {
-
 		// given
 		Long categoryId = 1L;
 
@@ -73,7 +69,6 @@ class CategoryServiceTest {
 	@Test
 	@DisplayName("카테고리 조회를 성공하면 카테고리를 반환한다.")
 	void should_returnCategory_when_getCategorySuccess() {
-
 		// given
 		Long categoryId = 1L;
 		Category category = new Category("name");
@@ -91,7 +86,6 @@ class CategoryServiceTest {
 	@Test
 	@DisplayName("카테고리 조회를 실패하면 에러가 발생한다.")
 	void should_NotFoundException_when_categoryGetFailure() {
-
 		// given
 		given(categoryMapper.findById(1L)).willReturn(Optional.empty());
 
@@ -104,7 +98,6 @@ class CategoryServiceTest {
 	@Test
 	@DisplayName("카테고리 목록 조회를 성공하면 카테고리 목록을 반환한다.")
 	void should_returnCategories_when_getCategoriesSuccess() {
-
 		// given, when
 		categoryService.getCategories(1);
 

@@ -16,7 +16,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @CustomMybatisTest
 class CategoryMapperTest {
-
 	@Autowired
 	private CategoryMapper categoryMapper;
 
@@ -33,7 +32,6 @@ class CategoryMapperTest {
 	@Test
 	@DisplayName("새로운 카테고리를 추가한다.")
 	void should_insert() {
-
 		// given
 		Category category = new Category("name");
 
@@ -50,7 +48,6 @@ class CategoryMapperTest {
 	@Test
 	@DisplayName("카테고리 이름을 갱신한다.")
 	void should_updateName() {
-
 		// given
 		Category category = new Category("name");
 		categoryMapper.insert(category);
@@ -69,7 +66,6 @@ class CategoryMapperTest {
 	@Test
 	@DisplayName("id로 카테고리를 삭제한다.")
 	void should_deleteById() {
-
 		// given
 		Category category = new Category("name");
 		categoryMapper.insert(category);
@@ -85,7 +81,6 @@ class CategoryMapperTest {
 	@Test
 	@DisplayName("id로 카테고리를 조회한다.")
 	void should_findById() {
-
 		// given
 		Category category = new Category("name");
 		categoryMapper.insert(category);
@@ -101,7 +96,6 @@ class CategoryMapperTest {
 	@Test
 	@DisplayName("전체 카테고리를 조회한다.")
 	void should_find() {
-
 		// given
 		Category category1 = new Category("name1");
 		Category category2 = new Category("name2");
