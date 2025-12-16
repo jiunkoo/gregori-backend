@@ -75,6 +75,17 @@ cd gregori-backend
 - User: sa
 - Password: (빈 값)
 
+### 📚 API 문서 (Springdoc OpenAPI)
+
+애플리케이션 실행 후 아래 주소로 접속하여 API 명세서를 확인할 수 있습니다:
+
+👉 http://localhost:8080/swagger-ui.html
+
+API 문서는 Springdoc OpenAPI를 사용하여 자동 생성되며, 모든 REST API 엔드포인트와 요청/응답 스키마를 확인할 수 있습니다.
+
+- OpenAPI UI: `/swagger-ui.html`
+- OpenAPI JSON: `/api-docs`
+
 ## 🧪 테스트 커버리지(JaCoCo)
 
 본 프로젝트는 GitHub Actions에서 테스트 커버리지를 자동 계산하며,  

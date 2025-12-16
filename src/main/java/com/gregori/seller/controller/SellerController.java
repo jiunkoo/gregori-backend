@@ -4,8 +4,8 @@ import java.net.URI;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,7 +28,7 @@ import lombok.RequiredArgsConstructor;
 import static com.gregori.auth.domain.Authority.GENERAL_MEMBER;
 import static com.gregori.auth.domain.Authority.SELLING_MEMBER;
 
-@Controller
+@RestController
 @RequiredArgsConstructor
 @RequestMapping("/seller")
 public class SellerController {
