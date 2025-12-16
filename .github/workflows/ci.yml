@@ -1,10 +1,11 @@
 name: Continuous Integration
 
 on:
+  push:
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
   workflow_dispatch:
-    branches: [ "refactoring/1/cicd", "refactoring/17/test" ]
 
 jobs:
   build_and_test:
@@ -22,8 +23,8 @@ jobs:
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
-          java-version: '17'
-          distribution: 'temurin'
+          java-version: "17"
+          distribution: "temurin"
 
       - name: Cache Gradle packages
         uses: actions/cache@v3
@@ -70,5 +71,5 @@ jobs:
         uses: EndBug/add-and-commit@v9
         with:
           default_author: github_actions
-          message: 'commit badge'
-          add: '*.svg'
+          message: "commit badge"
+          add: "*.svg"
