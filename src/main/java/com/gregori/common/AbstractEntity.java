@@ -8,7 +8,6 @@ import java.time.ZonedDateTime;
 public class AbstractEntity {
 
     private ZonedDateTime createdAt;
-
     private ZonedDateTime updatedAt;
 
     public void setCreatedAt(ZonedDateTime createdAt) {

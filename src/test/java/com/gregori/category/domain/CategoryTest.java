@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class CategoryTest {
-
 	@Test
 	@DisplayName("Category 객체의 이름을 수정한다.")
 	void should_updateCategoryName() {

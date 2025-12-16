@@ -5,8 +5,7 @@ import org.mockito.ArgumentMatcher;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.argThat;
 
-public class DeepReflectionEqMatcher<T> implements ArgumentMatcher<T>
-{
+public class DeepReflectionEqMatcher<T> implements ArgumentMatcher<T> {
 	private final T expected;
 	private final String[] excludedFields;
 

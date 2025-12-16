@@ -12,7 +12,6 @@ import jakarta.validation.ValidatorFactory;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class OrderRequestDtoTest {
-
 	private final ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
 	private final Validator validator = factory.getValidator();
 	private final List<OrderDetailRequestDto> orderDetails = List.of(new OrderDetailRequestDto(1L, 1L));
@@ -20,7 +19,6 @@ class OrderRequestDtoTest {
 	@Test
 	@DisplayName("입력값이 올바르면 OrderRequestDto 객체 생성에 성공한다.")
 	void should_craeteOrderRequestDto_when_validInput() {
-
 		// given
 		OrderRequestDto dto = new OrderRequestDto(1L, "method", 1L, 1L, orderDetails);
 
@@ -34,7 +32,6 @@ class OrderRequestDtoTest {
 	@Test
 	@DisplayName("memberId 필드가 비어 있으면 에러가 발생한다.")
 	void should_ValidException_when_nullMemberId() {
-
 		// given
 		OrderRequestDto dto = new OrderRequestDto(null, "method", 1L, 1L, orderDetails);
 
@@ -48,7 +45,6 @@ class OrderRequestDtoTest {
 	@Test
 	@DisplayName("paymentMethod 필드가 비어 있거나 빈 문자열이면 에러가 발생한다.")
 	void should_ValidException_when_blankPaymentMethod() {
-
 		// given
 		OrderRequestDto dto1 = new OrderRequestDto(1L, null, 1L, 1L, orderDetails);
 		OrderRequestDto dto2 = new OrderRequestDto(1L, "", 1L, 1L, orderDetails);
@@ -68,7 +64,6 @@ class OrderRequestDtoTest {
 	@Test
 	@DisplayName("PaymentAmount 필드가 비어 있으면 에러가 발생한다.")
 	void should_ValidException_when_nullPaymentAmount() {
-
 		// given
 		OrderRequestDto dto = new OrderRequestDto(1L, "method", null, 1L, orderDetails);
 
@@ -82,7 +77,6 @@ class OrderRequestDtoTest {
 	@Test
 	@DisplayName("deliveryCost 필드가 비어 있으면 에러가 발생한다.")
 	void should_ValidException_when_nullDeliveryCost() {
-
 		// given
 		OrderRequestDto dto = new OrderRequestDto(1L, "method", 1L, null, orderDetails);
 
@@ -96,7 +90,6 @@ class OrderRequestDtoTest {
 	@Test
 	@DisplayName("orderDetails 필드가 비어 있으면 에러가 발생한다.")
 	void should_ValidException_when_nullOrderDetails() {
-
 		// given
 		OrderRequestDto dto = new OrderRequestDto(1L, "method", 1L, 1L, null);
 

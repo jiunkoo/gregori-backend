@@ -33,7 +33,6 @@ class OrderTest {
 		Order order = new Order(1L, "method", 1L, 1L);
 		Order.Status status = order.getStatus();
 
-
 		// when
 		order.orderCanceled();
 		Order.Status result = order.getStatus();

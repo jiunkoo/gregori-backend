@@ -14,7 +14,6 @@ import com.gregori.common.exception.BusinessRuleViolationException;
 import com.gregori.common.exception.NotFoundException;
 import com.gregori.common.exception.UnauthorizedException;
 import com.gregori.common.exception.ValidationException;
-import com.gregori.member.domain.Member;
 import com.gregori.member.domain.SessionMember;
 import com.gregori.member.mapper.MemberMapper;
 import com.gregori.product.domain.Product;
@@ -34,7 +33,6 @@ import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 class SellerServiceTest {
-
 	@Mock
 	private MemberMapper memberMapper;
 
@@ -50,7 +48,6 @@ class SellerServiceTest {
 	@Test
 	@DisplayName("판매자 생성을 성공하면 id를 반환한다.")
 	void should_returnId_when_saveSellerSuccess() {
-
 		// given
 		SessionMember sessionMember = new SessionMember(null, "email", SELLING_MEMBER);
 		SellerRegisterDto dto = new SellerRegisterDto("123-45-67891", "name");
@@ -65,7 +62,6 @@ class SellerServiceTest {
 	@Test
 	@DisplayName("판매자 정보 갱신을 성공하면 id를 반환한다.")
 	void should_returnId_when_updateSellerSuccess() {
-
 		// given
 		SellerUpdateDto sellerUpdateDto = new SellerUpdateDto(1L, "123-45-67891", "name");
 		Seller seller = new Seller(1L, "123-45-67891", "name");
@@ -82,7 +78,6 @@ class SellerServiceTest {
 	@Test
 	@DisplayName("잘못된 사업자 등록번호면 판매자 생성과 갱신을 실패한다.")
 	void should_ValidationException_when_invalidBusinessNumber() {
-
 		// given
 		SellerRegisterDto dto1 = new SellerRegisterDto("111-11-11111", "name");
 		SellerUpdateDto dto2 = new SellerUpdateDto(1L, "111-11-11111", "name");
@@ -95,7 +90,6 @@ class SellerServiceTest {
 	@Test
 	@DisplayName("판매자 삭제를 성공하면 id를 반환한다.")
 	void should_returnId_when_deleteSellerSuccess() {
-
 		// given
 		Long sellerId = 1L;
 
@@ -112,10 +106,9 @@ class SellerServiceTest {
 	@Test
 	@DisplayName("삭제되지 않은 상품이 있으면 폐업 신청을 실패한다.")
 	void should_BusinessRuleViolationException_when_productIsDeletedFalse() {
-
 		// given
 		Long sellerId = 1L;
-		Product product = new Product(1L, 1L, "name", 1L, 1L);
+		Product product = new Product(1L, 1L, "name", 1L, 1L, "");
 
 		given(sellerMapper.findById(sellerId)).willReturn(Optional.of(new Seller()));
 		given(productMapper.find(null, null, sellerId, null, null, CREATED_AT_DESC.toString())).willReturn(List.of(product));
@@ -127,7 +120,6 @@ class SellerServiceTest {
 	@Test
 	@DisplayName("판매자 조회를 성공하면 판매자를 반환한다.")
 	void should_returnSeller_when_getSellerSuccess() {
-
 		// given
 		Long sellerId = 1L;
 
@@ -145,7 +137,6 @@ class SellerServiceTest {
 	@Test
 	@DisplayName("판매자 조회를 실패하면 에러가 발생한다.")
 	void should_NotFoundException_when_findSellerFailure() {
-
 		// given
 		SellerUpdateDto dto = new SellerUpdateDto(1L, "123-45-67891", "name");
 
@@ -160,7 +151,6 @@ class SellerServiceTest {
 	@Test
 	@DisplayName("판매자 목록 조회를 성공하면 판매자 목록을 반환한다.")
 	void should_returnSellers_when_getSellersSuccess() {
-
 		// given
 		Long sellerId = 1L;
 
@@ -176,7 +166,6 @@ class SellerServiceTest {
 	@Test
 	@DisplayName("세션의 회원 id와 판매자의 회원 id가 다르면 에러가 발생한다.")
 	void should_UnauthorizedException_when_invalidMemberId() {
-
 		// given
 		Long sellerId = 1L;
 

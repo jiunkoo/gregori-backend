@@ -1,5 +1,7 @@
 package com.gregori.product.dto;
 
+import java.time.ZonedDateTime;
+
 import com.gregori.category.domain.Category;
 import com.gregori.product.domain.Product;
 import com.gregori.seller.domain.Seller;
@@ -27,8 +29,8 @@ public class ProductResponseDto {
 	private Long stock;
 	private String imageUrl;
 	private Product.Status status;
-	private String createdAt;
-	private String updatedAt;
+	private ZonedDateTime createdAt;
+	private ZonedDateTime updatedAt;
 
 	public ProductResponseDto toEntity(Product product) {
 
@@ -41,8 +43,8 @@ public class ProductResponseDto {
 			.stock(product.getInventory())
 			.imageUrl(product.getImageUrl())
 			.status(product.getStatus())
-			.createdAt(product.getCreatedAt().toString())
-			.updatedAt(product.getUpdatedAt().toString())
+			.createdAt(product.getCreatedAt())
+			.updatedAt(product.getUpdatedAt())
 			.build();
 	}
 
@@ -59,8 +61,8 @@ public class ProductResponseDto {
 			.stock(product.getInventory())
 			.imageUrl(product.getImageUrl())
 			.status(product.getStatus())
-			.createdAt(product.getCreatedAt().toString())
-			.updatedAt(product.getUpdatedAt().toString())
+			.createdAt(product.getCreatedAt())
+			.updatedAt(product.getUpdatedAt())
 			.build();
 	}
 }
