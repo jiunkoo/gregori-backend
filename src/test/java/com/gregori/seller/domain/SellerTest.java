@@ -4,18 +4,15 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import com.gregori.common.domain.IsDeleted;
-import com.gregori.member.domain.Member;
 
 import static com.gregori.common.domain.IsDeleted.FALSE;
 import static com.gregori.common.domain.IsDeleted.TRUE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class SellerTest {
-
 	@Test
 	@DisplayName("Seller 객체의 필드를 수정한다.")
 	void should_updateSellerInfo() {
-
 		// given
 		Seller seller = new Seller(1L, "number", "name");
 
@@ -31,7 +28,6 @@ class SellerTest {
 	@Test
 	@DisplayName("Seller 객체의 삭제 여부를 'TRUE'로 변경한다.")
 	void should_isDeletedTrue() {
-
 		// given
 		Seller seller = new Seller(1L, "number", "name");
 		IsDeleted isDeleted = seller.getIsDeleted();

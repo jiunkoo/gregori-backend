@@ -32,7 +32,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Slf4j
 @CustomMybatisTest
 class ProductMapperTest {
-
 	@Autowired
 	private MemberMapper memberMapper;
 
@@ -52,18 +51,10 @@ class ProductMapperTest {
 
 	@BeforeEach
 	void beforeEach() {
-		member = Member.builder()
-			.email("a@a.a")
-			.name("일호")
-			.password("aa11111!")
-			.build();
+		member = new Member("a@a.a", "일호", "aa11111!");
 		memberMapper.insert(member);
 
-		seller = Seller.builder()
-			.memberId(member.getId())
-			.businessNumber("111-11-11111")
-			.businessName("일호 상점")
-			.build();
+		seller = new Seller(member.getId(), "111-11-11111", "일호 상점");
 		sellerMapper.insert(seller);
 
 		Category category1 = new Category("모자");
@@ -97,15 +88,8 @@ class ProductMapperTest {
 	@Test
 	@DisplayName("새로운 상품을 추가한다.")
 	void should_insert() {
-
 		// given
-		Product product = Product.builder()
-			.sellerId(seller.getId())
-			.categoryId(categoryIds.get(0))
-			.name("name")
-			.price(1L)
-			.inventory(1L)
-			.build();
+		Product product = new Product(seller.getId(), categoryIds.get(0), "name", 1L, 1L, "");
 
 		// when
 		productMapper.insert(product);
@@ -120,15 +104,8 @@ class ProductMapperTest {
 	@Test
 	@DisplayName("상품을 수정한다.")
 	void should_update() {
-
 		// given
-		Product product = Product.builder()
-			.sellerId(seller.getId())
-			.categoryId(categoryIds.get(0))
-			.name("name")
-			.price(1L)
-			.inventory(1L)
-			.build();
+		Product product = new Product(seller.getId(), categoryIds.get(0), "name", 1L, 1L, "");
 
 		productMapper.insert(product);
 		productIds.add(product.getId());
@@ -150,15 +127,8 @@ class ProductMapperTest {
 	@Test
 	@DisplayName("상품 재고를 수정한다.")
 	void should_updateInventory() {
-
 		// given
-		Product product = Product.builder()
-			.sellerId(seller.getId())
-			.categoryId(categoryIds.get(0))
-			.name("name")
-			.price(1L)
-			.inventory(1L)
-			.build();
+		Product product = new Product(seller.getId(), categoryIds.get(0), "name", 1L, 1L, "");
 
 		productMapper.insert(product);
 		productIds.add(product.getId());
@@ -175,15 +145,8 @@ class ProductMapperTest {
 	@Test
 	@DisplayName("id로 상품을 논리적으로 삭제한다.")
 	void should_updateIsDeleted() {
-
 		// given
-		Product product = Product.builder()
-			.sellerId(seller.getId())
-			.categoryId(categoryIds.get(0))
-			.name("name")
-			.price(1L)
-			.inventory(1L)
-			.build();
+		Product product = new Product(seller.getId(), categoryIds.get(0), "name", 1L, 1L, "");
 
 		productMapper.insert(product);
 		productIds.add(product.getId());
@@ -199,15 +162,8 @@ class ProductMapperTest {
 	@Test
 	@DisplayName("id로 상품을 삭제한다.")
 	void should_deleteById() {
-
 		 // given
-		Product product = Product.builder()
-			.sellerId(seller.getId())
-			.categoryId(categoryIds.get(0))
-			.name("name")
-			.price(1L)
-			.inventory(1L)
-			.build();
+		Product product = new Product(seller.getId(), categoryIds.get(0), "name", 1L, 1L, "");
 
 		productMapper.insert(product);
 		productIds.add(product.getId());
@@ -223,15 +179,8 @@ class ProductMapperTest {
 	@Test
 	@DisplayName("id로 상품을 조회한다.")
 	void should_findById() {
-
 		// given
-		Product product = Product.builder()
-			.sellerId(seller.getId())
-			.categoryId(categoryIds.get(0))
-			.name("name")
-			.price(1L)
-			.inventory(1L)
-			.build();
+		Product product = new Product(seller.getId(), categoryIds.get(0), "name", 1L, 1L, "");
 
 		productMapper.insert(product);
 		productIds.add(product.getId());
@@ -247,13 +196,12 @@ class ProductMapperTest {
 	@Test
 	@DisplayName("낮은 가격순으로 keyword와 일치하는 상품을 조회한다.")
 	void should_findByKeyword_when_priceAsc() {
-
 		// given
 		Random random = new Random();
 		for (int i = 0; i < 10; i++) {
 			String name = i % 2 == 0 ? "one" : "two";
 			Long price = random.nextLong(0, 999);
-			Product product = new Product(seller.getId(), categoryIds.get(0), name+i, price, (long)i);
+			Product product = new Product(seller.getId(), categoryIds.get(0), name + i, price, (long) i, "");
 			productMapper.insert(product);
 			productIds.add(product.getId());
 		}
@@ -272,13 +220,12 @@ class ProductMapperTest {
 	@Test
 	@DisplayName("높은 가격순으로 categoryId와 일치하는 상품을 조회한다.")
 	void should_findByCategory_when_priceDesc() {
-
 		// given
 		Random random = new Random();
 		for (int i = 0; i < 10; i++) {
 			Long categoryId = i % 2 == 0 ? categoryIds.get(0) : categoryIds.get(1);
 			Long price = random.nextLong(0, 999);
-			Product product = new Product(seller.getId(), categoryId, "name"+i, price, (long)i);
+			Product product = new Product(seller.getId(), categoryId, "name"+i, price, (long)i, "");
 			productMapper.insert(product);
 			productIds.add(product.getId());
 		}
@@ -297,12 +244,11 @@ class ProductMapperTest {
 	@Test
 	@DisplayName("최신 등록 순으로 sellerId와 일치하는 상품을 조회한다.")
 	void should_findBySellerId_when_createdAtDesc() {
-
 		// given
 		Random random = new Random();
 		for (int i = 0; i < 10; i++) {
 			Long price = random.nextLong(0, 999);
-			Product product = new Product(seller.getId(), categoryIds.get(0), "name"+i, price, (long)i);
+			Product product = new Product(seller.getId(), categoryIds.get(0), "name" + i, price, (long) i, "");
 			productMapper.insert(product);
 			productIds.add(product.getId());
 		}

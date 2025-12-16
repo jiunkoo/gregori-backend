@@ -7,11 +7,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class ProductTest {
-
 	@Test
 	@DisplayName("Product 객체의 필드를 수정한다.")
 	void should_updateProductInfo() {
-
 		// given
 		Product product = Product.builder()
 			.sellerId(1L)

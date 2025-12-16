@@ -16,7 +16,6 @@ class ProductCreateDtoTest {
 	@Test
 	@DisplayName("입력값이 올바르면 ProductCreateDto 객체 생성에 성공한다.")
 	void should_createProductCreateDto_when_validInput() {
-
 		// given
 		ProductCreateDto dto = new ProductCreateDto(1L,"name", 1L, 1L);
 
@@ -30,7 +29,6 @@ class ProductCreateDtoTest {
 	@Test
 	@DisplayName("sellerId 필드가 비어 있으면 에러가 발생한다.")
 	void should_ValidException_when_nullSellerId() {
-
 		// given
 		ProductCreateDto dto = new ProductCreateDto(null, "name", 1L, 1L);
 
@@ -44,7 +42,6 @@ class ProductCreateDtoTest {
 	@Test
 	@DisplayName("name 필드가 비어 있거나 빈 문자열이면 에러가 발생한다.")
 	void should_ValidException_when_blankName() {
-
 		// given
 		ProductCreateDto dto1 = new ProductCreateDto(1L,null, 1L, 1L);
 		ProductCreateDto dto2 = new ProductCreateDto(1L, "", 1L, 1L);
@@ -64,7 +61,6 @@ class ProductCreateDtoTest {
 	@Test
 	@DisplayName("price 필드가 비어 있으면 에러가 발생한다.")
 	void should_ValidException_when_nullPrice() {
-
 		// given
 		ProductCreateDto dto = new ProductCreateDto(1L,"name", null, 1L);
 
@@ -78,7 +74,6 @@ class ProductCreateDtoTest {
 	@Test
 	@DisplayName("inventory 필드가 비어 있으면 에러가 발생한다.")
 	void should_ValidException_when_nullInventory() {
-
 		// given
 		ProductCreateDto dto = new ProductCreateDto(1L,"name", 1L, null);
 

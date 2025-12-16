@@ -20,6 +20,7 @@ import com.gregori.product.dto.ProductUpdateDto;
 import static com.gregori.auth.domain.Authority.SELLING_MEMBER;
 import static com.gregori.product.domain.Product.Status.PRE_SALE;
 import static com.gregori.product.domain.Sorter.CREATED_AT_DESC;
+import static java.util.Objects.requireNonNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.refEq;
 import static org.mockito.BDDMockito.given;
@@ -27,13 +28,11 @@ import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 class ProductControllerTest extends CustomWebMvcTest {
-
 	private final ObjectMapper objectMapper = new ObjectMapper();
 
 	@Test
 	@DisplayName("상품 등록을 요청하면 Created 응답을 반환한다.")
 	void should_responseCreated_when_requestCreateProduct() throws Exception {
-
 		// given
 		ProductCreateDto dto = new ProductCreateDto(1L, "name", 1L, 1L);
 
@@ -48,8 +47,8 @@ class ProductControllerTest extends CustomWebMvcTest {
 		ResultActions actions = mockMvc.perform(
 			MockMvcRequestBuilders.post("/product")
 				.session(session)
-				.contentType(MediaType.APPLICATION_JSON)
-				.content(objectMapper.writeValueAsString(dto)));
+				.contentType(requireNonNull(MediaType.APPLICATION_JSON))
+				.content(requireNonNull(objectMapper.writeValueAsString(dto))));
 
 		// then
 		actions.andExpect(status().isCreated());
@@ -60,7 +59,6 @@ class ProductControllerTest extends CustomWebMvcTest {
 	@Test
 	@DisplayName("상품 수정을 요청하면 NoContent 응답을 반환한다.")
 	void should_responseNoContent_when_requestUpdateProduct() throws Exception {
-
 		// given
 		ProductUpdateDto dto = new ProductUpdateDto(1L, 1L, "name", 1L, 1L, PRE_SALE);
 
@@ -75,8 +73,8 @@ class ProductControllerTest extends CustomWebMvcTest {
 		ResultActions actions = mockMvc.perform(
 			MockMvcRequestBuilders.put("/product")
 				.session(session)
-				.contentType(MediaType.APPLICATION_JSON)
-				.content(objectMapper.writeValueAsString(dto)));
+				.contentType(requireNonNull(MediaType.APPLICATION_JSON))
+				.content(requireNonNull(objectMapper.writeValueAsString(dto))));
 
 		// then
 		actions.andExpect(status().isNoContent());
@@ -87,7 +85,6 @@ class ProductControllerTest extends CustomWebMvcTest {
 	@Test
 	@DisplayName("상품 삭제를 요청하면 NoContent 응답을 반환한다.")
 	void should_responseNoContent_when_requestDeleteProduct() throws Exception {
-
 		// given
 		Long productId = 1L;
 
@@ -102,7 +99,7 @@ class ProductControllerTest extends CustomWebMvcTest {
 		ResultActions actions = mockMvc.perform(
 			MockMvcRequestBuilders.delete("/product/" + productId)
 				.session(session)
-				.contentType(MediaType.APPLICATION_JSON));
+				.contentType(requireNonNull(MediaType.APPLICATION_JSON)));
 
 		// then
 		actions.andExpect(status().isNoContent());
@@ -113,14 +110,13 @@ class ProductControllerTest extends CustomWebMvcTest {
 	@Test
 	@DisplayName("상품 조회를 요청하면 Ok 응답을 반환한다.")
 	void should_responseOk_when_request_getProduct() throws Exception {
-
 		// given
 		Long productId = 1L;
 
 		// when
 		ResultActions actions = mockMvc.perform(
 			MockMvcRequestBuilders.get("/product/" + productId)
-				.contentType(MediaType.APPLICATION_JSON));
+				.contentType(requireNonNull(MediaType.APPLICATION_JSON)));
 
 		// then
 		actions.andExpect(status().isOk());
@@ -131,7 +127,6 @@ class ProductControllerTest extends CustomWebMvcTest {
 	@Test
 	@DisplayName("검색어와 함께 상품 목록 조회를 요청하면 Ok 응답을 반환한다.")
 	void should_responseOk_when_request_getProductsWithKeyword() throws Exception {
-
 		// given
 		String keyword = "스프링";
 		int page = 1;
@@ -140,7 +135,7 @@ class ProductControllerTest extends CustomWebMvcTest {
 		// when
 		ResultActions actions = mockMvc.perform(
 			MockMvcRequestBuilders.get("/product?keyword=" + keyword + "&page=" + page + "&sorter=" + sorter)
-				.contentType(MediaType.APPLICATION_JSON));
+				.contentType(requireNonNull(MediaType.APPLICATION_JSON)));
 
 		// then
 		actions.andExpect(status().isOk());
@@ -151,7 +146,6 @@ class ProductControllerTest extends CustomWebMvcTest {
 	@Test
 	@DisplayName("categoryId와 함께 상품 목록 조회를 요청하면 Ok 응답을 반환한다.")
 	void should_responseOk_when_request_getProductsWithCategoryId() throws Exception {
-
 		// given
 		Long categoryId = 1L;
 		int page = 1;
@@ -160,7 +154,7 @@ class ProductControllerTest extends CustomWebMvcTest {
 		// when
 		ResultActions actions = mockMvc.perform(
 			MockMvcRequestBuilders.get("/product?categoryId=" + categoryId + "&page=" + page + "&sorter=" + sorter)
-				.contentType(MediaType.APPLICATION_JSON));
+				.contentType(requireNonNull(MediaType.APPLICATION_JSON)));
 
 		// then
 		actions.andExpect(status().isOk());
@@ -171,7 +165,6 @@ class ProductControllerTest extends CustomWebMvcTest {
 	@Test
 	@DisplayName("sellerId와 함께 상품 목록 조회를 요청하면 Ok 응답을 반환한다.")
 	void should_responseOk_when_request_getProductsWithSellerId() throws Exception {
-
 		// given
 		Long sellerId = 1L;
 		int page = 1;
@@ -180,7 +173,7 @@ class ProductControllerTest extends CustomWebMvcTest {
 		// when
 		ResultActions actions = mockMvc.perform(
 			MockMvcRequestBuilders.get("/product?&sellerId=" + sellerId + "&page=" + page + "&sorter=" + sorter)
-				.contentType(MediaType.APPLICATION_JSON));
+				.contentType(requireNonNull(MediaType.APPLICATION_JSON)));
 
 		// then
 		actions.andExpect(status().isOk());

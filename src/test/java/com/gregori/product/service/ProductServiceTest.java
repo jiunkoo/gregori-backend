@@ -13,6 +13,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.gregori.common.exception.BusinessRuleViolationException;
 import com.gregori.common.exception.NotFoundException;
 import com.gregori.common.exception.ValidationException;
+import com.gregori.category.mapper.CategoryMapper;
 import com.gregori.order.domain.OrderDetail;
 import com.gregori.order.mapper.OrderDetailMapper;
 import com.gregori.product.domain.Product;
@@ -33,9 +34,11 @@ import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 class ProductServiceTest {
-
 	@Mock
 	private SellerMapper sellerMapper;
+
+	@Mock
+	private CategoryMapper categoryMapper;
 
 	@Mock
 	private ProductMapper productMapper;
@@ -49,7 +52,6 @@ class ProductServiceTest {
 	@Test
 	@DisplayName("상품 생성을 성공하면 id를 반환한다.")
 	void should_returnId_when_saveProductSuccess() {
-
 		// given
 		ProductCreateDto dto = new ProductCreateDto(1L, "name", 1L, 1L);
 
@@ -63,7 +65,6 @@ class ProductServiceTest {
 	@Test
 	@DisplayName("상품 갱신을 성공한다.")
 	void should_updateProductSuccess() {
-
 		// given
 		ProductUpdateDto dto = new ProductUpdateDto(1L, 1L, "name", 1L, 1L, PRE_SALE);
 		Seller seller = new Seller(1L, "123-45-67891", "name");
@@ -81,7 +82,6 @@ class ProductServiceTest {
 	@Test
 	@DisplayName("잘못된 입력값이면 상품 생성과 갱신을 실패한다.")
 	void should_ValidationException_when_invalidPriceAndInventory() {
-
 		// given
 		ProductCreateDto dto1 = new ProductCreateDto(1L, "name", -1L, 1L);
 		ProductUpdateDto dto2 = new ProductUpdateDto(1L, 1L, "name", 1L, -1L, PRE_SALE);
@@ -94,7 +94,6 @@ class ProductServiceTest {
 	@Test
 	@DisplayName("상품 삭제를 성공한다.")
 	void should_deleteProductSuccess() {
-
 		// given
 		Long productId = 1L;
 		Seller seller = new Seller(1L, "123-45-67891", "name");
@@ -113,7 +112,6 @@ class ProductServiceTest {
 	@Test
 	@DisplayName("주문 상품의 배송이 완료되지 않았으면 상품 삭제를 실패한다.")
 	void should_BusinessRuleViolationException_when_orderDetailIsDeliveredFalse() {
-
 		// given
 		Long productId = 1L;
 		OrderDetail orderDetail = new OrderDetail(1L, 1L, 1L, "name", 1L, 1L);
@@ -130,7 +128,6 @@ class ProductServiceTest {
 	@Test
 	@DisplayName("상품 조회를 성공하면 상품을 반환한다.")
 	void should_returnProduct_when_getProductSuccess() {
-
 		// given
 		Long productId = 1L;
 
@@ -146,7 +143,6 @@ class ProductServiceTest {
 	@Test
 	@DisplayName("상품 조회를 실패하면 에러가 발생한다.")
 	void should_NotFoundException_when_findProductFailure() {
-
 		// given
 		ProductUpdateDto dto = new ProductUpdateDto(1L, 1L, "name", 1L, 1L, PRE_SALE);
 
@@ -161,7 +157,6 @@ class ProductServiceTest {
 	@Test
 	@DisplayName("상품 목록 조회를 성공하면 상품 목록을 반환한다.")
 	void should_returnProducts_when_getProductsSuccess() {
-
 		// given
 		String keyword = "keyword";
 		int page = 1;

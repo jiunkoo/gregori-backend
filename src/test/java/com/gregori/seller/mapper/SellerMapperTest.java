@@ -20,7 +20,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @CustomMybatisTest
 class SellerMapperTest {
-
 	@Autowired
 	private MemberMapper memberMapper;
 
@@ -32,11 +31,7 @@ class SellerMapperTest {
 
 	@BeforeEach
 	void beforeEach() {
-		member = Member.builder()
-			.email("a@a.a")
-			.name("일호")
-			.password("aa11111!")
-			.build();
+		member = new Member("a@a.a", "일호", "aa11111!");
 		memberMapper.insert(member);
 	}
 
@@ -56,13 +51,8 @@ class SellerMapperTest {
 	@Test
 	@DisplayName("새로운 판매자를 추가한다.")
 	void should_insert() {
-
 		// given
-		Seller seller = Seller.builder()
-			.memberId(member.getId())
-			.businessNumber("111-11-11111")
-			.businessName("김일호 상점1")
-			.build();
+		Seller seller = new Seller(member.getId(), "111-11-11111", "김일호 상점1");
 
 		// when
 		sellerMapper.insert(seller);
@@ -77,13 +67,8 @@ class SellerMapperTest {
 	@Test
 	@DisplayName("판매자를 수정한다.")
 	void should_update() {
-
 		// given
-		Seller seller = Seller.builder()
-			.memberId(member.getId())
-			.businessNumber("111-11-11111")
-			.businessName("김일호 상점1")
-			.build();
+		Seller seller = new Seller(member.getId(), "111-11-11111", "김일호 상점1");
 
 		sellerMapper.insert(seller);
 		sellerIds.add(seller.getId());
@@ -102,13 +87,8 @@ class SellerMapperTest {
 	@Test
 	@DisplayName("id 목록으로 판매자를 삭제한다.")
 	void should_deleteByIds() {
-
 		// given
-		Seller seller = Seller.builder()
-			.memberId(member.getId())
-			.businessNumber("111-11-11111")
-			.businessName("김일호 상점1")
-			.build();
+		Seller seller = new Seller(member.getId(), "111-11-11111", "김일호 상점1");
 
 		sellerMapper.insert(seller);
 		sellerIds.add(seller.getId());
@@ -124,13 +104,8 @@ class SellerMapperTest {
 	@Test
 	@DisplayName("id로 판매자를 조회한다.")
 	void should_findById() {
-
 		// given
-		Seller seller = Seller.builder()
-			.memberId(member.getId())
-			.businessNumber("123-45-67890")
-			.businessName("김일호 상점1")
-			.build();
+		Seller seller = new Seller(member.getId(), "123-45-67890", "김일호 상점1");
 
 		sellerMapper.insert(seller);
 		sellerIds.add(seller.getId());
@@ -145,13 +120,8 @@ class SellerMapperTest {
 	@Test
 	@DisplayName("memberId로 판매자를 조회한다.")
 	void should_findByMemberId() {
-
 		// given
-		Seller seller = Seller.builder()
-			.memberId(member.getId())
-			.businessNumber("123-45-67890")
-			.businessName("김일호 상점1")
-			.build();
+		Seller seller = new Seller(member.getId(), "123-45-67890", "김일호 상점1");
 
 		sellerMapper.insert(seller);
 		sellerIds.add(seller.getId());

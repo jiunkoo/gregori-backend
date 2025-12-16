@@ -10,14 +10,12 @@ import jakarta.validation.ValidatorFactory;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class SellerRegisterDtoTest {
-
 	private final ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
 	private final Validator validator = factory.getValidator();
 
 	@Test
 	@DisplayName("입력값이 올바르면 SellerRegisterDto 객체 생성에 성공한다.")
 	void should_craeteSellerRegisterDto_when_validInput() {
-
 		// given
 		SellerRegisterDto dto = new SellerRegisterDto("000-00-00000", "name");
 
@@ -31,7 +29,6 @@ class SellerRegisterDtoTest {
 	@Test
 	@DisplayName("businessNumber 필드가 비어 있거나 빈 문자열이면 에러가 발생한다.")
 	void should_ValidException_when_blankBusinessNumber() {
-
 		// given
 		SellerRegisterDto dto1 = new SellerRegisterDto(null, "name");
 		SellerRegisterDto dto2 = new SellerRegisterDto("", "name");
@@ -51,7 +48,6 @@ class SellerRegisterDtoTest {
 	@Test
 	@DisplayName("businessNumber 필드의 패턴이 불일치하면 에러가 발생한다.")
 	void should_ValidException_when_mismatchedBusinessNumber() {
-
 		// given
 		SellerRegisterDto dto = new SellerRegisterDto("00-00-00", "name");
 
@@ -65,7 +61,6 @@ class SellerRegisterDtoTest {
 	@Test
 	@DisplayName("businessName 필드가 비어 있거나 빈 문자열이면 에러가 발생한다.")
 	void should_ValidException_when_blankBusinessName() {
-
 		// given
 		SellerRegisterDto dto1 = new SellerRegisterDto("000-00-00000", null);
 		SellerRegisterDto dto2 = new SellerRegisterDto("000-00-00000", "");
