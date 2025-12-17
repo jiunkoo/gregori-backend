@@ -79,12 +79,14 @@ cd gregori-backend
 
 애플리케이션 실행 후 아래 주소로 접속하여 API 명세서를 확인할 수 있습니다:
 
-👉 http://localhost:8080/swagger-ui.html
+👉 **Swagger UI**: http://localhost:8080/swagger-ui.html  
+👉 **Redoc UI**: http://localhost:8080/redoc.html
 
 API 문서는 Springdoc OpenAPI를 사용하여 자동 생성되며, 모든 REST API 엔드포인트와 요청/응답 스키마를 확인할 수 있습니다.
 
-- OpenAPI UI: `/swagger-ui.html`
-- OpenAPI JSON: `/api-docs`
+- **Swagger UI**: `/swagger-ui.html` - 인터랙티브한 API 테스트 가능
+- **Redoc UI**: `/redoc.html` - 깔끔한 문서 스타일의 API 문서
+- **OpenAPI JSON**: `/api-docs` - OpenAPI 스펙 JSON 형식
 
 ## 🧪 테스트 커버리지(JaCoCo)
 
