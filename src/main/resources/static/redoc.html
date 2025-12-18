@@ -1,22 +1,290 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
   <head>
-    <title>GREGORI API Documentation</title>
     <meta charset="utf-8" />
+    <title>GREGORI API Documentation</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Fonts -->
     <link
-      href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:300,400,700"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@300;400;600&display=swap"
       rel="stylesheet"
     />
+
+    <!-- ReDoc -->
+    <script src="https://cdn.redoc.ly/redoc/latest/bundles/redoc.standalone.js"></script>
+
     <style>
+      /* Global layout */
       body {
         margin: 0;
-        padding: 0;
+        background: #1e1e1e;
+        font-family: Inter, sans-serif;
+        color: #d4d4d4;
+      }
+
+      /* Top Bar */
+      .topbar {
+        background: #2d2d30;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        padding: 0 16px;
+        border-bottom: 1px solid #3c3c3c;
+        color: #cccccc;
+        font-weight: 600;
+        letter-spacing: 0.4px;
+        font-size: 14px;
+      }
+
+      .indicator {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #4fc1ff;
+        margin-right: 12px;
+        box-shadow: 0 0 8px rgba(79, 193, 255, 0.5);
+      }
+
+      /* Scrollbar */
+      ::-webkit-scrollbar {
+        width: 10px;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: #454545;
+        border-radius: 6px;
+      }
+
+      /* --- ReDoc OVERRIDES (SAFE) --- */
+
+      /* Sidebar */
+      .menu-content,
+      .menu-content label {
+        background-color: #252526 !important;
+        color: #d4d4d4 !important;
+      }
+
+      .menu-content .active > label {
+        background-color: #2a2d2e !important;
+        color: #4fc1ff !important;
+      }
+
+      /* API Content base */
+      .api-content {
+        background-color: #1e1e1e !important;
+        color: #d4d4d4 !important;
+      }
+
+      /* Headings */
+      .api-content h1,
+      .api-content h2,
+      .api-content h3,
+      .api-content h4 {
+        color: #e6e6e6 !important;
+        font-weight: 600 !important;
+        font-family: Inter, sans-serif !important;
+      }
+
+      .api-content h2 {
+        color: #4fc1ff !important;
+        border-bottom: 1px solid #3c3c3c !important;
+        padding-bottom: 8px !important;
+        margin-top: 32px;
+      }
+
+      /* --- JSON Highlight Fix --- */
+
+      pre,
+      code {
+        font-family: "JetBrains Mono", monospace !important;
+        background-color: #1e1e1e !important;
+        color: #dcdcdc !important;
+        border: 1px solid #3c3c3c !important;
+        border-radius: 6px;
+      }
+
+      .token.key {
+        color: #9cdcfe !important;
+      }
+
+      .token.string {
+        color: #ce9178 !important;
+      }
+
+      .token.number {
+        color: #b5cea8 !important;
+      }
+
+      .token.boolean,
+      .token.null {
+        color: #569cd6 !important;
+      }
+
+      /* --- Response Section Fix --- */
+
+      /* Response Schema Title */
+      h5[class*="sc-"] {
+        color: #d4d4d4 !important;
+      }
+
+      /* application/json Badge */
+      h5[class*="sc-"] span[class*="sc-"] {
+        background-color: #2d2d30 !important;
+        color: #4fc1ff !important;
+        border: 1px solid #3c3c3c !important;
+        padding: 3px 8px;
+        border-radius: 4px;
+      }
+
+      /* Response Samples Panel */
+      div.react-tabs__tab-panel {
+        color: #d4d4d4 !important;
+      }
+
+      /* Response Samples JSON */
+      div[class*="response"] pre,
+      div[class*="response"] code {
+        color: #d4d4d4 !important;
+        background-color: #1e1e1e !important;
+        border: 1px solid #3c3c3c !important;
+      }
+
+      /* Tabs (Payload / Example) */
+      .react-tabs__tab {
+        background: #252526 !important;
+        color: #d4d4d4 !important;
+        border: 1px solid #3c3c3c !important;
+      }
+
+      .react-tabs__tab--selected {
+        background: #1e1e1e !important;
+        color: #4fc1ff !important;
+        border-color: #4fc1ff !important;
+      }
+
+      /* Schema tables */
+      table th {
+        background: #2d2d30 !important;
+        color: #cccccc !important;
+      }
+
+      table td {
+        background: #1e1e1e !important;
+        color: #d4d4d4 !important;
+        border-color: #3c3c3c !important;
+      }
+
+      /* ===== Servers Section: URL Button (완전 다크 고정) ===== */
+
+      /* 버튼 컨테이너 */
+      div[aria-hidden="false"] div[role="button"] > div {
+        background-color: #1e1e1e !important;
+        color: #d4d4d4 !important;
+        border: 1px solid #3c3c3c !important;
+        border-radius: 6px;
+        padding: 6px 10px;
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      /* URL base (http://localhost:8080) */
+      div[aria-hidden="false"] div[role="button"] > div > span {
+        color: #4fc1ff !important;
+      }
+
+      /* URL path (/member/password) */
+      div[aria-hidden="false"] div[role="button"] > div {
+        color: #d4d4d4 !important;
+      }
+
+      /* 혹시 내부에서 다시 덮는 경우까지 차단 */
+      div[aria-hidden="false"] div[role="button"] > div * {
+        background-color: transparent !important;
+      }
+
+      /* Hover / Focus 상태 */
+      div[aria-hidden="false"] div[role="button"]:hover > div,
+      div[aria-hidden="false"] div[role="button"]:focus > div {
+        background-color: #252526 !important;
+        border-color: #4fc1ff !important;
+      }
+
+      /* ===== Servers section: server description text (로컬 개발 서버) ===== */
+
+      /* Servers 설명 텍스트 */
+      div[aria-hidden="false"] p {
+        color: #d4d4d4 !important;
+      }
+
+      /* 혹시 내부에서 span 등으로 감싸도 대비 */
+      div[aria-hidden="false"] p * {
+        color: #d4d4d4 !important;
       }
     </style>
   </head>
+
   <body>
-    <redoc spec-url="/api-docs"></redoc>
-    <script src="https://cdn.redoc.ly/redoc/latest/bundles/redoc.standalone.js"></script>
+    <div class="topbar">
+      <div class="indicator"></div>
+      GREGORI API Documentation
+    </div>
+
+    <div id="redoc-container"></div>
+
+    <script>
+      Redoc.init(
+        "/api-docs",
+        {
+          hideDownloadButton: true,
+          expandResponses: "200,201",
+          scrollYOffset: 48,
+
+          theme: {
+            colors: {
+              primary: { main: "#4fc1ff" },
+              text: {
+                primary: "#d4d4d4",
+                secondary: "#aaaaaa",
+              },
+              http: {
+                get: "#4fc1ff",
+                post: "#6a9955",
+                put: "#dcdcaa",
+                delete: "#f48771",
+              },
+            },
+
+            typography: {
+              fontFamily: "Inter, sans-serif",
+              code: {
+                fontFamily: "JetBrains Mono, monospace",
+                fontSize: "13px",
+              },
+            },
+
+            sidebar: {
+              backgroundColor: "#252526",
+              textColor: "#cccccc",
+              activeTextColor: "#4fc1ff",
+            },
+
+            rightPanel: {
+              backgroundColor: "#1e1e1e",
+            },
+
+            codeBlock: {
+              backgroundColor: "#1e1e1e",
+            },
+
+            schema: {
+              typeNameColor: "#4fc1ff",
+              requireLabelColor: "#f48771",
+              linesColor: "#3c3c3c",
+            },
+          },
+        },
+        document.getElementById("redoc-container")
+      );
+    </script>
   </body>
 </html>
