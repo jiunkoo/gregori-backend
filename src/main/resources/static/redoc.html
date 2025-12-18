@@ -175,50 +175,38 @@
         border-color: #3c3c3c !important;
       }
 
-      /* ===== Servers Section: URL Button (완전 다크 고정) ===== */
+      /* Server URL 버튼 스타일링 */
+      div[role="button"] {
+        background: #1e1e1e !important;
+        background-color: #1e1e1e !important;
+        box-shadow: none !important;
+      }
 
-      /* 버튼 컨테이너 */
-      div[aria-hidden="false"] div[role="button"] > div {
+      div[role="button"]::before,
+      div[role="button"]::after {
+        content: none !important;
+        background: transparent !important;
+      }
+
+      div[role="button"] > div {
         background-color: #1e1e1e !important;
         color: #d4d4d4 !important;
         border: 1px solid #3c3c3c !important;
         border-radius: 6px;
         padding: 6px 10px;
         font-family: "JetBrains Mono", monospace;
+        box-shadow: none !important;
       }
 
-      /* URL base (http://localhost:8080) */
-      div[aria-hidden="false"] div[role="button"] > div > span {
+      div[role="button"] > div > span {
         color: #4fc1ff !important;
+        background-color: #1e1e1e !important;
       }
 
-      /* URL path (/member/password) */
-      div[aria-hidden="false"] div[role="button"] > div {
-        color: #d4d4d4 !important;
-      }
-
-      /* 혹시 내부에서 다시 덮는 경우까지 차단 */
-      div[aria-hidden="false"] div[role="button"] > div * {
-        background-color: transparent !important;
-      }
-
-      /* Hover / Focus 상태 */
-      div[aria-hidden="false"] div[role="button"]:hover > div,
-      div[aria-hidden="false"] div[role="button"]:focus > div {
+      div[role="button"]:hover > div,
+      div[role="button"]:focus > div {
         background-color: #252526 !important;
         border-color: #4fc1ff !important;
-      }
-
-      /* ===== Servers section: server description text (로컬 개발 서버) ===== */
-
-      /* Servers 설명 텍스트 */
-      div[aria-hidden="false"] p {
-        color: #d4d4d4 !important;
-      }
-
-      /* 혹시 내부에서 span 등으로 감싸도 대비 */
-      div[aria-hidden="false"] p * {
-        color: #d4d4d4 !important;
       }
     </style>
   </head>
@@ -232,6 +220,246 @@
     <div id="redoc-container"></div>
 
     <script>
+      // 동적 CSS 스타일시트 추가 (최우선순위)
+      const injectDynamicStyles = () => {
+        // head에 추가
+        const styleId = "redoc-dark-server-button-override";
+        let styleEl = document.getElementById(styleId);
+        if (!styleEl) {
+          styleEl = document.createElement("style");
+          styleEl.id = styleId;
+          document.head.appendChild(styleEl);
+        }
+
+        // body 끝에도 추가 (더 늦게 로드되도록)
+        const bodyStyleId = "redoc-dark-server-button-override-body";
+        let bodyStyleEl = document.getElementById(bodyStyleId);
+        if (!bodyStyleEl) {
+          bodyStyleEl = document.createElement("style");
+          bodyStyleEl.id = bodyStyleId;
+          if (document.body) {
+            document.body.appendChild(bodyStyleEl);
+          } else {
+            document.addEventListener("DOMContentLoaded", () => {
+              document.body.appendChild(bodyStyleEl);
+            });
+          }
+        }
+
+        const cssContent = `
+          /* 서버 선택 버튼 스타일 - 모든 상태 포함 */
+          body div[role="button"],
+          body div[tabindex][role="button"],
+          div[role="button"],
+          div[tabindex][role="button"],
+          body div[role="button"]:hover,
+          body div[role="button"]:focus,
+          body div[role="button"]:active,
+          div[role="button"]:hover,
+          div[role="button"]:focus,
+          div[role="button"]:active {
+            background: #1e1e1e !important;
+            background-color: #1e1e1e !important;
+            background-image: none !important;
+            box-shadow: none !important;
+          }
+          
+          /* 서버 선택 버튼 내부 요소 */
+          body div[role="button"] > div,
+          body div[tabindex][role="button"] > div,
+          div[role="button"] > div,
+          div[tabindex][role="button"] > div {
+            background: #1e1e1e !important;
+            background-color: #1e1e1e !important;
+            background-image: none !important;
+            color: #d4d4d4 !important;
+            border: 1px solid #3c3c3c !important;
+            box-shadow: none !important;
+          }
+          
+          /* 서버 URL 강조 (localhost 부분) */
+          body div[role="button"] > div > span,
+          div[role="button"] > div > span {
+            background: #1e1e1e !important;
+            background-color: #1e1e1e !important;
+            color: #4fc1ff !important;
+          }
+          
+          /* 드롭다운 메뉴: 인라인 스타일에 흰색 배경이 있는 모든 가능한 요소 */
+          div[style*="rgb(250, 250, 250)"],
+          div[style*="background: rgb(250, 250, 250)"],
+          div[style*="background-color: rgb(250, 250, 250)"],
+          div[style*="background:rgb(250, 250, 250)"],
+          div[style*="background-color:rgb(250, 250, 250)"],
+          /* position absolute인 드롭다운 */
+          div[style*="position: absolute"],
+          div[style*="position:absolute"],
+          /* z-index가 높은 요소 */
+          div[style*="z-index: 100"],
+          div[style*="z-index:100"],
+          /* 조합 */
+          div[style*="position: absolute"][style*="z-index"],
+          div[style*="position:absolute"][style*="z-index"] {
+            background: #1e1e1e !important;
+            background-color: #1e1e1e !important;
+            background-image: none !important;
+            color: #d4d4d4 !important;
+          }
+          
+          /* 드롭다운 메뉴의 모든 자식 요소 */
+          div[style*="rgb(250, 250, 250)"] *,
+          div[style*="position: absolute"][style*="z-index"] * {
+            background: #1e1e1e !important;
+            background-color: #1e1e1e !important;
+            color: #d4d4d4 !important;
+          }
+          
+          div[style*="rgb(250, 250, 250)"] a,
+          div[style*="rgb(250, 250, 250)"] span,
+          div[style*="position: absolute"][style*="z-index"] a,
+          div[style*="position: absolute"][style*="z-index"] span {
+            color: #4fc1ff !important;
+          }
+        `;
+
+        styleEl.textContent = cssContent;
+        bodyStyleEl.textContent = cssContent;
+      };
+
+      // 서버 선택 버튼 및 드롭다운 스타일 적용
+      const forceDarkServerButton = () => {
+        // 1. 서버 선택 버튼 스타일
+        document.querySelectorAll('div[role="button"]').forEach((btn) => {
+          btn.style.backgroundColor = "#1e1e1e";
+          btn.style.background = "#1e1e1e";
+          btn.style.boxShadow = "none";
+
+          const inner = btn.querySelector("div");
+          if (inner) {
+            inner.style.backgroundColor = "#1e1e1e";
+            inner.style.background = "#1e1e1e";
+            inner.style.color = "#d4d4d4";
+            inner.style.border = "1px solid #3c3c3c";
+            inner.style.borderRadius = "6px";
+            inner.style.fontFamily = "JetBrains Mono, monospace";
+            inner.style.boxShadow = "none";
+
+            const span = inner.querySelector("span");
+            if (span) {
+              span.style.backgroundColor = "#1e1e1e";
+              span.style.color = "#4fc1ff";
+            }
+          }
+        });
+
+        // 2. 모든 div 요소를 검사하여 흰색 배경을 가진 요소 찾기 (더 철저하게)
+        document.querySelectorAll("div").forEach((el) => {
+          const styleAttr = el.getAttribute("style") || "";
+          const inlineBg =
+            el.style.background || el.style.backgroundColor || "";
+          const computedStyle = window.getComputedStyle(el);
+          const computedBg =
+            computedStyle.background || computedStyle.backgroundColor || "";
+
+          // 흰색 배경인지 확인 (여러 방법으로 체크)
+          const hasWhiteBg =
+            styleAttr.includes("rgb(250, 250, 250)") ||
+            styleAttr.includes("background: rgb(250") ||
+            styleAttr.includes("background-color: rgb(250") ||
+            inlineBg.includes("250, 250, 250") ||
+            inlineBg.includes("rgb(250") ||
+            computedBg.includes("250, 250, 250") ||
+            computedBg.includes("rgb(250") ||
+            computedBg === "rgb(250, 250, 250)" ||
+            computedBg === "rgba(250, 250, 250, 1)";
+
+          // position: absolute이고 z-index가 높은 드롭다운 메뉴도 확인
+          const isDropdown =
+            computedStyle.position === "absolute" &&
+            parseInt(computedStyle.zIndex || "0") >= 100;
+
+          if (hasWhiteBg || (isDropdown && computedBg.includes("250"))) {
+            // 배경을 검은색으로 강제 변경 (인라인 스타일은 최우선순위)
+            el.style.background = "#1e1e1e";
+            el.style.backgroundColor = "#1e1e1e";
+            el.style.backgroundImage = "none";
+            el.style.color = "#d4d4d4";
+
+            // 자식 요소들도 처리
+            el.querySelectorAll("*").forEach((child) => {
+              const childComputedStyle = window.getComputedStyle(child);
+              const childBg =
+                childComputedStyle.background ||
+                childComputedStyle.backgroundColor ||
+                "";
+              const childInlineBg =
+                child.style.background || child.style.backgroundColor || "";
+
+              if (
+                childBg.includes("250, 250, 250") ||
+                childBg.includes("rgb(250") ||
+                childInlineBg.includes("250, 250, 250") ||
+                childInlineBg.includes("rgb(250")
+              ) {
+                child.style.background = "#1e1e1e";
+                child.style.backgroundColor = "#1e1e1e";
+              }
+
+              // 링크와 강조 텍스트는 색상 유지
+              if (
+                child.tagName === "A" ||
+                (child.tagName === "SPAN" && child.textContent.trim())
+              ) {
+                child.style.color = "#4fc1ff";
+              } else if (
+                childComputedStyle.color.includes("38, 50, 56") ||
+                childComputedStyle.color.includes("rgb(38")
+              ) {
+                child.style.color = "#d4d4d4";
+              }
+            });
+          }
+        });
+      };
+
+      // 스타일 적용 함수
+      const applyStyles = () => {
+        injectDynamicStyles();
+        forceDarkServerButton();
+      };
+
+      // 즉시 스타일 적용 (requestAnimationFrame 사용)
+      const applyStylesImmediately = () => {
+        requestAnimationFrame(() => {
+          applyStyles();
+          requestAnimationFrame(forceDarkServerButton);
+        });
+      };
+
+      // 최초 실행
+      applyStyles();
+
+      // 클릭 이벤트: 드롭다운이 열릴 때 스타일 적용
+      document.addEventListener(
+        "click",
+        () => {
+          setTimeout(forceDarkServerButton, 0);
+          requestAnimationFrame(forceDarkServerButton);
+        },
+        true
+      );
+
+      // DOM 변경 감지: 새로운 요소가 추가될 때 스타일 적용
+      const observer = new MutationObserver(() => {
+        requestAnimationFrame(forceDarkServerButton);
+      });
+      observer.observe(document.body, {
+        childList: true,
+        subtree: true,
+        attributes: true,
+        attributeFilter: ["style", "aria-hidden"],
+      });
+
       Redoc.init(
         "/api-docs",
         {
@@ -285,6 +513,10 @@
         },
         document.getElementById("redoc-container")
       );
+
+      // ReDoc 렌더링 완료 후 스타일 적용
+      setTimeout(applyStyles, 100);
+      setTimeout(applyStyles, 500);
     </script>
   </body>
 </html>
