@@ -1,24 +1,24 @@
 :root {
-  --dark-bg: #1e1e1e;
-  --dark-text: #d4d4d4;
-  --dark-text-secondary: #aaaaaa;
-  --dark-text-light: #e6e6e6;
-  --dark-text-code: #dcdcdc;
-  --accent-color: #4fc1ff;
-  --border-color: #3c3c3c;
-  --dark-sidebar-bg: #252526;
-  --dark-sidebar-text: #cccccc;
-  --dark-sidebar-active: #2a2d2e;
-  --dark-topbar-bg: #2d2d30;
-  --dark-scrollbar-thumb: #454545;
-  --http-post: #6a9955;
-  --http-put: #dcdcaa;
-  --http-delete: #f48771;
-  --require-label: #f48771;
-  --token-key: #9cdcfe;
-  --token-string: #ce9178;
-  --token-number: #b5cea8;
-  --token-boolean: #569cd6;
+  --light-bg: #ffffff;
+  --light-text: #1e1e1e;
+  --light-text-secondary: #666666;
+  --light-text-light: #333333;
+  --light-text-code: #24292e;
+  --accent-color: #1890ff;
+  --border-color: #e0e0e0;
+  --light-sidebar-bg: #fafafa;
+  --light-sidebar-text: #333333;
+  --light-sidebar-active: #e6f7ff;
+  --light-topbar-bg: #ffffff;
+  --light-scrollbar-thumb: #d0d0d0;
+  --http-post: #52c41a;
+  --http-put: #faad14;
+  --http-delete: #ff4d4f;
+  --require-label: #ff4d4f;
+  --token-key: #1890ff;
+  --token-string: #cf1322;
+  --token-number: #389e0d;
+  --token-boolean: #722ed1;
   --font-family: Inter, sans-serif;
   --font-family-code: JetBrains Mono, monospace;
   --font-size-code: 13px;
@@ -26,9 +26,9 @@
 
 body {
   margin: 0;
-  background: var(--dark-bg);
+  background: var(--light-bg);
   font-family: var(--font-family);
-  color: var(--dark-text);
+  color: var(--light-text);
 }
 
 .topbar {
@@ -37,14 +37,14 @@ body {
   left: 0;
   right: 0;
   z-index: 1000;
-  background: var(--dark-topbar-bg);
+  background: var(--light-topbar-bg);
   height: 48px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 16px;
   border-bottom: 1px solid var(--border-color);
-  color: var(--dark-sidebar-text);
+  color: var(--light-sidebar-text);
   font-weight: 600;
   letter-spacing: 0.4px;
   font-size: 14px;
@@ -56,8 +56,8 @@ body {
 }
 
 .theme-toggle {
-  background: var(--dark-bg);
-  color: var(--dark-text);
+  background: var(--light-bg);
+  color: var(--light-text);
   border: 1px solid var(--border-color);
   border-radius: 6px;
   padding: 6px 12px;
@@ -68,7 +68,7 @@ body {
 }
 
 .theme-toggle:hover {
-  background: var(--dark-sidebar-bg);
+  background: var(--light-sidebar-active);
   border-color: var(--accent-color);
   color: var(--accent-color);
 }
@@ -83,7 +83,7 @@ body {
   border-radius: 50%;
   background: var(--accent-color);
   margin-right: 12px;
-  box-shadow: 0 0 8px rgba(79, 193, 255, 0.5);
+  box-shadow: 0 0 8px rgba(24, 144, 255, 0.3);
 }
 
 ::-webkit-scrollbar {
@@ -91,31 +91,31 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--dark-scrollbar-thumb);
+  background: var(--light-scrollbar-thumb);
   border-radius: 6px;
 }
 
 .menu-content,
 .menu-content label {
-  background-color: var(--dark-sidebar-bg) !important;
-  color: var(--dark-text) !important;
+  background-color: var(--light-sidebar-bg) !important;
+  color: var(--light-text) !important;
 }
 
 .menu-content .active > label {
-  background-color: var(--dark-sidebar-active) !important;
+  background-color: var(--light-sidebar-active) !important;
   color: var(--accent-color) !important;
 }
 
 .api-content {
-  background-color: var(--dark-bg) !important;
-  color: var(--dark-text) !important;
+  background-color: var(--light-bg) !important;
+  color: var(--light-text) !important;
 }
 
 .api-content h1,
 .api-content h2,
 .api-content h3,
 .api-content h4 {
-  color: var(--dark-text-light) !important;
+  color: var(--light-text-light) !important;
   font-weight: 600 !important;
   font-family: var(--font-family) !important;
 }
@@ -130,8 +130,8 @@ body {
 pre,
 code {
   font-family: var(--font-family-code) !important;
-  background-color: var(--dark-bg) !important;
-  color: var(--dark-text-code) !important;
+  background-color: var(--light-bg) !important;
+  color: var(--light-text-code) !important;
   border: 1px solid var(--border-color) !important;
   border-radius: 6px;
 }
@@ -154,11 +154,11 @@ code {
 }
 
 h5[class*="sc-"] {
-  color: var(--dark-text) !important;
+  color: var(--light-text) !important;
 }
 
 h5[class*="sc-"] span[class*="sc-"] {
-  background-color: var(--dark-topbar-bg) !important;
+  background-color: var(--light-topbar-bg) !important;
   color: var(--accent-color) !important;
   border: 1px solid var(--border-color) !important;
   padding: 3px 8px;
@@ -166,36 +166,36 @@ h5[class*="sc-"] span[class*="sc-"] {
 }
 
 div.react-tabs__tab-panel {
-  color: var(--dark-text) !important;
+  color: var(--light-text) !important;
 }
 
 div[class*="response"] pre,
 div[class*="response"] code {
-  color: var(--dark-text) !important;
-  background-color: var(--dark-bg) !important;
+  color: var(--light-text) !important;
+  background-color: var(--light-bg) !important;
   border: 1px solid var(--border-color) !important;
 }
 
 .react-tabs__tab {
-  background: var(--dark-sidebar-bg) !important;
-  color: var(--dark-text) !important;
+  background: var(--light-sidebar-bg) !important;
+  color: var(--light-text) !important;
   border: 1px solid var(--border-color) !important;
 }
 
 .react-tabs__tab--selected {
-  background: var(--dark-bg) !important;
+  background: var(--light-bg) !important;
   color: var(--accent-color) !important;
   border-color: var(--accent-color) !important;
 }
 
 table th {
-  background: var(--dark-topbar-bg) !important;
-  color: var(--dark-sidebar-text) !important;
+  background: var(--light-topbar-bg) !important;
+  color: var(--light-sidebar-text) !important;
 }
 
 table td {
-  background: var(--dark-bg) !important;
-  color: var(--dark-text) !important;
+  background: var(--light-bg) !important;
+  color: var(--light-text) !important;
   border-color: var(--border-color) !important;
 }
 
@@ -208,8 +208,8 @@ body div[tabindex][role="button"],
 body div[role="button"]:hover,
 body div[role="button"]:focus,
 body div[role="button"]:active {
-  background: var(--dark-bg) !important;
-  background-color: var(--dark-bg) !important;
+  background: var(--light-bg) !important;
+  background-color: var(--light-bg) !important;
   background-image: none !important;
   box-shadow: none !important;
 }
@@ -224,10 +224,10 @@ div[role="button"] > div,
 body div[role="button"] > div,
 body div[tabindex][role="button"] > div,
 div[tabindex][role="button"] > div {
-  background: var(--dark-bg) !important;
-  background-color: var(--dark-bg) !important;
+  background: var(--light-bg) !important;
+  background-color: var(--light-bg) !important;
   background-image: none !important;
-  color: var(--dark-text) !important;
+  color: var(--light-text) !important;
   border: 1px solid var(--border-color) !important;
   border-radius: 6px !important;
   padding: 6px 10px;
@@ -237,53 +237,53 @@ div[tabindex][role="button"] > div {
 
 div[role="button"] > div > span,
 body div[role="button"] > div > span {
-  background: var(--dark-bg) !important;
-  background-color: var(--dark-bg) !important;
+  background: var(--light-bg) !important;
+  background-color: var(--light-bg) !important;
   color: var(--accent-color) !important;
 }
 
 div[role="button"]:hover > div,
 div[role="button"]:focus > div {
-  background-color: var(--dark-sidebar-bg) !important;
+  background-color: var(--light-sidebar-active) !important;
   border-color: var(--accent-color) !important;
 }
 
-div[style*="rgb(250, 250, 250)"],
-div[style*="rgba(250, 250, 250"],
-div[style*="background: rgb(250, 250, 250)"],
-div[style*="background-color: rgb(250, 250, 250)"],
-div[style*="background:rgb(250, 250, 250)"],
-div[style*="background-color:rgb(250, 250, 250)"],
-div[style*="background:rgba(250, 250, 250"],
-div[style*="background-color:rgba(250, 250, 250"],
+div[style*="rgb(30, 30, 30)"],
+div[style*="rgba(30, 30, 30"],
+div[style*="background: rgb(30, 30, 30)"],
+div[style*="background-color: rgb(30, 30, 30)"],
+div[style*="background:rgb(30, 30, 30)"],
+div[style*="background-color:rgb(30, 30, 30)"],
+div[style*="background:rgba(30, 30, 30"],
+div[style*="background-color:rgba(30, 30, 30"],
 div[style*="position: absolute"],
 div[style*="position:absolute"],
 div[style*="z-index: 100"],
 div[style*="z-index:100"],
 div[style*="position: absolute"][style*="z-index"],
 div[style*="position:absolute"][style*="z-index"] {
-  background: var(--dark-bg) !important;
-  background-color: var(--dark-bg) !important;
+  background: var(--light-bg) !important;
+  background-color: var(--light-bg) !important;
   background-image: none !important;
-  color: var(--dark-text) !important;
+  color: var(--light-text) !important;
 }
 
-div[style*="rgb(250, 250, 250)"] *,
-div[style*="rgba(250, 250, 250"] *,
+div[style*="rgb(30, 30, 30)"] *,
+div[style*="rgba(30, 30, 30"] *,
 div[style*="position: absolute"][style*="z-index"] *,
-div[style*="rgb(250, 250, 250)"] div,
-div[style*="rgba(250, 250, 250"] div,
+div[style*="rgb(30, 30, 30)"] div,
+div[style*="rgba(30, 30, 30"] div,
 div[style*="position: absolute"][style*="z-index"] div {
-  background: var(--dark-bg) !important;
-  background-color: var(--dark-bg) !important;
+  background: var(--light-bg) !important;
+  background-color: var(--light-bg) !important;
   background-image: none !important;
-  color: var(--dark-text) !important;
+  color: var(--light-text) !important;
 }
 
-div[style*="rgb(250, 250, 250)"] a,
-div[style*="rgba(250, 250, 250"] a,
-div[style*="rgb(250, 250, 250)"] span,
-div[style*="rgba(250, 250, 250"] span,
+div[style*="rgb(30, 30, 30)"] a,
+div[style*="rgba(30, 30, 30"] a,
+div[style*="rgb(30, 30, 30)"] span,
+div[style*="rgba(30, 30, 30"] span,
 div[style*="position: absolute"][style*="z-index"] a,
 div[style*="position: absolute"][style*="z-index"] span {
   color: var(--accent-color) !important;
