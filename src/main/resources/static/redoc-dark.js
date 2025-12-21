@@ -1,35 +1,25 @@
-const getCSSVariable = (name) => {
-  return getComputedStyle(document.documentElement)
-    .getPropertyValue(name)
-    .trim();
-};
+const getCSSVariable = (name) =>
+  getComputedStyle(document.documentElement).getPropertyValue(name).trim();
 
-const DARK_BG = getCSSVariable("--dark-bg");
-const DARK_TEXT = getCSSVariable("--dark-text");
-const ACCENT_COLOR = getCSSVariable("--accent-color");
-const BORDER_COLOR = getCSSVariable("--border-color");
 const WHITE_BG_PATTERN = /rgb\(250,\s*250,\s*250\)|rgb\(250/i;
 
 const applyDarkStyles = () => {
   document.querySelectorAll('div[role="button"]').forEach((btn) => {
-    btn.style.backgroundColor = DARK_BG;
-    btn.style.background = DARK_BG;
+    btn.style.backgroundColor = getCSSVariable("--dark-bg");
+    btn.style.background = getCSSVariable("--dark-bg");
     btn.style.boxShadow = "none";
 
     const inner = btn.querySelector("div");
     if (inner) {
-      inner.style.backgroundColor = DARK_BG;
-      inner.style.background = DARK_BG;
-      inner.style.color = DARK_TEXT;
-      inner.style.border = `1px solid ${BORDER_COLOR}`;
-      inner.style.borderRadius = "6px";
-      inner.style.fontFamily = "JetBrains Mono, monospace";
+      inner.style.backgroundColor = getCSSVariable("--dark-bg");
+      inner.style.background = getCSSVariable("--dark-bg");
+      inner.style.color = getCSSVariable("--dark-text");
       inner.style.boxShadow = "none";
 
       const span = inner.querySelector("span");
       if (span) {
-        span.style.backgroundColor = DARK_BG;
-        span.style.color = ACCENT_COLOR;
+        span.style.backgroundColor = getCSSVariable("--dark-bg");
+        span.style.color = getCSSVariable("--accent-color");
       }
     }
   });
@@ -44,19 +34,17 @@ const applyDarkStyles = () => {
     const hasWhiteBg =
       WHITE_BG_PATTERN.test(styleAttr) ||
       WHITE_BG_PATTERN.test(inlineBg) ||
-      WHITE_BG_PATTERN.test(computedBg) ||
-      computedBg === "rgb(250, 250, 250)" ||
-      computedBg === "rgba(250, 250, 250, 1)";
+      WHITE_BG_PATTERN.test(computedBg);
 
     const isDropdown =
       computedStyle.position === "absolute" &&
       parseInt(computedStyle.zIndex || "0") >= 100;
 
     if (hasWhiteBg || (isDropdown && computedBg.includes("250"))) {
-      el.style.background = DARK_BG;
-      el.style.backgroundColor = DARK_BG;
+      el.style.background = getCSSVariable("--dark-bg");
+      el.style.backgroundColor = getCSSVariable("--dark-bg");
       el.style.backgroundImage = "none";
-      el.style.color = DARK_TEXT;
+      el.style.color = getCSSVariable("--dark-text");
 
       el.querySelectorAll("*").forEach((child) => {
         const childComputedStyle = window.getComputedStyle(child);
@@ -71,20 +59,20 @@ const applyDarkStyles = () => {
           WHITE_BG_PATTERN.test(childBg) ||
           WHITE_BG_PATTERN.test(childInlineBg)
         ) {
-          child.style.background = DARK_BG;
-          child.style.backgroundColor = DARK_BG;
+          child.style.background = getCSSVariable("--dark-bg");
+          child.style.backgroundColor = getCSSVariable("--dark-bg");
         }
 
         if (
           child.tagName === "A" ||
           (child.tagName === "SPAN" && child.textContent.trim())
         ) {
-          child.style.color = ACCENT_COLOR;
+          child.style.color = getCSSVariable("--accent-color");
         } else if (
           childComputedStyle.color.includes("38, 50, 56") ||
           childComputedStyle.color.includes("rgb(38")
         ) {
-          child.style.color = DARK_TEXT;
+          child.style.color = getCSSVariable("--dark-text");
         }
       });
     }
@@ -112,50 +100,52 @@ observer.observe(document.body, {
   attributeFilter: ["style", "aria-hidden"],
 });
 
+const getRedocTheme = () => ({
+  colors: {
+    primary: { main: getCSSVariable("--accent-color") },
+    text: {
+      primary: getCSSVariable("--dark-text"),
+      secondary: getCSSVariable("--dark-text-secondary"),
+    },
+    http: {
+      get: getCSSVariable("--accent-color"),
+      post: getCSSVariable("--http-post"),
+      put: getCSSVariable("--http-put"),
+      delete: getCSSVariable("--http-delete"),
+    },
+  },
+  typography: {
+    fontFamily: getCSSVariable("--font-family"),
+    code: {
+      fontFamily: getCSSVariable("--font-family-code"),
+      fontSize: getCSSVariable("--font-size-code"),
+    },
+  },
+  sidebar: {
+    backgroundColor: getCSSVariable("--dark-sidebar-bg"),
+    textColor: getCSSVariable("--dark-sidebar-text"),
+    activeTextColor: getCSSVariable("--accent-color"),
+  },
+  rightPanel: {
+    backgroundColor: getCSSVariable("--dark-bg"),
+  },
+  codeBlock: {
+    backgroundColor: getCSSVariable("--dark-bg"),
+  },
+  schema: {
+    typeNameColor: getCSSVariable("--accent-color"),
+    requireLabelColor: getCSSVariable("--require-label"),
+    linesColor: getCSSVariable("--border-color"),
+  },
+});
+
 Redoc.init(
   "/api-docs",
   {
     hideDownloadButton: true,
     expandResponses: "200,201",
     scrollYOffset: 48,
-    theme: {
-      colors: {
-        primary: { main: ACCENT_COLOR },
-        text: {
-          primary: DARK_TEXT,
-          secondary: "#aaaaaa",
-        },
-        http: {
-          get: ACCENT_COLOR,
-          post: "#6a9955",
-          put: "#dcdcaa",
-          delete: "#f48771",
-        },
-      },
-      typography: {
-        fontFamily: "Inter, sans-serif",
-        code: {
-          fontFamily: "JetBrains Mono, monospace",
-          fontSize: "13px",
-        },
-      },
-      sidebar: {
-        backgroundColor: "#252526",
-        textColor: "#cccccc",
-        activeTextColor: ACCENT_COLOR,
-      },
-      rightPanel: {
-        backgroundColor: DARK_BG,
-      },
-      codeBlock: {
-        backgroundColor: DARK_BG,
-      },
-      schema: {
-        typeNameColor: ACCENT_COLOR,
-        requireLabelColor: "#f48771",
-        linesColor: BORDER_COLOR,
-      },
-    },
+    theme: getRedocTheme(),
   },
   document.getElementById("redoc-container")
 );

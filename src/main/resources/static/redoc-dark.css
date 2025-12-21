@@ -1,25 +1,44 @@
 :root {
   --dark-bg: #1e1e1e;
   --dark-text: #d4d4d4;
+  --dark-text-secondary: #aaaaaa;
+  --dark-text-light: #e6e6e6;
+  --dark-text-code: #dcdcdc;
   --accent-color: #4fc1ff;
   --border-color: #3c3c3c;
+  --dark-sidebar-bg: #252526;
+  --dark-sidebar-text: #cccccc;
+  --dark-sidebar-active: #2a2d2e;
+  --dark-topbar-bg: #2d2d30;
+  --dark-scrollbar-thumb: #454545;
+  --http-post: #6a9955;
+  --http-put: #dcdcaa;
+  --http-delete: #f48771;
+  --require-label: #f48771;
+  --token-key: #9cdcfe;
+  --token-string: #ce9178;
+  --token-number: #b5cea8;
+  --token-boolean: #569cd6;
+  --font-family: Inter, sans-serif;
+  --font-family-code: JetBrains Mono, monospace;
+  --font-size-code: 13px;
 }
 
 body {
   margin: 0;
   background: var(--dark-bg);
-  font-family: Inter, sans-serif;
+  font-family: var(--font-family);
   color: var(--dark-text);
 }
 
 .topbar {
-  background: #2d2d30;
+  background: var(--dark-topbar-bg);
   height: 48px;
   display: flex;
   align-items: center;
   padding: 0 16px;
   border-bottom: 1px solid var(--border-color);
-  color: #cccccc;
+  color: var(--dark-sidebar-text);
   font-weight: 600;
   letter-spacing: 0.4px;
   font-size: 14px;
@@ -39,18 +58,18 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #454545;
+  background: var(--dark-scrollbar-thumb);
   border-radius: 6px;
 }
 
 .menu-content,
 .menu-content label {
-  background-color: #252526 !important;
+  background-color: var(--dark-sidebar-bg) !important;
   color: var(--dark-text) !important;
 }
 
 .menu-content .active > label {
-  background-color: #2a2d2e !important;
+  background-color: var(--dark-sidebar-active) !important;
   color: var(--accent-color) !important;
 }
 
@@ -63,9 +82,9 @@ body {
 .api-content h2,
 .api-content h3,
 .api-content h4 {
-  color: #e6e6e6 !important;
+  color: var(--dark-text-light) !important;
   font-weight: 600 !important;
-  font-family: Inter, sans-serif !important;
+  font-family: var(--font-family) !important;
 }
 
 .api-content h2 {
@@ -77,28 +96,28 @@ body {
 
 pre,
 code {
-  font-family: "JetBrains Mono", monospace !important;
+  font-family: var(--font-family-code) !important;
   background-color: var(--dark-bg) !important;
-  color: #dcdcdc !important;
+  color: var(--dark-text-code) !important;
   border: 1px solid var(--border-color) !important;
   border-radius: 6px;
 }
 
 .token.key {
-  color: #9cdcfe !important;
+  color: var(--token-key) !important;
 }
 
 .token.string {
-  color: #ce9178 !important;
+  color: var(--token-string) !important;
 }
 
 .token.number {
-  color: #b5cea8 !important;
+  color: var(--token-number) !important;
 }
 
 .token.boolean,
 .token.null {
-  color: #569cd6 !important;
+  color: var(--token-boolean) !important;
 }
 
 h5[class*="sc-"] {
@@ -106,7 +125,7 @@ h5[class*="sc-"] {
 }
 
 h5[class*="sc-"] span[class*="sc-"] {
-  background-color: #2d2d30 !important;
+  background-color: var(--dark-topbar-bg) !important;
   color: var(--accent-color) !important;
   border: 1px solid var(--border-color) !important;
   padding: 3px 8px;
@@ -125,7 +144,7 @@ div[class*="response"] code {
 }
 
 .react-tabs__tab {
-  background: #252526 !important;
+  background: var(--dark-sidebar-bg) !important;
   color: var(--dark-text) !important;
   border: 1px solid var(--border-color) !important;
 }
@@ -137,8 +156,8 @@ div[class*="response"] code {
 }
 
 table th {
-  background: #2d2d30 !important;
-  color: #cccccc !important;
+  background: var(--dark-topbar-bg) !important;
+  color: var(--dark-sidebar-text) !important;
 }
 
 table td {
@@ -177,9 +196,9 @@ div[tabindex][role="button"] > div {
   background-image: none !important;
   color: var(--dark-text) !important;
   border: 1px solid var(--border-color) !important;
-  border-radius: 6px;
+  border-radius: 6px !important;
   padding: 6px 10px;
-  font-family: "JetBrains Mono", monospace;
+  font-family: var(--font-family-code) !important;
   box-shadow: none !important;
 }
 
@@ -192,15 +211,18 @@ body div[role="button"] > div > span {
 
 div[role="button"]:hover > div,
 div[role="button"]:focus > div {
-  background-color: #252526 !important;
+  background-color: var(--dark-sidebar-bg) !important;
   border-color: var(--accent-color) !important;
 }
 
 div[style*="rgb(250, 250, 250)"],
+div[style*="rgba(250, 250, 250"],
 div[style*="background: rgb(250, 250, 250)"],
 div[style*="background-color: rgb(250, 250, 250)"],
 div[style*="background:rgb(250, 250, 250)"],
 div[style*="background-color:rgb(250, 250, 250)"],
+div[style*="background:rgba(250, 250, 250"],
+div[style*="background-color:rgba(250, 250, 250"],
 div[style*="position: absolute"],
 div[style*="position:absolute"],
 div[style*="z-index: 100"],
@@ -214,8 +236,10 @@ div[style*="position:absolute"][style*="z-index"] {
 }
 
 div[style*="rgb(250, 250, 250)"] *,
+div[style*="rgba(250, 250, 250"] *,
 div[style*="position: absolute"][style*="z-index"] *,
 div[style*="rgb(250, 250, 250)"] div,
+div[style*="rgba(250, 250, 250"] div,
 div[style*="position: absolute"][style*="z-index"] div {
   background: var(--dark-bg) !important;
   background-color: var(--dark-bg) !important;
@@ -224,7 +248,9 @@ div[style*="position: absolute"][style*="z-index"] div {
 }
 
 div[style*="rgb(250, 250, 250)"] a,
+div[style*="rgba(250, 250, 250"] a,
 div[style*="rgb(250, 250, 250)"] span,
+div[style*="rgba(250, 250, 250"] span,
 div[style*="position: absolute"][style*="z-index"] a,
 div[style*="position: absolute"][style*="z-index"] span {
   color: var(--accent-color) !important;
