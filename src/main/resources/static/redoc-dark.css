@@ -5,7 +5,7 @@
   --dark-text-light: #e6e6e6;
   --dark-text-code: #dcdcdc;
   --accent-color: #4fc1ff;
-  --border-color: #3c3c3c;
+  --border-color: #979797;
   --dark-sidebar-bg: #252526;
   --dark-sidebar-text: #cccccc;
   --dark-sidebar-active: #2a2d2e;
@@ -132,8 +132,6 @@ code {
   font-family: var(--font-family-code) !important;
   background-color: var(--dark-bg) !important;
   color: var(--dark-text-code) !important;
-  border: 1px solid var(--border-color) !important;
-  border-radius: 6px;
 }
 
 .token.key {

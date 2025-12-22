@@ -5,7 +5,7 @@
   --light-text-light: #333333;
   --light-text-code: #24292e;
   --accent-color: #1890ff;
-  --border-color: #e0e0e0;
+  --border-color: #333333;
   --light-sidebar-bg: #fafafa;
   --light-sidebar-text: #333333;
   --light-sidebar-active: #e6f7ff;
@@ -43,7 +43,7 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 0 16px;
-  border-bottom: 1px solid var(--border-color);
+  /* border-bottom: 1px solid var(--border-color); */
   color: var(--light-sidebar-text);
   font-weight: 600;
   letter-spacing: 0.4px;
@@ -132,8 +132,6 @@ code {
   font-family: var(--font-family-code) !important;
   background-color: var(--light-bg) !important;
   color: var(--light-text-code) !important;
-  border: 1px solid var(--border-color) !important;
-  border-radius: 6px;
 }
 
 .token.key {
