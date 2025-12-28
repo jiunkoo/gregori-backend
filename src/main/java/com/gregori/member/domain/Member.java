@@ -14,7 +14,6 @@ import static com.gregori.common.domain.IsDeleted.TRUE;
 @Getter
 @NoArgsConstructor
 public class Member extends AbstractEntity {
-
     private Long id;
     private String name;
     private String email;

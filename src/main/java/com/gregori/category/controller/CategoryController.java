@@ -2,6 +2,7 @@ package com.gregori.category.controller;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -27,23 +28,21 @@ import static com.gregori.auth.domain.Authority.ADMIN_MEMBER;
 @RequiredArgsConstructor
 @RequestMapping("/category")
 public class CategoryController {
-
 	private final CategoryService categoryService;
 
 	@LoginCheck(ADMIN_MEMBER)
 	@PostMapping
 	public ResponseEntity<Void> createCategory(@RequestBody @Validated CategoryRequestDto dto) {
-
 		Long categoryId = categoryService.saveCategory(dto.getName());
+		URI location = Objects.requireNonNull(URI.create("/category/" + categoryId));
 
-		return ResponseEntity.created(URI.create("/category/" + categoryId)).build();
+		return ResponseEntity.created(location).build();
 	}
 
 	@LoginCheck(ADMIN_MEMBER)
 	@PostMapping("/{categoryId}")
 	public ResponseEntity<Void> updateCategoryName(@PathVariable Long categoryId,
 		@RequestBody @Validated CategoryRequestDto dto) {
-
 		categoryService.updateCategoryName(categoryId, dto.getName());
 
 		return ResponseEntity.noContent().build();
@@ -52,7 +51,6 @@ public class CategoryController {
 	@LoginCheck(ADMIN_MEMBER)
 	@DeleteMapping("/{categoryId}")
 	public ResponseEntity<Void> deleteCategory(@PathVariable Long categoryId) {
-
 		categoryService.deleteCategory(categoryId);
 
 		return ResponseEntity.noContent().build();
@@ -60,7 +58,6 @@ public class CategoryController {
 
 	@GetMapping("/{categoryId}")
 	public ResponseEntity<Category> getCategory(@PathVariable Long categoryId) {
-
 		Category category = categoryService.getCategory(categoryId);
 
 		return ResponseEntity.ok().body(category);
@@ -69,7 +66,6 @@ public class CategoryController {
 	@GetMapping
 	public ResponseEntity<List<Category>> getCategories(
 		@RequestParam(defaultValue = "1") int page) {
-
 		List<Category> categories = categoryService.getCategories(page);
 
 		return ResponseEntity.ok().body(categories);

@@ -9,7 +9,6 @@ import com.gregori.order.domain.OrderDetail;
 
 @Mapper
 public interface OrderDetailMapper {
-
 	Long insert(OrderDetail orderDetail);
 	void updateStatus(Long id, OrderDetail.Status status);
 	void deleteByIds(List<Long> ids);

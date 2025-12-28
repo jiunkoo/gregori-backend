@@ -14,11 +14,9 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class CategoryService {
-
 	private final CategoryMapper categoryMapper;
 
 	public Long saveCategory(String name) {
-
 		Category category = new Category(name);
 		categoryMapper.insert(category);
 
@@ -27,24 +25,20 @@ public class CategoryService {
 
 	@Transactional
 	public void updateCategoryName(Long categoryId, String name) throws NotFoundException {
-
 		Category category = categoryMapper.findById(categoryId).orElseThrow(NotFoundException::new);
 		category.updateCategoryName(name);
 		categoryMapper.updateName(category);
 	}
 
 	public void deleteCategory(Long categoryId) {
-
 		categoryMapper.deleteById(categoryId);
 	}
 
 	public Category getCategory(Long categoryId) throws NotFoundException {
-
 		return categoryMapper.findById(categoryId).orElseThrow(NotFoundException::new);
 	}
 
 	public List<Category> getCategories(int page) {
-
 		int limit = 10;
 		int offset = (page - 1) * limit;
 

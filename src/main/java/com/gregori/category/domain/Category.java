@@ -7,7 +7,6 @@ import lombok.Getter;
 
 @Getter
 public class Category extends AbstractEntity {
-
 	private Long id;
 	private String name;
 

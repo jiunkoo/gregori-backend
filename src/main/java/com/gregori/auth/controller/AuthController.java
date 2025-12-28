@@ -26,12 +26,10 @@ import static com.gregori.common.CookieGenerator.COOKIE_NAME;
 @RequiredArgsConstructor
 @RequestMapping("/auth")
 public class AuthController {
-
 	private final AuthService authService;
 
 	@PostMapping("/signin")
 	public ResponseEntity<Void> signIn(@RequestBody @Validated AuthSignInDto dto, HttpSession session) {
-
 		SessionMember response = authService.signIn(dto);
 		session.setAttribute("member", response);
 
@@ -40,7 +38,6 @@ public class AuthController {
 
 	@PostMapping("/signout")
 	public ResponseEntity<Void> signOut(HttpSession session, @CookieValue(name = COOKIE_NAME) Cookie cookie) {
-
 		if (session == null || cookie == null) {
 			throw new NotFoundException("쿠키 혹은 세션을 찾을 수 없습니다.");
 		}

@@ -13,7 +13,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MemberNameUpdateDto {
-
 	@NotBlank
 	@Pattern(regexp = NAME_REGEX, message = "이름 형식이 일치해야 합니다.")
 	private String name;

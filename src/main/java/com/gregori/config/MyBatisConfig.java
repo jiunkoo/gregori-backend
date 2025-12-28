@@ -14,10 +14,8 @@ import javax.sql.DataSource;
 @Configuration
 @MapperScan("com.gregori.*.mapper")
 public class MyBatisConfig {
-
     @Bean
     public SqlSessionFactory primarySqlSession(DataSource dataSource) throws Exception {
-
         SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
         sessionFactory.setDataSource(dataSource);
         sessionFactory.setConfigLocation(new ClassPathResource("mybatis-config.xml"));
@@ -28,7 +26,6 @@ public class MyBatisConfig {
 
     @Bean
     public SqlSessionTemplate sqlSessionTemplate(SqlSessionFactory sqlSessionFactory) {
-
         return new SqlSessionTemplate(sqlSessionFactory);
     }
 }

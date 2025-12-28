@@ -28,13 +28,16 @@ import static org.springframework.http.HttpMethod.PUT;
 @EnableScheduling
 @RequiredArgsConstructor
 public class WebConfig implements WebMvcConfigurer {
-
 	private final AuthArgumentResolver argumentResolver;
+
+	@NonNull
 	private final AuthIntercepter authIntercepter;
 
+	@NonNull
 	@Value("${config.allowed-origins}")
 	private String[] allowedOrigins;
 
+	@NonNull
 	private final String[] allowedMethods = {
 		POST.name(),
 		PUT.name(), PATCH.name(),
@@ -55,7 +58,6 @@ public class WebConfig implements WebMvcConfigurer {
 
 	@Override
 	public void addCorsMappings(@NonNull CorsRegistry registry) {
-
 		registry.addMapping("/**")
 			.allowedMethods(allowedMethods)
 			.allowCredentials(true)

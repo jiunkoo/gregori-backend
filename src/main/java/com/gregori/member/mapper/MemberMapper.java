@@ -11,7 +11,6 @@ import com.gregori.member.domain.Member;
 
 @Mapper
 public interface MemberMapper {
-
     Long insert(Member member);
     void updateName(Long id, String name);
     void updatePassword(Long id, String password);

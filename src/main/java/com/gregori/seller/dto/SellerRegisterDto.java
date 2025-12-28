@@ -12,7 +12,6 @@ import static com.gregori.common.RegexPatterns.BUSINESS_NO_REGEX;
 @Getter
 @AllArgsConstructor
 public class SellerRegisterDto {
-
 	@NotBlank
 	@Pattern(regexp = BUSINESS_NO_REGEX, message = "사업자 등록번호의 형식이 올바르지 않습니다.")
 	private String businessNumber;
@@ -21,7 +20,6 @@ public class SellerRegisterDto {
 	private String businessName;
 
 	public Seller toEntity(Long memberId) {
-
 		return Seller.builder()
 			.memberId(memberId)
 			.businessNumber(businessNumber)

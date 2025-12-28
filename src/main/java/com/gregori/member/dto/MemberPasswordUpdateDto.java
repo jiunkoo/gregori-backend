@@ -10,7 +10,6 @@ import static com.gregori.common.RegexPatterns.PASSWORD_REGEX;
 @Getter
 @AllArgsConstructor
 public class MemberPasswordUpdateDto {
-
 	@NotBlank
 	@Pattern(regexp = PASSWORD_REGEX, message = "비밀번호 형식이 일치해야 합니다.")
 	private String oldPassword;

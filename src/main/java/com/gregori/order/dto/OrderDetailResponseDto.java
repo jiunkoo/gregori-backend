@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class OrderDetailResponseDto {
-
 	private Long id;
 	private Long orderId;
 	private Long productId;
@@ -23,7 +22,6 @@ public class OrderDetailResponseDto {
 	private OrderDetail.Status status;
 
 	public OrderDetailResponseDto toEntity(OrderDetail orderDetail) {
-
 		return OrderDetailResponseDto.builder()
 			.id(orderDetail.getId())
 			.orderId(orderDetail.getOrderId())

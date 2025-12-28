@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SessionMember {
-
 	private Long id;
 	private String email;
 	private Authority authority;

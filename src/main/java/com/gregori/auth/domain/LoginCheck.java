@@ -10,7 +10,6 @@ import org.springframework.core.annotation.AliasFor;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 public @interface LoginCheck {
-
 	@AliasFor("authority")
 	Authority[] value() default { Authority.GENERAL_MEMBER };
 

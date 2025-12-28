@@ -2,6 +2,7 @@ package com.gregori.order.controller;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,23 +33,20 @@ import static com.gregori.order.domain.OrderDetail.Status.PAYMENT_CANCELED;
 @RequiredArgsConstructor
 @RequestMapping("/order")
 public class OrderController {
-
-
 	private final OrderService orderService;
 
 	@LoginCheck
 	@PostMapping
 	public ResponseEntity<Void> createOrder(@RequestBody @Valid OrderRequestDto dto) {
-
 		Long orderId = orderService.saveOrder(dto);
+		URI location = Objects.requireNonNull(URI.create("/order/" + orderId));
 
-		return ResponseEntity.created(URI.create("/order/" + orderId)).build();
+		return ResponseEntity.created(location).build();
 	}
 
 	@LoginCheck
 	@PatchMapping("/{orderId}")
 	public ResponseEntity<Void> cancelOrder(@PathVariable Long orderId) {
-
 		orderService.cancelOrder(orderId);
 
 		return ResponseEntity.noContent().build();
@@ -58,7 +56,6 @@ public class OrderController {
 	@PatchMapping("/detail")
 	public ResponseEntity<Void> updateOrderDetailStatus(
 		@CurrentMember SessionMember sessionMember, OrderDetailStatusUpdateDto dto) {
-
 		if ((sessionMember.getAuthority() == GENERAL_MEMBER && dto.getStatus() == PAYMENT_CANCELED) ||
 			sessionMember.getAuthority() == SELLING_MEMBER) {
 			orderService.updateOrderDetailStatus(dto);
@@ -70,7 +67,6 @@ public class OrderController {
 	@LoginCheck
 	@GetMapping("/{orderId}")
 	public ResponseEntity<OrderResponseDto> getOrder(@PathVariable Long orderId) {
-
 		OrderResponseDto response = orderService.getOrder(orderId);
 
 		return ResponseEntity.ok().body(response);
@@ -80,7 +76,6 @@ public class OrderController {
 	@GetMapping
 	public ResponseEntity<List<OrderResponseDto>> getOrders(
 		@CurrentMember SessionMember sessionMember, @RequestParam(defaultValue = "1") int page) {
-
 		List<OrderResponseDto> response = orderService.getOrders(sessionMember.getId(), page);
 
 		return ResponseEntity.ok().body(response);

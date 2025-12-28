@@ -31,4 +31,3 @@ public class OpenApiConfig {
 			.servers(List.of(localServer));
 	}
 }
-

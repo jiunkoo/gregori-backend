@@ -20,13 +20,11 @@ import lombok.RequiredArgsConstructor;
 @Component
 @RequiredArgsConstructor
 public class AuthIntercepter implements HandlerInterceptor {
-
 	private final SessionMemberManager manager;
 
 	@Override
 	public boolean preHandle(@NonNull HttpServletRequest request,
 		@NonNull HttpServletResponse response, @NonNull Object handler) throws Exception {
-
 		if (!(handler instanceof HandlerMethod)) {
 			return true;
 		}

@@ -14,7 +14,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MemberResponseDto {
-
 	private Long id;
 	private String email;
 	private String name;
@@ -22,7 +21,6 @@ public class MemberResponseDto {
 	private Authority authority;
 
 	public MemberResponseDto toEntity(Member member) {
-
 		return MemberResponseDto.builder()
 			.id(member.getId())
 			.name(member.getName())

@@ -10,7 +10,6 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class OrderDetailRequestDto {
-
 	@NotNull
 	private Long productId;
 
@@ -18,7 +17,6 @@ public class OrderDetailRequestDto {
 	private Long productCount;
 
 	public OrderDetail toEntity(Long orderId, Product product) {
-
 		return OrderDetail.builder()
 			.orderId(orderId)
 			.productId(productId)

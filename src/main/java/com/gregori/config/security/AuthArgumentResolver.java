@@ -2,6 +2,7 @@ package com.gregori.config.security;
 
 import org.springframework.core.MethodParameter;
 import org.springframework.lang.NonNull;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
@@ -18,21 +19,18 @@ import lombok.RequiredArgsConstructor;
 @Component
 @RequiredArgsConstructor
 public class AuthArgumentResolver implements HandlerMethodArgumentResolver {
-
 	private final SessionMemberManager manager;
 
 	@Override
-	public boolean supportsParameter(MethodParameter parameter) {
-
+	public boolean supportsParameter(@NonNull MethodParameter parameter) {
 		boolean assignableFrom = parameter.getParameterType().isAssignableFrom(SessionMember.class);
 
 		return parameter.hasParameterAnnotation(CurrentMember.class) && assignableFrom;
 	}
 
 	@Override
-	public Object resolveArgument(@NonNull MethodParameter parameter, ModelAndViewContainer mavContainer,
-		@NonNull NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
-
+	public Object resolveArgument(@NonNull MethodParameter parameter, @Nullable ModelAndViewContainer mavContainer,
+		@NonNull NativeWebRequest webRequest, @Nullable WebDataBinderFactory binderFactory) throws Exception {
 		HttpServletRequest request = (HttpServletRequest)webRequest.getNativeRequest();
 
 		SessionMember sessionMember = manager.getSessionMember(request);

@@ -11,7 +11,6 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class AuthSignInDto {
-
 	@NotBlank
 	@Email(message = "email 형식과 일치해야 합니다.")
 	private String email;

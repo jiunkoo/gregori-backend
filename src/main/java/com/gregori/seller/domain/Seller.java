@@ -13,7 +13,6 @@ import static com.gregori.common.domain.IsDeleted.TRUE;
 @Getter
 @NoArgsConstructor
 public class Seller extends AbstractEntity {
-
 	private Long id;
 	private Long memberId;
 	private String businessNumber;
@@ -22,7 +21,6 @@ public class Seller extends AbstractEntity {
 
 	@Builder
 	public Seller(Long memberId, String businessNumber, String businessName) {
-
 		this.memberId = memberId;
 		this.businessNumber = businessNumber;
 		this.businessName = businessName;
@@ -30,7 +28,6 @@ public class Seller extends AbstractEntity {
 	}
 
 	public void updateSellerInfo(String businessNumber, String businessName) {
-
 		this.businessNumber = businessNumber;
 		this.businessName = businessName;
 	}

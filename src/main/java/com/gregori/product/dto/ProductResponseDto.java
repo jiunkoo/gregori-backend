@@ -18,7 +18,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductResponseDto {
-
 	private Long id;
 	private Long sellerId;
 	private String sellerName;
@@ -33,7 +32,6 @@ public class ProductResponseDto {
 	private ZonedDateTime updatedAt;
 
 	public ProductResponseDto toEntity(Product product) {
-
 		return ProductResponseDto.builder()
 			.id(product.getId())
 			.sellerId(product.getSellerId())
@@ -49,7 +47,6 @@ public class ProductResponseDto {
 	}
 
 	public ProductResponseDto toEntity(Product product, Category category, Seller seller) {
-
 		return ProductResponseDto.builder()
 			.id(product.getId())
 			.sellerId(product.getSellerId())

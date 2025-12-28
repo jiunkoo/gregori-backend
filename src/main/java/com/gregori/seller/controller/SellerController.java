@@ -2,6 +2,7 @@ package com.gregori.seller.controller;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -32,24 +33,22 @@ import static com.gregori.auth.domain.Authority.SELLING_MEMBER;
 @RequiredArgsConstructor
 @RequestMapping("/seller")
 public class SellerController {
-
 	private final SellerService sellerService;
 
 	@LoginCheck({GENERAL_MEMBER, SELLING_MEMBER })
 	@PostMapping
 	public ResponseEntity<Void> createSeller(
 		@CurrentMember SessionMember sessionMember, @RequestBody @Valid SellerRegisterDto dto) {
-
 		Long sellerId = sellerService.saveSeller(sessionMember, dto);
+		URI location = Objects.requireNonNull(URI.create("/seller/" + sellerId));
 
-		return ResponseEntity.created(URI.create("/seller/" + sellerId)).build();
+		return ResponseEntity.created(location).build();
 	}
 
 	@LoginCheck(SELLING_MEMBER)
 	@PatchMapping
 	public ResponseEntity<Void> updateSeller(
 		@CurrentMember SessionMember sessionMember, @RequestBody @Valid SellerUpdateDto dto) {
-
 		sellerService.updateSeller(sessionMember.getId(), dto);
 
 		return ResponseEntity.noContent().build();
@@ -59,7 +58,6 @@ public class SellerController {
 	@DeleteMapping("/{sellerId}")
 	public ResponseEntity<Void> deleteSeller(
 		@CurrentMember SessionMember sessionMember, @PathVariable Long sellerId) {
-
 		sellerService.deleteSeller(sessionMember.getId(), sellerId);
 
 		return ResponseEntity.noContent().build();
@@ -69,7 +67,6 @@ public class SellerController {
 	@GetMapping("/{sellerId}")
 	public ResponseEntity<SellerResponseDto> getSeller(
 		@CurrentMember SessionMember sessionMember, @PathVariable Long sellerId) {
-
 		SellerResponseDto response = sellerService.getSeller(sessionMember.getId(), sellerId);
 
 		return ResponseEntity.ok().body(response);
@@ -79,7 +76,6 @@ public class SellerController {
 	@GetMapping
 	public ResponseEntity<List<SellerResponseDto>> getSellers(@CurrentMember SessionMember sessionMember,
 		@RequestParam(defaultValue = "1") int page) {
-
 		List<SellerResponseDto> response = sellerService.getSellers(sessionMember.getId(), page);
 
 		return ResponseEntity.ok().body(response);

@@ -12,7 +12,6 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class OrderRequestDto {
-
 	@NotNull
 	private Long memberId;
 
@@ -29,7 +28,6 @@ public class OrderRequestDto {
 	private List<OrderDetailRequestDto> orderDetails;
 
 	public Order toEntity() {
-
 		return Order.builder()
 			.memberId(memberId)
 			.paymentAmount(paymentAmount)

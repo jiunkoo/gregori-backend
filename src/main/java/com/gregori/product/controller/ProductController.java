@@ -2,10 +2,10 @@ package com.gregori.product.controller;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,23 +33,21 @@ import static com.gregori.auth.domain.Authority.SELLING_MEMBER;
 @RequiredArgsConstructor
 @RequestMapping("/product")
 public class ProductController {
-
 	private final ProductService productService;
 
 	@LoginCheck(SELLING_MEMBER)
 	@PostMapping
 	public ResponseEntity<Void> createProduct(@RequestBody @Valid ProductCreateDto dto) {
-
 		Long productId = productService.saveProduct(dto);
+		URI location = Objects.requireNonNull(URI.create("/product/" + productId));
 
-		return ResponseEntity.created(URI.create("/product/" + productId)).build();
+		return ResponseEntity.created(location).build();
 	}
 
 	@LoginCheck(SELLING_MEMBER)
 	@PutMapping
 	public ResponseEntity<Void> updateProduct(
 		@CurrentMember SessionMember sessionMember, @RequestBody @Valid ProductUpdateDto dto) {
-
 		productService.updateProduct(sessionMember.getId(), dto);
 
 		return ResponseEntity.noContent().build();
@@ -59,7 +57,6 @@ public class ProductController {
 	@DeleteMapping("/{productId}")
 	public ResponseEntity<Void> deleteProduct(
 		@CurrentMember SessionMember sessionMember, @PathVariable Long productId) {
-
 		productService.deleteProduct(sessionMember.getId(), productId);
 
 		return ResponseEntity.noContent().build();
@@ -67,7 +64,6 @@ public class ProductController {
 
 	@GetMapping("/{productId}")
 	public ResponseEntity<ProductResponseDto> getProduct(@PathVariable Long productId) {
-
 		ProductResponseDto response = productService.getProduct(productId);
 
 		return ResponseEntity.ok().body(response);
@@ -80,7 +76,6 @@ public class ProductController {
 		@RequestParam(required = false) Long sellerId,
 		@RequestParam(defaultValue = "1") int page,
 		@RequestParam(defaultValue = "CREATED_AT_DESC") Sorter sorter) {
-
 		List<ProductResponseDto> response = productService.getProducts(keyword, categoryId, sellerId, page, sorter);
 
 		return ResponseEntity.ok().body(response);

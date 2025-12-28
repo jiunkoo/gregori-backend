@@ -13,7 +13,6 @@ import static com.gregori.common.domain.IsDeleted.FALSE;
 @Getter
 @NoArgsConstructor
 public class Product extends AbstractEntity {
-
 	private Long id;
 	private Long sellerId;
 	private Long categoryId;
@@ -27,7 +26,6 @@ public class Product extends AbstractEntity {
 	@Getter
 	@RequiredArgsConstructor
 	public enum Status {
-
 		PRE_SALE("준비중"),
 		ON_SALE("판매중"),
 		END_OF_SALE("판매종료");
@@ -37,7 +35,6 @@ public class Product extends AbstractEntity {
 
 	@Builder
 	public Product(Long sellerId, Long categoryId, String name, Long price, Long inventory, String imageUrl) {
-
 		this.sellerId = sellerId;
 		this.categoryId = categoryId;
 		this.name = name;
@@ -49,7 +46,6 @@ public class Product extends AbstractEntity {
 	}
 
 	public void updateProductInfo(Long categoryId, String name, Long price, Long inventory, Status status) {
-
 		this.categoryId = categoryId;
 		this.name = name;
 		this.price = price;

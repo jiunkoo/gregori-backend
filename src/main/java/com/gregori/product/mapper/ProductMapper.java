@@ -10,7 +10,6 @@ import com.gregori.product.domain.Product;
 
 @Mapper
 public interface ProductMapper {
-
 	Long insert(Product product);
 	void update(Product product);
 	void updateInventory(Long id, Long inventory);

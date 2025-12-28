@@ -1,6 +1,7 @@
 package com.gregori.member.controller;
 
 import java.net.URI;
+import java.util.Objects;
 
 import com.gregori.auth.domain.CurrentMember;
 import com.gregori.common.CookieGenerator;
@@ -39,22 +40,20 @@ import static com.gregori.common.CookieGenerator.COOKIE_NAME;
 @RequiredArgsConstructor
 @RequestMapping("/member")
 public class MemberController {
-
     private final MemberService memberService;
 
     @PostMapping("/register")
     public ResponseEntity<Void> register(@RequestBody @Validated MemberRegisterDto dto) {
-
         Long memberId = memberService.register(dto);
+        URI location = Objects.requireNonNull(URI.create("/member/" + memberId));
 
-        return ResponseEntity.created(URI.create("/member/" + memberId)).build();
+        return ResponseEntity.created(location).build();
     }
 
     @LoginCheck({ GENERAL_MEMBER, SELLING_MEMBER, ADMIN_MEMBER })
     @PostMapping("/name")
     public ResponseEntity<Void> updateMemberName(@CurrentMember SessionMember sessionMember,
         @RequestBody @Validated MemberNameUpdateDto dto) {
-
         memberService.updateMemberName(sessionMember.getId(), dto.getName());
 
         return ResponseEntity.noContent().build();
@@ -64,7 +63,6 @@ public class MemberController {
     @PostMapping("/password")
     public ResponseEntity<Void> updateMemberPassword(@CurrentMember SessionMember sessionMember,
         @RequestBody @Validated MemberPasswordUpdateDto dto) {
-
         memberService.updateMemberPassword(sessionMember.getId(), dto);
 
         return ResponseEntity.noContent().build();
@@ -74,7 +72,6 @@ public class MemberController {
     @DeleteMapping
     public ResponseEntity<Void> deleteMember(@CurrentMember SessionMember sessionMember,
         HttpSession session, @CookieValue(name = COOKIE_NAME) Cookie cookie) {
-
         if (session == null || cookie == null) {
             throw new NotFoundException("쿠키 혹은 세션을 찾을 수 없습니다.");
         }
@@ -92,7 +89,6 @@ public class MemberController {
     @LoginCheck({ GENERAL_MEMBER, SELLING_MEMBER, ADMIN_MEMBER })
     @GetMapping
     public ResponseEntity<MemberResponseDto> getMember(@CurrentMember SessionMember sessionMember) {
-
         MemberResponseDto response = memberService.getMember(sessionMember.getId());
 
         return ResponseEntity.ok().body(response);

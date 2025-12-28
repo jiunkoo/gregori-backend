@@ -31,14 +31,12 @@ import static com.gregori.order.domain.OrderDetail.Status.DELIVERED;
 @Service
 @RequiredArgsConstructor
 public class ProductService {
-
 	private final SellerMapper sellerMapper;
 	private final ProductMapper productMapper;
 	private final OrderDetailMapper orderDetailMapper;
 	private final CategoryMapper categoryMapper;
 
 	public Long saveProduct(ProductCreateDto dto) {
-
 		checkPriceAndInventoryValidation(dto.getPrice(), dto.getInventory());
 
 		Product product = dto.toEntity();
@@ -49,7 +47,6 @@ public class ProductService {
 
 	@Transactional
 	public void updateProduct(Long memberId, ProductUpdateDto dto) throws NotFoundException {
-
 		checkPriceAndInventoryValidation(dto.getPrice(), dto.getInventory());
 
 		Product product = productMapper.findById(dto.getId()).orElseThrow(NotFoundException::new);
@@ -62,7 +59,6 @@ public class ProductService {
 
 	@Transactional
 	public void deleteProduct(Long memberId, Long productId) throws NotFoundException {
-
 		Product product = productMapper.findById(productId).orElseThrow(NotFoundException::new);
 
 		checkAuthorization(memberId, product.getSellerId());
@@ -77,7 +73,6 @@ public class ProductService {
 	}
 
 	public ProductResponseDto getProduct(Long productId) {
-
 		Product product = productMapper.findById(productId).orElseThrow(NotFoundException::new);
 		Category category = categoryMapper.findById(product.getCategoryId()).orElse(null);
 		Seller seller = sellerMapper.findById(product.getSellerId()).orElse(null);
@@ -86,7 +81,6 @@ public class ProductService {
 	}
 
 	public List<ProductResponseDto> getProducts(String keyword, Long categoryId, Long sellerId, int page, Sorter sorter) {
-
 		int limit = 10;
 		int offset = (page - 1) * limit;
 
@@ -101,14 +95,12 @@ public class ProductService {
 	}
 
 	private void checkPriceAndInventoryValidation(Long price, Long inventory) {
-
 		if (price < 0 || inventory < 0) {
 			throw new ValidationException("가격과 재고는 마이너스가 될 수 없습니다.");
 		}
 	}
 
 	private void checkAuthorization(Long memberId, Long sellerId) {
-
 		Seller seller = sellerMapper.findById(sellerId).orElseThrow(NotFoundException::new);
 		if (!Objects.equals(memberId, seller.getMemberId())) {
 			throw new UnauthorizedException("요청한 회원과 판매자가 일치하지 않습니다.");

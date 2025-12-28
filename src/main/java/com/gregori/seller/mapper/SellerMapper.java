@@ -10,7 +10,6 @@ import com.gregori.seller.domain.Seller;
 
 @Mapper
 public interface SellerMapper {
-
 	Long insert(Seller seller);
 	void update(Seller seller);
 	void updateIsDeleted(Long id, IsDeleted isDeleted);

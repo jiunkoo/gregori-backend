@@ -13,7 +13,6 @@ import com.gregori.common.exception.ValidationException;
 import com.gregori.member.domain.SessionMember;
 import com.gregori.product.domain.Product;
 import com.gregori.product.mapper.ProductMapper;
-import com.gregori.member.domain.Member;
 import com.gregori.member.mapper.MemberMapper;
 import com.gregori.seller.domain.Seller;
 import com.gregori.seller.dto.SellerRegisterDto;
@@ -33,14 +32,12 @@ import static com.gregori.product.domain.Sorter.CREATED_AT_DESC;
 @Service
 @RequiredArgsConstructor
 public class SellerService {
-
 	private final MemberMapper memberMapper;
 	private final SellerMapper sellerMapper;
 	private final ProductMapper productMapper;
 
 	@Transactional
 	public Long saveSeller(SessionMember sessionMember, SellerRegisterDto dto) throws ValidationException {
-
 		checkBusinessNumberValidation(dto.getBusinessNumber());
 
 		if (sessionMember.getAuthority() == GENERAL_MEMBER) {
@@ -55,7 +52,6 @@ public class SellerService {
 
 	@Transactional
 	public void updateSeller(Long memberId, SellerUpdateDto dto) throws ValidationException {
-
 		checkBusinessNumberValidation(dto.getBusinessNumber());
 
 		Seller seller = sellerMapper.findById(dto.getId()).orElseThrow(NotFoundException::new);
@@ -69,7 +65,6 @@ public class SellerService {
 
 	@Transactional
 	public void deleteSeller(Long memberId, Long sellerId) throws NotFoundException {
-
 		Seller seller = sellerMapper.findById(sellerId).orElseThrow(NotFoundException::new);
 		if (!Objects.equals(memberId, seller.getMemberId())) {
 			throw new UnauthorizedException("요청한 회원과 판매자가 일치하지 않습니다.");
@@ -86,7 +81,6 @@ public class SellerService {
 	}
 
 	public SellerResponseDto getSeller(Long memberId, Long sellerId) throws NotFoundException {
-
 		Seller seller = sellerMapper.findById(sellerId).orElseThrow(NotFoundException::new);
 		if (!Objects.equals(memberId, seller.getMemberId())) {
 			throw new UnauthorizedException("요청한 회원과 판매자가 일치하지 않습니다.");
@@ -96,7 +90,6 @@ public class SellerService {
 	}
 
 	public List<SellerResponseDto> getSellers(Long memberId, int page) {
-
 		int limit = 10;
 		int offset = (page - 1) * limit;
 
@@ -106,7 +99,6 @@ public class SellerService {
 	}
 
 	private void checkBusinessNumberValidation(String businessNumber) {
-
 		String tenNumber = businessNumber.replace("-", "");
 		if (tenNumber.length() != 10) {
 			throw new ValidationException();

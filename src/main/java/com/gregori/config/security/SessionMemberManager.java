@@ -18,11 +18,9 @@ import lombok.RequiredArgsConstructor;
 @Component
 @RequiredArgsConstructor
 public class SessionMemberManager {
-
 	private final MemberMapper memberMapper;
 
 	public SessionMember getSessionMember(HttpServletRequest request) {
-
 		HttpSession session = request.getSession(false);
 		if (session == null) {
 			throw new NotFoundException("세션을 찾을 수 없습니다.");
@@ -32,7 +30,6 @@ public class SessionMemberManager {
 	}
 
 	public void sessionMemberValidation(SessionMember sessionMember) {
-
 		Member member = memberMapper.findById(sessionMember.getId()).orElseThrow(NotFoundException::new);
 		if (!Objects.equals(sessionMember.getId(), member.getId()) ||
 			!StringUtils.equals(sessionMember.getEmail(), member.getEmail()) ||

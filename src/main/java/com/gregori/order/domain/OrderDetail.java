@@ -10,7 +10,6 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class OrderDetail extends AbstractEntity {
-
 	private Long id;
 	private Long orderId;
 	private Long productId;
@@ -23,7 +22,6 @@ public class OrderDetail extends AbstractEntity {
 	@Getter
 	@RequiredArgsConstructor
 	public enum Status {
-
 		PAYMENT_CANCELED("결제 취소"),
 		PAYMENT_COMPLETED("결제 완료"),
 		SHIPMENT_PREPARATION("배송 준비중"),

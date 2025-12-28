@@ -9,7 +9,6 @@ import com.gregori.category.domain.Category;
 
 @Mapper
 public interface CategoryMapper {
-
 	Long insert(Category category);
 	void updateName(Category category);
 	void deleteById(Long id);

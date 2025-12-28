@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class OrderDetailStatusUpdateDto {
-
 	@NotNull
 	private Long orderDetailId;
 

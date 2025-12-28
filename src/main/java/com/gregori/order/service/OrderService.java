@@ -31,19 +31,16 @@ import static com.gregori.order.domain.OrderDetail.Status.SHIPPED;
 @Service
 @RequiredArgsConstructor
 public class OrderService {
-
 	private final ProductMapper productMapper;
 	private final OrderMapper orderMapper;
 	private final OrderDetailMapper orderDetailMapper;
 
 	@Transactional
 	public Long saveOrder(OrderRequestDto orderRequestDto) throws NotFoundException {
-
 		Order order = orderRequestDto.toEntity();
 		orderMapper.insert(order);
 		orderRequestDto.getOrderDetails()
 			.forEach(orderDetailRequestDto -> {
-
 				Product product = productMapper.findById(orderDetailRequestDto.getProductId()).orElseThrow(NotFoundException::new);
 				long newInventory = product.getInventory() - orderDetailRequestDto.getProductCount();
 				if (newInventory < 0) {
@@ -60,7 +57,6 @@ public class OrderService {
 
 	@Transactional
 	public void cancelOrder(Long orderId) throws NotFoundException {
-
 		Order order = orderMapper.findById(orderId).orElseThrow(NotFoundException::new);
 		order.orderCanceled();
 		orderMapper.updateStatus(orderId, order.getStatus());
@@ -75,7 +71,6 @@ public class OrderService {
 
 	@Transactional
 	public void updateOrderDetailStatus(OrderDetailStatusUpdateDto dto) throws NotFoundException {
-
 		OrderDetail orderDetail = orderDetailMapper.findById(dto.getOrderDetailId()).orElseThrow(NotFoundException::new);
 
 		if (dto.getStatus() == PAYMENT_CANCELED) {
@@ -113,14 +108,12 @@ public class OrderService {
 
 	@Transactional
 	public OrderResponseDto getOrder(Long orderId) throws NotFoundException {
-
 		Order order = orderMapper.findById(orderId).orElseThrow(NotFoundException::new);
 
 		return getOrderResponseDto(order);
 	}
 
 	public List<OrderResponseDto> getOrders(Long memberId, int page) {
-
 		int limit = 10;
 		int offset = (page - 1) * limit;
 

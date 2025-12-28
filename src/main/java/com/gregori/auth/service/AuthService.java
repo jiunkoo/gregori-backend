@@ -16,13 +16,11 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class AuthService {
-
 	private final PasswordEncoder passwordEncoder;
 	private final MemberMapper memberMapper;
 
 	@Transactional
 	public SessionMember signIn(AuthSignInDto authSignInDto) {
-
 		Member member = memberMapper.findByEmail(authSignInDto.getEmail()).orElseThrow(NotFoundException::new);
 		boolean matches = passwordEncoder.matches(authSignInDto.getPassword(), member.getPassword());
 		if (!matches) {

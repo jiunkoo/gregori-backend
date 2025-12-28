@@ -30,16 +30,13 @@ import static com.gregori.order.domain.Order.Status.ORDER_PROCESSING;
 @Service
 @RequiredArgsConstructor
 public class MemberService {
-
     private final PasswordEncoder passwordEncoder;
-
     private final MemberMapper memberMapper;
     private final SellerMapper sellerMapper;
     private final OrderMapper orderMapper;
 
     @Transactional
     public Long register(@Valid MemberRegisterDto dto) throws DuplicateException {
-
         if (memberMapper.findByEmail(dto.getEmail()).isPresent()) {
             throw new DuplicateException();
         }
@@ -53,13 +50,11 @@ public class MemberService {
 
     @Transactional
     public void updateMemberName(Long memberId, String name) {
-
         memberMapper.findById(memberId).orElseThrow(NotFoundException::new);
         memberMapper.updateName(memberId, name);
     }
 
     public void updateMemberPassword(Long memberId, MemberPasswordUpdateDto dto) {
-
         Member member = memberMapper.findById(memberId).orElseThrow(NotFoundException::new);
         String oldPassword = passwordEncoder.encode(dto.getOldPassword());
 
@@ -73,7 +68,6 @@ public class MemberService {
 
     @Transactional
     public void deleteMember(Long memberId) {
-
         Member member = memberMapper.findById(memberId).orElseThrow(NotFoundException::new);
 
         List<Order> orders = orderMapper.findByMemberId(memberId, null, null).stream()
@@ -96,7 +90,6 @@ public class MemberService {
     }
 
     public MemberResponseDto getMember(Long memberId) {
-
         Member member = memberMapper.findById(memberId).orElseThrow(NotFoundException::new);
 
         return new MemberResponseDto().toEntity(member);
