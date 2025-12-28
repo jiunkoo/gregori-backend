@@ -9,7 +9,6 @@
   --dark-sidebar-bg: #252526;
   --dark-sidebar-text: #cccccc;
   --dark-sidebar-active: #2a2d2e;
-  --dark-topbar-bg: #2d2d30;
   --dark-scrollbar-thumb: #454545;
   --http-post: #6a9955;
   --http-put: #dcdcaa;
@@ -19,9 +18,22 @@
   --token-string: #ce9178;
   --token-number: #b5cea8;
   --token-boolean: #569cd6;
-  --font-family: Inter, sans-serif;
-  --font-family-code: JetBrains Mono, monospace;
-  --font-size-code: 13px;
+  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-family-code: Consolas, Menlo, monospace;
+  --font-size-code: 0.8rem;
+}
+
+*::-webkit-scrollbar {
+  width: thin;
+  background: var(--dark-bg);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: color-mix(
+    in srgb,
+    var(--dark-scrollbar-thumb) 40%,
+    transparent
+  );
 }
 
 body {
@@ -31,23 +43,17 @@ body {
   color: var(--dark-text);
 }
 
+/* Topbar */
 .topbar {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  background: var(--dark-topbar-bg);
-  height: 48px;
+  inset: 0 0 auto 0;
+  height: 3rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 16px;
-  border-bottom: 1px solid var(--border-color);
-  color: var(--dark-sidebar-text);
-  font-weight: 600;
-  letter-spacing: 0.4px;
-  font-size: 14px;
+  padding: 0 1rem;
+  background: var(--dark-bg);
+  z-index: 1000;
 }
 
 .topbar > div:first-child {
@@ -58,13 +64,8 @@ body {
 .theme-toggle {
   background: var(--dark-bg);
   color: var(--dark-text);
-  border: 1px solid var(--border-color);
-  border-radius: 6px;
-  padding: 6px 12px;
-  font-size: 13px;
-  font-family: var(--font-family);
-  cursor: pointer;
-  transition: all 0.2s ease;
+  border: 0.05rem solid var(--border-color);
+  padding: 0.4rem 0.8rem;
 }
 
 .theme-toggle:hover {
@@ -73,65 +74,71 @@ body {
   color: var(--accent-color);
 }
 
-.theme-toggle:active {
-  transform: scale(0.98);
-}
-
 .indicator {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
+  width: 0.5rem;
+  height: 0.5rem;
   background: var(--accent-color);
-  margin-right: 12px;
-  box-shadow: 0 0 8px rgba(79, 193, 255, 0.5);
+  margin-right: 0.8rem;
 }
 
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--dark-scrollbar-thumb);
-  border-radius: 6px;
-}
-
+/* Left Panel */
 .menu-content,
 .menu-content label {
-  background-color: var(--dark-sidebar-bg) !important;
-  color: var(--dark-text) !important;
+  background-color: var(--dark-sidebar-bg);
+  color: var(--dark-text);
 }
 
-.menu-content .active > label {
-  background-color: var(--dark-sidebar-active) !important;
-  color: var(--accent-color) !important;
+.menu-content span:nth-of-type(1) {
+  border-radius: 0;
 }
 
+/* API Content */
 .api-content {
-  background-color: var(--dark-bg) !important;
-  color: var(--dark-text) !important;
+  margin-top: 3rem;
+  background-color: var(--dark-bg);
+  color: var(--dark-text);
 }
 
 .api-content h1,
-.api-content h2,
-.api-content h3,
-.api-content h4 {
-  color: var(--dark-text-light) !important;
-  font-weight: 600 !important;
-  font-family: var(--font-family) !important;
+d .api-content h2,
+.api-content h3 {
+  color: var(--dark-text-light);
+  font-weight: 600;
 }
 
-.api-content h2 {
+.api-content h5 {
+  padding-top: 0.8rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 0.2rem solid var(--border-color);
+}
+
+h5[class*="sc-"] {
+  color: var(--dark-text) !important;
+}
+
+h5[class*="sc-"] span[class*="sc-"] {
   color: var(--accent-color) !important;
-  border-bottom: 1px solid var(--border-color) !important;
-  padding-bottom: 8px !important;
-  margin-top: 32px;
+  padding: 0.2rem 0.4rem;
 }
 
-pre,
-code {
-  font-family: var(--font-family-code) !important;
-  background-color: var(--dark-bg) !important;
-  color: var(--dark-text-code) !important;
+/* Right Panel */
+svg polygon {
+  fill: var(--dark-text) !important;
+}
+
+.react-tabs__tab-list {
+  color: var(--dark-text) !important;
+}
+
+.react-tabs__tab-panel {
+  background: var(--dark-sidebar-bg) !important;
+}
+
+.react-tabs__tab--selected {
+  background: var(--dark-bg) !important;
+  color: var(--accent-color) !important;
+  border-color: var(--accent-color) !important;
+  border-radius: 0 !important;
 }
 
 .token.key {
@@ -151,138 +158,38 @@ code {
   color: var(--token-boolean) !important;
 }
 
-h5[class*="sc-"] {
-  color: var(--dark-text) !important;
+button[class*="sc-"] {
+  border-radius: 0 !important;
 }
 
-h5[class*="sc-"] span[class*="sc-"] {
-  background-color: var(--dark-topbar-bg) !important;
-  color: var(--accent-color) !important;
-  border: 1px solid var(--border-color) !important;
-  padding: 3px 8px;
-  border-radius: 4px;
-}
-
-div.react-tabs__tab-panel {
-  color: var(--dark-text) !important;
-}
-
-div[class*="response"] pre,
-div[class*="response"] code {
-  color: var(--dark-text) !important;
-  background-color: var(--dark-bg) !important;
-  border: 1px solid var(--border-color) !important;
-}
-
-.react-tabs__tab {
-  background: var(--dark-sidebar-bg) !important;
-  color: var(--dark-text) !important;
-  border: 1px solid var(--border-color) !important;
-}
-
-.react-tabs__tab--selected {
-  background: var(--dark-bg) !important;
-  color: var(--accent-color) !important;
-  border-color: var(--accent-color) !important;
-}
-
-table th {
-  background: var(--dark-topbar-bg) !important;
-  color: var(--dark-sidebar-text) !important;
-}
-
-table td {
-  background: var(--dark-bg) !important;
-  color: var(--dark-text) !important;
-  border-color: var(--border-color) !important;
-}
-
-div[role="button"],
-div[role="button"]:hover,
-div[role="button"]:focus,
-div[role="button"]:active,
-body div[role="button"],
-body div[tabindex][role="button"],
-body div[role="button"]:hover,
-body div[role="button"]:focus,
-body div[role="button"]:active {
-  background: var(--dark-bg) !important;
-  background-color: var(--dark-bg) !important;
-  background-image: none !important;
-  box-shadow: none !important;
-}
-
-div[role="button"]::before,
-div[role="button"]::after {
-  content: none !important;
-  background: transparent !important;
-}
-
-div[role="button"] > div,
-body div[role="button"] > div,
-body div[tabindex][role="button"] > div,
-div[tabindex][role="button"] > div {
-  background: var(--dark-bg) !important;
-  background-color: var(--dark-bg) !important;
-  background-image: none !important;
-  color: var(--dark-text) !important;
-  border: 1px solid var(--border-color) !important;
-  border-radius: 6px !important;
-  padding: 6px 10px;
-  font-family: var(--font-family-code) !important;
-  box-shadow: none !important;
-}
-
-div[role="button"] > div > span,
-body div[role="button"] > div > span {
-  background: var(--dark-bg) !important;
-  background-color: var(--dark-bg) !important;
-  color: var(--accent-color) !important;
-}
-
-div[role="button"]:hover > div,
-div[role="button"]:focus > div {
+button[class*="sc-"]:has(span[type="get"]),
+button[class*="sc-"]:has(span[type="post"]),
+button[class*="sc-"]:has(span[type="put"]),
+button[class*="sc-"]:has(span[type="patch"]),
+button[class*="sc-"]:has(span[type="delete"]) {
   background-color: var(--dark-sidebar-bg) !important;
-  border-color: var(--accent-color) !important;
+  box-shadow: none !important;
 }
 
-div[style*="rgb(250, 250, 250)"],
-div[style*="rgba(250, 250, 250"],
-div[style*="background: rgb(250, 250, 250)"],
-div[style*="background-color: rgb(250, 250, 250)"],
-div[style*="background:rgb(250, 250, 250)"],
-div[style*="background-color:rgb(250, 250, 250)"],
-div[style*="background:rgba(250, 250, 250"],
-div[style*="background-color:rgba(250, 250, 250"],
-div[style*="position: absolute"],
-div[style*="position:absolute"],
-div[style*="z-index: 100"],
-div[style*="z-index:100"],
-div[style*="position: absolute"][style*="z-index"],
-div[style*="position:absolute"][style*="z-index"] {
-  background: var(--dark-bg) !important;
-  background-color: var(--dark-bg) !important;
-  background-image: none !important;
+button[class*="sc-"] span[class*="sc-"]:nth-of-type(2),
+div[class*="react-"] span[class*="sc-"],
+div[class*="react-"] div[class*="sc-"] {
   color: var(--dark-text) !important;
 }
 
-div[style*="rgb(250, 250, 250)"] *,
-div[style*="rgba(250, 250, 250"] *,
-div[style*="position: absolute"][style*="z-index"] *,
-div[style*="rgb(250, 250, 250)"] div,
-div[style*="rgba(250, 250, 250"] div,
-div[style*="position: absolute"][style*="z-index"] div {
-  background: var(--dark-bg) !important;
+div[class*="react-"] div[class*="sc-"]:not(:has(button)):has(span) {
   background-color: var(--dark-bg) !important;
-  background-image: none !important;
-  color: var(--dark-text) !important;
 }
 
-div[style*="rgb(250, 250, 250)"] a,
-div[style*="rgba(250, 250, 250"] a,
-div[style*="rgb(250, 250, 250)"] span,
-div[style*="rgba(250, 250, 250"] span,
-div[style*="position: absolute"][style*="z-index"] a,
-div[style*="position: absolute"][style*="z-index"] span {
-  color: var(--accent-color) !important;
+div[tabindex="0"]:has(div.redoc-json)::-webkit-scrollbar {
+  width: 0.4rem;
+  background: var(--dark-sidebar-bg);
+}
+
+div[tabindex="0"]:has(div.redoc-json)::-webkit-scrollbar-thumb {
+  background-color: color-mix(
+    in srgb,
+    var(--dark-scrollbar-thumb) 40%,
+    transparent
+  );
 }
