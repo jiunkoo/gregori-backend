@@ -229,7 +229,6 @@ const updateThemeToggleButton = () => {
   const btn = document.getElementById("theme-toggle");
   if (!btn) return;
 
-  // 현재 테마에 따라 data-theme 속성 설정 (다크 모드일 때는 오른쪽, 라이트 모드일 때는 왼쪽)
   btn.setAttribute("data-theme", currentTheme);
   btn.setAttribute(
     "aria-label",
