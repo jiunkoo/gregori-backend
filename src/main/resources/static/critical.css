@@ -1,0 +1,18 @@
+:root {
+  /* Tokens */
+  --topbar-h: 48px;
+}
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  padding-top: var(--topbar-h);
+}
+.topbar {
+  height: var(--topbar-h);
+}
+#redoc-container {
+  min-height: calc(100vh - var(--topbar-h));
+}

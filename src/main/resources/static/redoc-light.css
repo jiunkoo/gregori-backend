@@ -1,60 +1,92 @@
 :root {
-  --light-bg: #ffffff;
-  --light-text: #1e1e1e;
-  --light-text-secondary: #666666;
-  --light-text-light: #333333;
-  --light-text-code: #24292e;
-  --accent-color: #1890ff;
-  --border-color: #333333;
-  --light-sidebar-bg: #f5f5f5;
-  --light-sidebar-text: #333333;
-  --light-sidebar-active: #e6f7ff;
-  --light-scrollbar-thumb: #d0d0d0;
-  --dark-bg: #1e1e1e;
-  --http-post: #52c41a;
-  --http-put: #faad14;
-  --http-delete: #ff4d4f;
-  --require-label: #ff4d4f;
-  --token-key: #1890ff;
-  --token-string: #cf1322;
-  --token-number: #389e0d;
-  --token-boolean: #722ed1;
+  /* Fonts */
   --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-family-code: Consolas, Menlo, monospace;
-  --font-size-code: 0.8rem;
+  --font-size-code: var(--token-sm-3);
+
+  /* Tokens */
+  --token-xs-1: 0.1rem;
+  --token-xs-2: 0.2rem;
+  --token-sm-1: 0.4rem;
+  --token-sm-2: 0.6rem;
+  --token-sm-3: 0.8rem;
+  --token-base: 1rem;
+  --token-md-1: 1.2rem;
+  --token-md-2: 1.6rem;
+  --token-md-3: 1.8rem;
+  --token-lg-1: 2rem;
+  --token-lg-2: 3rem;
+  --token-lg-3: 4rem;
+  --token-half: 50%;
+
+  /* Colors - Gray */
+  --color-light-gray-900: #1e1e1e;
+  --color-light-gray-800: #24292e;
+  --color-light-gray-700: #333333;
+  --color-light-gray-600: #666666;
+  --color-light-gray-300: #d0d0d0;
+  --color-light-gray-100: #f5f5f5;
+
+  /* Colors - White */
+  --color-light-white: #ffffff;
+
+  /* Colors - Blue */
+  --color-light-blue-500: #1890ff;
+  --color-light-blue-100: #e6f7ff;
+
+  /* Colors - Green */
+  --color-light-green-600: #389e0d;
+  --color-light-green-500: #52c41a;
+
+  /* Colors - Yellow */
+  --color-light-yellow-500: #faad14;
+
+  /* Colors - Red */
+  --color-light-red-600: #cf1322;
+  --color-light-red-500: #ff4d4f;
+
+  /* Colors - Purple */
+  --color-light-purple-500: #722ed1;
 }
 
 *::-webkit-scrollbar {
   width: thin;
-  background: var(--light-bg);
+  background: var(--color-light-white);
 }
 
 *::-webkit-scrollbar-thumb {
   background-color: color-mix(
     in srgb,
-    var(--light-scrollbar-thumb) 40%,
+    var(--color-light-gray-300) var(--token-half),
     transparent
   );
 }
 
 body {
   margin: 0;
-  background: var(--light-bg);
+  background: var(--color-light-white);
   font-family: var(--font-family);
-  color: var(--light-text);
+  color: var(--color-light-gray-900);
 }
 
 /* Topbar */
 .topbar {
   position: fixed;
   inset: 0 0 auto 0;
-  height: 3rem;
+  height: var(--token-lg-2);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 1rem;
-  background: var(--light-bg);
+  padding: 0 var(--token-base);
+  background: var(--color-light-white);
   z-index: 1000;
+}
+
+/* Loading spinner z-index fix */
+div[id*="redoc-loading"],
+div[class*="loading"],
+.redoc-loading {
+  z-index: 1001 !important;
 }
 
 .topbar > div:first-child {
@@ -63,10 +95,10 @@ body {
 }
 
 .indicator {
-  width: 0.5rem;
-  height: 0.5rem;
-  background: var(--accent-color);
-  margin-right: 0.8rem;
+  width: var(--token-sm-2);
+  height: var(--token-sm-2);
+  background: var(--color-light-blue-500);
+  margin-right: var(--token-sm-3);
 }
 
 .theme-toggle {
@@ -80,77 +112,60 @@ body {
 
 .theme-toggle-track {
   position: relative;
-  width: 4rem;
-  height: 2rem;
-  background: var(--dark-bg);
+  width: var(--token-lg-3);
+  height: var(--token-lg-1);
+  background: var(--color-light-gray-900);
   border: none;
-  border-radius: 1rem;
+  border-radius: var(--token-base);
   transition: background-color 0.3s ease;
 }
 
 .theme-toggle:hover .theme-toggle-track {
-  background: var(--dark-bg);
+  background: var(--color-light-gray-900);
 }
 
 .theme-toggle-thumb {
   position: absolute;
-  top: 0.15rem;
-  left: 0.15rem;
-  width: 1.7rem;
-  height: 1.7rem;
-  min-width: 1.7rem;
-  min-height: 1.7rem;
+  top: var(--token-xs-2);
+  left: var(--token-xs-2);
+  width: var(--token-md-2);
+  height: var(--token-md-2);
   box-sizing: border-box;
-  background: var(--dark-bg);
-  border-radius: 50%;
+  background: var(--color-light-gray-900);
+  border-radius: var(--token-half);
   transition: transform 0.3s ease, background-color 0.3s ease;
   transform: translateX(0);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.875rem;
+  font-size: var(--token-sm-3);
 }
 
 .theme-toggle[data-theme="light"] .theme-toggle-thumb {
-  transform: translateX(0);
-  background: var(--light-bg);
+  transform: translateX(var(--token-lg-1));
+  background: var(--color-light-white);
 }
 
 .theme-toggle[data-theme="dark"] .theme-toggle-thumb {
-  transform: translateX(2rem);
+  transform: translateX(0);
 }
 
 .theme-icon-light,
 .theme-icon-dark {
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: var(--token-half);
+  left: var(--token-half);
   transform: translate(-50%, -50%);
-  font-size: 0.875rem;
+  font-size: var(--token-sm-3);
   line-height: 1;
   transition: opacity 0.3s ease, visibility 0.3s ease;
-  width: 1.2rem;
-  height: 1.2rem;
-  min-width: 1.2rem;
-  min-height: 1.2rem;
-  max-width: 1.2rem;
-  max-height: 1.2rem;
+  width: var(--token-md-1);
+  height: var(--token-md-1);
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   pointer-events: none;
-}
-
-.theme-icon-svg {
-  width: 100%;
-  height: 100%;
-  min-width: 100%;
-  min-height: 100%;
-  max-width: 100%;
-  max-height: 100%;
-  display: block;
-  object-fit: contain;
 }
 
 .theme-toggle:not([data-theme="light"]) .theme-icon-dark,
@@ -161,12 +176,12 @@ body {
 
 .theme-toggle:not([data-theme="light"]) .theme-icon-dark .theme-icon-svg,
 .theme-toggle[data-theme="dark"] .theme-icon-dark .theme-icon-svg {
-  color: var(--light-bg);
+  color: var(--color-light-white);
 }
 
 .theme-toggle:not([data-theme="light"]) .theme-icon-dark .theme-icon-svg path,
 .theme-toggle[data-theme="dark"] .theme-icon-dark .theme-icon-svg path {
-  fill: var(--light-bg) !important;
+  fill: var(--color-light-white) !important;
 }
 
 .theme-toggle:not([data-theme="light"]) .theme-icon-light,
@@ -181,12 +196,12 @@ body {
 }
 
 .theme-toggle[data-theme="light"] .theme-icon-light .theme-icon-svg {
-  color: var(--dark-bg);
+  color: var(--color-light-gray-900);
 }
 
 .theme-toggle[data-theme="light"] .theme-icon-light .theme-icon-svg circle,
 .theme-toggle[data-theme="light"] .theme-icon-light .theme-icon-svg polygon {
-  fill: var(--dark-bg) !important;
+  fill: var(--color-light-gray-900) !important;
 }
 
 .theme-toggle[data-theme="light"] .theme-icon-dark {
@@ -197,8 +212,8 @@ body {
 /* Left Panel */
 .menu-content,
 .menu-content label {
-  background-color: var(--light-sidebar-bg);
-  color: var(--light-text);
+  background-color: var(--color-light-gray-100);
+  color: var(--color-light-gray-900);
 }
 
 .menu-content span:nth-of-type(1) {
@@ -207,68 +222,68 @@ body {
 
 /* API Content */
 .api-content {
-  margin-top: 3rem;
-  background-color: var(--light-bg);
-  color: var(--light-text);
+  margin-top: var(--token-lg-2);
+  background-color: var(--color-light-white);
+  color: var(--color-light-gray-900);
 }
 
 .api-content h1,
 .api-content h2,
 .api-content h3 {
-  color: var(--light-text-light);
+  color: var(--color-light-gray-700);
   font-weight: 600;
 }
 
 .api-content h5 {
-  padding-top: 0.8rem;
-  padding-bottom: 0.4rem;
-  border-bottom: 0.2rem solid var(--border-color);
+  padding-top: var(--token-sm-3);
+  padding-bottom: var(--token-sm-1);
+  border-bottom: var(--token-xs-2) solid var(--color-light-gray-700);
 }
 
 h5[class*="sc-"] {
-  color: var(--light-text) !important;
+  color: var(--color-light-gray-900) !important;
 }
 
 h5[class*="sc-"] span[class*="sc-"] {
-  color: var(--accent-color) !important;
-  padding: 0.2rem 0.4rem;
+  color: var(--color-light-blue-500) !important;
+  padding: var(--token-xs-2) var(--token-sm-1);
 }
 
 /* Right Panel */
 svg polygon {
-  fill: var(--light-text) !important;
+  fill: var(--color-light-gray-900) !important;
 }
 
 .react-tabs__tab-list {
-  color: var(--light-text) !important;
+  color: var(--color-light-gray-900) !important;
 }
 
 .react-tabs__tab-panel {
-  background: var(--light-sidebar-bg) !important;
+  background: var(--color-light-gray-100) !important;
 }
 
 .react-tabs__tab--selected {
-  background: var(--light-bg) !important;
-  color: var(--accent-color) !important;
-  border-color: var(--accent-color) !important;
+  background: var(--color-light-white) !important;
+  color: var(--color-light-blue-500) !important;
+  border-color: var(--color-light-blue-500) !important;
   border-radius: 0 !important;
 }
 
 .token.key {
-  color: var(--token-key) !important;
+  color: var(--color-light-blue-500) !important;
 }
 
 .token.string {
-  color: var(--token-string) !important;
+  color: var(--color-light-red-600) !important;
 }
 
 .token.number {
-  color: var(--token-number) !important;
+  color: var(--color-light-green-600) !important;
 }
 
 .token.boolean,
 .token.null {
-  color: var(--token-boolean) !important;
+  color: var(--color-light-purple-500) !important;
 }
 
 button[class*="sc-"] {
@@ -280,29 +295,29 @@ button[class*="sc-"]:has(span[type="post"]),
 button[class*="sc-"]:has(span[type="put"]),
 button[class*="sc-"]:has(span[type="patch"]),
 button[class*="sc-"]:has(span[type="delete"]) {
-  background-color: var(--light-sidebar-bg) !important;
+  background-color: var(--color-light-gray-100) !important;
   box-shadow: none !important;
 }
 
 button[class*="sc-"] span[class*="sc-"]:nth-of-type(2),
 div[class*="react-"] span[class*="sc-"],
 div[class*="react-"] div[class*="sc-"] {
-  color: var(--light-text) !important;
+  color: var(--color-light-gray-900) !important;
 }
 
 div[class*="react-"] div[class*="sc-"]:not(:has(button)):has(span) {
-  background-color: var(--light-bg) !important;
+  background-color: var(--color-light-white) !important;
 }
 
 div[tabindex="0"]:has(div.redoc-json)::-webkit-scrollbar {
-  width: 0.4rem;
-  background: var(--light-sidebar-bg);
+  width: var(--token-sm-1);
+  background: var(--color-light-gray-100);
 }
 
 div[tabindex="0"]:has(div.redoc-json)::-webkit-scrollbar-thumb {
   background-color: color-mix(
     in srgb,
-    var(--light-scrollbar-thumb) 40%,
+    var(--color-light-gray-300) var(--token-half),
     transparent
   );
 }

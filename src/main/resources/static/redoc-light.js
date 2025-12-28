@@ -5,21 +5,21 @@ const DARK_BG_PATTERN = /rgb\(30,\s*30,\s*30\)|rgb\(30/i;
 
 const applyLightStyles = () => {
   document.querySelectorAll('div[role="button"]').forEach((btn) => {
-    btn.style.backgroundColor = getCSSVariable("--light-bg");
-    btn.style.background = getCSSVariable("--light-bg");
+    btn.style.backgroundColor = getCSSVariable("--color-light-white");
+    btn.style.background = getCSSVariable("--color-light-white");
     btn.style.boxShadow = "none";
 
     const inner = btn.querySelector("div");
     if (inner) {
-      inner.style.backgroundColor = getCSSVariable("--light-bg");
-      inner.style.background = getCSSVariable("--light-bg");
-      inner.style.color = getCSSVariable("--light-text");
+      inner.style.backgroundColor = getCSSVariable("--color-light-white");
+      inner.style.background = getCSSVariable("--color-light-white");
+      inner.style.color = getCSSVariable("--color-light-gray-900");
       inner.style.boxShadow = "none";
 
       const span = inner.querySelector("span");
       if (span) {
-        span.style.backgroundColor = getCSSVariable("--light-bg");
-        span.style.color = getCSSVariable("--accent-color");
+        span.style.backgroundColor = getCSSVariable("--color-light-white");
+        span.style.color = getCSSVariable("--color-light-blue-500");
       }
     }
   });
@@ -41,10 +41,10 @@ const applyLightStyles = () => {
       parseInt(computedStyle.zIndex || "0") >= 100;
 
     if (hasDarkBg || (isDropdown && computedBg.includes("30"))) {
-      el.style.background = getCSSVariable("--light-bg");
-      el.style.backgroundColor = getCSSVariable("--light-bg");
+      el.style.background = getCSSVariable("--color-light-white");
+      el.style.backgroundColor = getCSSVariable("--color-light-white");
       el.style.backgroundImage = "none";
-      el.style.color = getCSSVariable("--light-text");
+      el.style.color = getCSSVariable("--color-light-gray-900");
 
       el.querySelectorAll("*").forEach((child) => {
         const childComputedStyle = window.getComputedStyle(child);
@@ -59,20 +59,20 @@ const applyLightStyles = () => {
           DARK_BG_PATTERN.test(childBg) ||
           DARK_BG_PATTERN.test(childInlineBg)
         ) {
-          child.style.background = getCSSVariable("--light-bg");
-          child.style.backgroundColor = getCSSVariable("--light-bg");
+          child.style.background = getCSSVariable("--color-light-white");
+          child.style.backgroundColor = getCSSVariable("--color-light-white");
         }
 
         if (
           child.tagName === "A" ||
           (child.tagName === "SPAN" && child.textContent.trim())
         ) {
-          child.style.color = getCSSVariable("--accent-color");
+          child.style.color = getCSSVariable("--color-light-blue-500");
         } else if (
           childComputedStyle.color.includes("212, 212, 212") ||
           childComputedStyle.color.includes("rgb(212")
         ) {
-          child.style.color = getCSSVariable("--light-text");
+          child.style.color = getCSSVariable("--color-light-gray-900");
         }
       });
     }
@@ -102,16 +102,16 @@ observer.observe(document.body, {
 
 const getRedocTheme = () => ({
   colors: {
-    primary: { main: getCSSVariable("--accent-color") },
+    primary: { main: getCSSVariable("--color-light-blue-500") },
     text: {
-      primary: getCSSVariable("--light-text"),
-      secondary: getCSSVariable("--light-text-secondary"),
+      primary: getCSSVariable("--color-light-gray-900"),
+      secondary: getCSSVariable("--color-light-gray-600"),
     },
     http: {
-      get: getCSSVariable("--accent-color"),
-      post: getCSSVariable("--http-post"),
-      put: getCSSVariable("--http-put"),
-      delete: getCSSVariable("--http-delete"),
+      get: getCSSVariable("--color-light-blue-500"),
+      post: getCSSVariable("--color-light-green-500"),
+      put: getCSSVariable("--color-light-yellow-500"),
+      delete: getCSSVariable("--color-light-red-500"),
     },
   },
   typography: {
@@ -122,20 +122,20 @@ const getRedocTheme = () => ({
     },
   },
   sidebar: {
-    backgroundColor: getCSSVariable("--light-sidebar-bg"),
-    textColor: getCSSVariable("--light-sidebar-text"),
-    activeTextColor: getCSSVariable("--accent-color"),
+    backgroundColor: getCSSVariable("--color-light-gray-100"),
+    textColor: getCSSVariable("--color-light-gray-700"),
+    activeTextColor: getCSSVariable("--color-light-blue-500"),
   },
   rightPanel: {
-    backgroundColor: getCSSVariable("--light-bg"),
+    backgroundColor: getCSSVariable("--color-light-white"),
   },
   codeBlock: {
-    backgroundColor: getCSSVariable("--light-bg"),
+    backgroundColor: getCSSVariable("--color-light-white"),
   },
   schema: {
-    typeNameColor: getCSSVariable("--accent-color"),
-    requireLabelColor: getCSSVariable("--require-label"),
-    linesColor: getCSSVariable("--border-color"),
+    typeNameColor: getCSSVariable("--color-light-blue-500"),
+    requireLabelColor: getCSSVariable("--color-light-red-500"),
+    linesColor: getCSSVariable("--color-light-gray-700"),
   },
 });
 

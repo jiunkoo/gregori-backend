@@ -5,21 +5,21 @@ const WHITE_BG_PATTERN = /rgb\(250,\s*250,\s*250\)|rgb\(250/i;
 
 const applyDarkStyles = () => {
   document.querySelectorAll('div[role="button"]').forEach((btn) => {
-    btn.style.backgroundColor = getCSSVariable("--dark-bg");
-    btn.style.background = getCSSVariable("--dark-bg");
+    btn.style.backgroundColor = getCSSVariable("--color-dark-gray-900");
+    btn.style.background = getCSSVariable("--color-dark-gray-900");
     btn.style.boxShadow = "none";
 
     const inner = btn.querySelector("div");
     if (inner) {
-      inner.style.backgroundColor = getCSSVariable("--dark-bg");
-      inner.style.background = getCSSVariable("--dark-bg");
-      inner.style.color = getCSSVariable("--dark-text");
+      inner.style.backgroundColor = getCSSVariable("--color-dark-gray-900");
+      inner.style.background = getCSSVariable("--color-dark-gray-900");
+      inner.style.color = getCSSVariable("--color-dark-gray-200");
       inner.style.boxShadow = "none";
 
       const span = inner.querySelector("span");
       if (span) {
-        span.style.backgroundColor = getCSSVariable("--dark-bg");
-        span.style.color = getCSSVariable("--accent-color");
+        span.style.backgroundColor = getCSSVariable("--color-dark-gray-900");
+        span.style.color = getCSSVariable("--color-dark-blue-400");
       }
     }
   });
@@ -41,10 +41,10 @@ const applyDarkStyles = () => {
       parseInt(computedStyle.zIndex || "0") >= 100;
 
     if (hasWhiteBg || (isDropdown && computedBg.includes("250"))) {
-      el.style.background = getCSSVariable("--dark-bg");
-      el.style.backgroundColor = getCSSVariable("--dark-bg");
+      el.style.background = getCSSVariable("--color-dark-gray-900");
+      el.style.backgroundColor = getCSSVariable("--color-dark-gray-900");
       el.style.backgroundImage = "none";
-      el.style.color = getCSSVariable("--dark-text");
+      el.style.color = getCSSVariable("--color-dark-gray-200");
 
       el.querySelectorAll("*").forEach((child) => {
         const childComputedStyle = window.getComputedStyle(child);
@@ -59,20 +59,20 @@ const applyDarkStyles = () => {
           WHITE_BG_PATTERN.test(childBg) ||
           WHITE_BG_PATTERN.test(childInlineBg)
         ) {
-          child.style.background = getCSSVariable("--dark-bg");
-          child.style.backgroundColor = getCSSVariable("--dark-bg");
+          child.style.background = getCSSVariable("--color-dark-gray-900");
+          child.style.backgroundColor = getCSSVariable("--color-dark-gray-900");
         }
 
         if (
           child.tagName === "A" ||
           (child.tagName === "SPAN" && child.textContent.trim())
         ) {
-          child.style.color = getCSSVariable("--accent-color");
+          child.style.color = getCSSVariable("--color-dark-blue-400");
         } else if (
           childComputedStyle.color.includes("38, 50, 56") ||
           childComputedStyle.color.includes("rgb(38")
         ) {
-          child.style.color = getCSSVariable("--dark-text");
+          child.style.color = getCSSVariable("--color-dark-gray-200");
         }
       });
     }
@@ -102,16 +102,16 @@ observer.observe(document.body, {
 
 const getRedocTheme = () => ({
   colors: {
-    primary: { main: getCSSVariable("--accent-color") },
+    primary: { main: getCSSVariable("--color-dark-blue-400") },
     text: {
-      primary: getCSSVariable("--dark-text"),
-      secondary: getCSSVariable("--dark-text-secondary"),
+      primary: getCSSVariable("--color-dark-gray-200"),
+      secondary: getCSSVariable("--color-dark-gray-400"),
     },
     http: {
-      get: getCSSVariable("--accent-color"),
-      post: getCSSVariable("--http-post"),
-      put: getCSSVariable("--http-put"),
-      delete: getCSSVariable("--http-delete"),
+      get: getCSSVariable("--color-dark-blue-400"),
+      post: getCSSVariable("--color-dark-green-600"),
+      put: getCSSVariable("--color-dark-yellow-300"),
+      delete: getCSSVariable("--color-dark-red-500"),
     },
   },
   typography: {
@@ -122,20 +122,20 @@ const getRedocTheme = () => ({
     },
   },
   sidebar: {
-    backgroundColor: getCSSVariable("--dark-sidebar-bg"),
-    textColor: getCSSVariable("--dark-sidebar-text"),
-    activeTextColor: getCSSVariable("--accent-color"),
+    backgroundColor: getCSSVariable("--color-dark-gray-800"),
+    textColor: getCSSVariable("--color-dark-gray-300"),
+    activeTextColor: getCSSVariable("--color-dark-blue-400"),
   },
   rightPanel: {
-    backgroundColor: getCSSVariable("--dark-bg"),
+    backgroundColor: getCSSVariable("--color-dark-gray-900"),
   },
   codeBlock: {
-    backgroundColor: getCSSVariable("--dark-bg"),
+    backgroundColor: getCSSVariable("--color-dark-gray-900"),
   },
   schema: {
-    typeNameColor: getCSSVariable("--accent-color"),
-    requireLabelColor: getCSSVariable("--require-label"),
-    linesColor: getCSSVariable("--border-color"),
+    typeNameColor: getCSSVariable("--color-dark-blue-400"),
+    requireLabelColor: getCSSVariable("--color-dark-red-500"),
+    linesColor: getCSSVariable("--color-dark-gray-500"),
   },
 });
 
