@@ -632,9 +632,7 @@ Content-Type: application/json
 
 애플리케이션 실행 후 다음 주소에서 상세한 API 문서를 확인할 수 있습니다:
 
-- **Swagger UI**: http://localhost:8080/swagger-ui.html
 - **ReDoc UI**: http://localhost:8080/redoc.html
-- **OpenAPI JSON**: http://localhost:8080/api-docs
 
 ## 참고 자료
 
