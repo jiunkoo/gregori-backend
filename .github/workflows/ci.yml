@@ -3,6 +3,8 @@ name: Continuous Integration
 on:
   push:
     branches: ["main"]
+    paths-ignore:
+      - "**.svg"
   pull_request:
     branches: ["main"]
   workflow_dispatch:
@@ -71,5 +73,5 @@ jobs:
         uses: EndBug/add-and-commit@v9
         with:
           default_author: github_actions
-          message: "commit badge"
+          message: "commit badge [skip ci]"
           add: "*.svg"
