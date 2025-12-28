@@ -2,9 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
 <mapper namespace="com.gregori.product.mapper.ProductMapper">
-
     <resultMap id="productResultMap" type="com.gregori.product.domain.Product">
         <id property="id" column="id"/>
         <result property="sellerId" column="seller_id"/>
