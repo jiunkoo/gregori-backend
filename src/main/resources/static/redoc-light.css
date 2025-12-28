@@ -10,6 +10,7 @@
   --light-sidebar-text: #333333;
   --light-sidebar-active: #e6f7ff;
   --light-scrollbar-thumb: #d0d0d0;
+  --dark-bg: #1e1e1e;
   --http-post: #52c41a;
   --http-put: #faad14;
   --http-delete: #ff4d4f;
@@ -62,16 +63,118 @@ body {
 }
 
 .theme-toggle {
-  background: var(--light-bg);
-  color: var(--light-text);
-  border: 0.05rem solid var(--border-color);
-  padding: 0.4rem 0.8rem;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
 }
 
-.theme-toggle:hover {
-  background: var(--light-sidebar-bg);
-  border-color: var(--accent-color);
-  color: var(--accent-color);
+.theme-toggle-track {
+  position: relative;
+  width: 4rem;
+  height: 2rem;
+  background: var(--dark-bg);
+  border: none;
+  border-radius: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.theme-toggle:hover .theme-toggle-track {
+  background: var(--dark-bg);
+}
+
+.theme-toggle-thumb {
+  position: absolute;
+  top: 0.15rem;
+  left: 0.15rem;
+  width: 1.7rem;
+  height: 1.7rem;
+  min-width: 1.7rem;
+  min-height: 1.7rem;
+  box-sizing: border-box;
+  background: var(--dark-bg);
+  border-radius: 50%;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  transform: translateX(0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+}
+
+.theme-toggle[data-theme="light"] .theme-toggle-thumb {
+  transform: translateX(0);
+  background: var(--light-bg);
+}
+
+.theme-toggle[data-theme="dark"] .theme-toggle-thumb {
+  transform: translateX(2rem);
+}
+
+.theme-icon-light,
+.theme-icon-dark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.875rem;
+  line-height: 1;
+  transition: opacity 0.3s ease;
+  width: 1.2rem;
+  height: 1.2rem;
+  min-width: 1.2rem;
+  min-height: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.theme-icon-svg {
+  width: 100%;
+  height: 100%;
+  min-width: 100%;
+  min-height: 100%;
+  display: block;
+}
+
+.theme-toggle:not([data-theme="light"]) .theme-icon-dark,
+.theme-toggle[data-theme="dark"] .theme-icon-dark {
+  opacity: 1;
+}
+
+.theme-toggle:not([data-theme="light"]) .theme-icon-dark .theme-icon-svg,
+.theme-toggle[data-theme="dark"] .theme-icon-dark .theme-icon-svg {
+  color: var(--light-bg);
+}
+
+.theme-toggle:not([data-theme="light"]) .theme-icon-dark .theme-icon-svg path,
+.theme-toggle[data-theme="dark"] .theme-icon-dark .theme-icon-svg path {
+  fill: var(--light-bg) !important;
+}
+
+.theme-toggle:not([data-theme="light"]) .theme-icon-light,
+.theme-toggle[data-theme="dark"] .theme-icon-light {
+  opacity: 0;
+}
+
+/* 라이트 모드일 때: 해 아이콘 표시 (dark-bg 색상) */
+.theme-toggle[data-theme="light"] .theme-icon-light {
+  opacity: 1;
+}
+
+.theme-toggle[data-theme="light"] .theme-icon-light .theme-icon-svg {
+  color: var(--dark-bg);
+}
+
+.theme-toggle[data-theme="light"] .theme-icon-light .theme-icon-svg circle,
+.theme-toggle[data-theme="light"] .theme-icon-light .theme-icon-svg polygon {
+  fill: var(--dark-bg) !important;
+}
+
+.theme-toggle[data-theme="light"] .theme-icon-dark {
+  opacity: 0;
 }
 
 .indicator {
